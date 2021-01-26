@@ -1,0 +1,80 @@
+﻿@model HHI_InspectionSoftware.Inspection
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete Inspection</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Inspection</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InspectionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InspectionDate)
+        </dd>
+                
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.Address1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.Address1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inspector.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inspector.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InspectionStatus.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InspectionStatus.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Realtor.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Realtor.FirstName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

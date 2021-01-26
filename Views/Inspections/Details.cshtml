@@ -1,0 +1,74 @@
+﻿@model HHI_InspectionSoftware.Inspection
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Inspection Details</h2>
+
+<div>
+    <h4>Inspection</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InspectionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InspectionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.Address1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address.Address1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inspector.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inspector.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InspectionStatus.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InspectionStatus.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Realtor.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Realtor.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

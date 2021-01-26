@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c220e4981a8e4ea2b00a0b993dee84c4" Name="Diagram1">
+        <EntityTypeShape EntityType="HHIModel.Address" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.Area" Width="1.5" PointX="10.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.CheckItem" Width="1.5" PointX="12.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.Company" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.Customer" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.HomeSystem" Width="1.5" PointX="5.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.Inspection" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.InspectionStatus" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.Inspector" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.Limitation" Width="1.5" PointX="8" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.Realtor" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.Template" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="HHIModel.FK__Inspectio__Addre__3E1D39E1" ManuallyRouted="false" />
+        <AssociationConnector Association="HHIModel.FK__CheckItem__AreaI__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="HHIModel.FK__CheckItem__Syste__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="HHIModel.FK__Inspectio__Custo__3F115E1A" ManuallyRouted="false" />
+        <AssociationConnector Association="HHIModel.FK__Limitatio__Syste__4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="HHIModel.FK__Inspectio__Inspe__40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="HHIModel.FK__Inspectio__Inspe__793DFFAF" ManuallyRouted="false" />
+        <AssociationConnector Association="HHIModel.FK__Inspectio__Realt__40F9A68C" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HHIModel.Category" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HHIModel.Comment" Width="1.5" PointX="8" PointY="2.5" />
+        <AssociationConnector Association="HHIModel.FK__Comment__Categor__10216507" />
+        <AssociationConnector Association="HHIModel.FK__Comment__SystemI__11158940" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
