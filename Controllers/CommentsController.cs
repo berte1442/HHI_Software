@@ -41,6 +41,7 @@ namespace HHI_InspectionSoftware.Controllers
         {
             ViewBag.CategoryID = new SelectList(db.Category, "ID", "Name");
             ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name");
+            ViewBag.ImageID = new SelectList(db.Images, "ID", "Name");
             return View();
         }
 
@@ -49,7 +50,7 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Description,CategoryID,SystemID")] Comment comment)
+        public ActionResult Create([Bind(Include = "ID,Name,Description,CategoryID,SystemID,ImageID")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +61,7 @@ namespace HHI_InspectionSoftware.Controllers
 
             ViewBag.CategoryID = new SelectList(db.Category, "ID", "Name", comment.CategoryID);
             ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", comment.SystemID);
+            ViewBag.ImageID = new SelectList(db.Images, "ID", "Name", comment.ImageID);
             return View(comment);
         }
 
@@ -77,6 +79,7 @@ namespace HHI_InspectionSoftware.Controllers
             }
             ViewBag.CategoryID = new SelectList(db.Category, "ID", "Name", comment.CategoryID);
             ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", comment.SystemID);
+            ViewBag.ImageID = new SelectList(db.Images, "ID", "Name", comment.ImageID);
             return View(comment);
         }
 
@@ -85,7 +88,7 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Description,CategoryID,SystemID")] Comment comment)
+        public ActionResult Edit([Bind(Include = "ID,Name,Description,CategoryID,SystemID,ImageID")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -95,6 +98,7 @@ namespace HHI_InspectionSoftware.Controllers
             }
             ViewBag.CategoryID = new SelectList(db.Category, "ID", "Name", comment.CategoryID);
             ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", comment.SystemID);
+            ViewBag.ImageID = new SelectList(db.Images, "ID", "Name", comment.ImageID);
             return View(comment);
         }
 

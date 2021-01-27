@@ -19,8 +19,10 @@ namespace HHI_InspectionSoftware
         public string Description { get; set; }
         public Nullable<int> CategoryID { get; set; }
         public Nullable<int> SystemID { get; set; }
+        public Nullable<int> ImageID { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual HomeSystem HomeSystem { get; set; }
+        public virtual Images Images { get; set; }
     }
 }

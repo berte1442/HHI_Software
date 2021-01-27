@@ -281,6 +281,10 @@
       <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
     <EntitySet Name="Images" EntityType="HHIModel.Images" />
+    <AssociationSet Name="FK__Comment__ImageID__1E6F845E" Association="HHIModel.FK__Comment__ImageID__1E6F845E">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Category">
     <Key>
@@ -302,6 +306,8 @@
     <Property Name="SystemID" Type="Int32" />
     <NavigationProperty Name="Category" Relationship="HHIModel.FK__Comment__Categor__10216507" FromRole="Comment" ToRole="Category" />
     <NavigationProperty Name="HomeSystem" Relationship="HHIModel.FK__Comment__SystemI__11158940" FromRole="Comment" ToRole="HomeSystem" />
+    <Property Name="ImageID" Type="Int32" />
+    <NavigationProperty Name="Images" Relationship="HHIModel.FK__Comment__ImageID__1E6F845E" FromRole="Comment" ToRole="Images" />
   </EntityType>
   <Association Name="FK__Comment__Categor__10216507">
     <End Type="HHIModel.Category" Role="Category" Multiplicity="0..1" />
@@ -334,5 +340,18 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FilePath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comment" Relationship="HHIModel.FK__Comment__ImageID__1E6F845E" FromRole="Images" ToRole="Comment" />
   </EntityType>
+  <Association Name="FK__Comment__ImageID__1E6F845E">
+    <End Type="HHIModel.Images" Role="Images" Multiplicity="0..1" />
+    <End Type="HHIModel.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

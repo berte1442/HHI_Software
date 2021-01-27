@@ -44,6 +44,7 @@
     <Property Name="Description" Type="varchar" MaxLength="500" />
     <Property Name="CategoryID" Type="int" />
     <Property Name="SystemID" Type="int" />
+    <Property Name="ImageID" Type="int" />
   </EntityType>
   <EntityType Name="Company">
     <Key>
@@ -174,6 +175,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Comment__ImageID__1E6F845E">
+    <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Comment__SystemI__11158940">
     <End Role="HomeSystem" Type="Self.HomeSystem" Multiplicity="0..1" />
     <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
@@ -284,6 +297,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__Comment__Categor__10216507" Association="Self.FK__Comment__Categor__10216507">
       <End Role="Category" EntitySet="Category" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__ImageID__1E6F845E" Association="Self.FK__Comment__ImageID__1E6F845E">
+      <End Role="Images" EntitySet="Images" />
       <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
     <AssociationSet Name="FK__Comment__SystemI__11158940" Association="Self.FK__Comment__SystemI__11158940">

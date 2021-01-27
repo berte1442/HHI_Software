@@ -18,10 +18,13 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.DisplayName("Category")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HomeSystem.Name)
+            @Html.DisplayName("System")
+        </th>
+        <th>
+            @Html.DisplayName("Image")
         </th>
         <th></th>
     </tr>
@@ -35,10 +38,15 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.Display("Category")
+            @Html.DisplayFor(modelItem => item.Category.Name)
         </td>
         <td>
-            @Html.Display("System")
+            @Html.DisplayFor(modelItem => item.HomeSystem.Name)
+        </td>
+        <td>
+           @* @Html.DisplayFor(modelItem => item.Images.Name)*@
+            <img src="@Url.Content(item.Images.FilePath)" width="75" height="75" alt=@item.Images.FilePath />
+
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

@@ -137,6 +137,7 @@
     <EntitySetMapping Name="Comment">
       <EntityTypeMapping TypeName="HHIModel.Comment">
         <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
           <ScalarProperty Name="SystemID" ColumnName="SystemID" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="Description" ColumnName="Description" />

@@ -30,6 +30,7 @@
         <AssociationConnector Association="HHIModel.FK__Comment__Categor__10216507" />
         <AssociationConnector Association="HHIModel.FK__Comment__SystemI__11158940" />
         <EntityTypeShape EntityType="HHIModel.Images" Width="1.5" PointX="3.375" PointY="8.75" />
+        <AssociationConnector Association="HHIModel.FK__Comment__ImageID__1E6F845E" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

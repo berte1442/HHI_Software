@@ -43,6 +43,13 @@
             @Html.DisplayFor(model => model.HomeSystem.Name)
         </dd>
 
+        <dt>
+            @Html.DisplayName("Image Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Images.Name)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {

@@ -17,6 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FilePath)
         </th>
+        <th>
+            <p>Image</p>
+        </th>
         <th></th>
     </tr>
 
@@ -27,6 +30,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FilePath)
+        </td>
+        <td>
+            <img src="@Url.Content(item.FilePath)" width="75" height="75" alt=@item.FilePath/>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
