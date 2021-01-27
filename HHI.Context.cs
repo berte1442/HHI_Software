@@ -39,5 +39,6 @@ namespace HHI_InspectionSoftware
         public virtual DbSet<Template> Template { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
+        public virtual DbSet<Images> Images { get; set; }
     }
 }

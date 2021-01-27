@@ -155,6 +155,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeSystemsController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\InspectionsController.cs" />
     <Compile Include="Controllers\InspectionStatusController.cs" />
     <Compile Include="Controllers\InspectorsController.cs" />
@@ -183,6 +184,9 @@
       <DependentUpon>HHI.edmx</DependentUpon>
     </Compile>
     <Compile Include="HomeSystem.cs">
+      <DependentUpon>HHI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Images.cs">
       <DependentUpon>HHI.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspection.cs">
@@ -225,18 +229,18 @@
       <DependentUpon>HHI.edmx</DependentUpon>
       <LastGenOutput>HHI.cs</LastGenOutput>
     </Content>
-    <Content Include="Images\Linkedin.png" />
-    <Content Include="Images\AirthingsLogo.jpg" />
-    <Content Include="Images\facebookLogo.png" />
-    <Content Include="Images\GmailLogo.png" />
-    <Content Include="Images\Scheduler.png" />
-    <Content Include="Images\Radon.png" />
-    <Content Include="Images\Email.png" />
-    <Content Include="Images\Dashboard.png" />
-    <Content Include="Images\Facebook.png" />
-    <Content Include="Images\SpectoraLogo.png" />
-    <Content Include="Images\Website.png" />
-    <Content Include="Images\LOGO.jpg" />
+    <Content Include="Photos\Linkedin.png" />
+    <Content Include="Photos\AirthingsLogo.jpg" />
+    <Content Include="Photos\facebookLogo.png" />
+    <Content Include="Photos\GmailLogo.png" />
+    <Content Include="Photos\Scheduler.png" />
+    <Content Include="Photos\Radon.png" />
+    <Content Include="Photos\Email.png" />
+    <Content Include="Photos\Dashboard.png" />
+    <Content Include="Photos\Facebook.png" />
+    <Content Include="Photos\SpectoraLogo.png" />
+    <Content Include="Photos\Website.png" />
+    <Content Include="Photos\LOGO.jpg" />
     <Content Include="Scripts\Book_ChangePage.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -342,6 +346,11 @@
     <Content Include="Views\Comments\Details.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\Images\Create.cshtml" />
+    <Content Include="Views\Images\Delete.cshtml" />
+    <Content Include="Views\Images\Details.cshtml" />
+    <Content Include="Views\Images\Edit.cshtml" />
+    <Content Include="Views\Images\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

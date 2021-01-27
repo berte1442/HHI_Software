@@ -280,6 +280,7 @@
       <End Role="HomeSystem" EntitySet="HomeSystem" />
       <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
+    <EntitySet Name="Images" EntityType="HHIModel.Images" />
   </EntityContainer>
   <EntityType Name="Category">
     <Key>
@@ -326,4 +327,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FilePath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>
