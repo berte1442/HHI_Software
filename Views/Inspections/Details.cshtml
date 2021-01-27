@@ -11,7 +11,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.InspectionDate)
+            @Html.DisplayName("Inspection Date")
         </dt>
 
         <dd>
@@ -27,31 +27,36 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Address.Address1)
+            @Html.DisplayName("Address")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Address.Address1)
+            @Html.DisplayFor(model => model.Address.City)
+            @Html.DisplayFor(model => model.Address.State)
+            @Html.DisplayFor(model => model.Address.Zip)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Customer.FirstName)
+            @Html.DisplayName("Customer")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Customer.FirstName)
+            @Html.DisplayFor(model => model.Customer.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Inspector.FirstName)
+            @Html.DisplayName("Inspector")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Inspector.FirstName)
+            @Html.DisplayFor(model => model.Inspector.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.InspectionStatus.Name)
+            @Html.DisplayName("Inspection Status")
         </dt>
 
         <dd>
@@ -59,11 +64,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Realtor.FirstName)
+            @Html.DisplayName("Realtor")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Realtor.FirstName)
+            @Html.DisplayFor(model => model.Realtor.LastName)
         </dd>
 
     </dl>

@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Comment Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -35,10 +35,10 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category.Name)
+            @Html.Display("Category")
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.HomeSystem.Name)
+            @Html.Display("System")
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
