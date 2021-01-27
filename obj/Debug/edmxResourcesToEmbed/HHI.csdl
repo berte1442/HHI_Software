@@ -57,6 +57,7 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="CheckItem" Relationship="Self.FK__CheckItem__Syste__17036CC0" FromRole="HomeSystem" ToRole="CheckItem" />
     <NavigationProperty Name="Limitation" Relationship="Self.FK__Limitatio__Syste__4F47C5E3" FromRole="HomeSystem" ToRole="Limitation" />
+    <NavigationProperty Name="Comment" Relationship="HHIModel.FK__Comment__SystemI__11158940" FromRole="HomeSystem" ToRole="Comment" />
   </EntityType>
   <EntityType Name="Inspection">
     <Key>
@@ -269,5 +270,60 @@
       <End Role="Realtor" EntitySet="Realtor" />
       <End Role="Inspection" EntitySet="Inspection" />
     </AssociationSet>
+    <EntitySet Name="Category" EntityType="HHIModel.Category" />
+    <EntitySet Name="Comment" EntityType="HHIModel.Comment" />
+    <AssociationSet Name="FK__Comment__Categor__10216507" Association="HHIModel.FK__Comment__Categor__10216507">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__SystemI__11158940" Association="HHIModel.FK__Comment__SystemI__11158940">
+      <End Role="HomeSystem" EntitySet="HomeSystem" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comment" Relationship="HHIModel.FK__Comment__Categor__10216507" FromRole="Category" ToRole="Comment" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="SystemID" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="HHIModel.FK__Comment__Categor__10216507" FromRole="Comment" ToRole="Category" />
+    <NavigationProperty Name="HomeSystem" Relationship="HHIModel.FK__Comment__SystemI__11158940" FromRole="Comment" ToRole="HomeSystem" />
+  </EntityType>
+  <Association Name="FK__Comment__Categor__10216507">
+    <End Type="HHIModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="HHIModel.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__SystemI__11158940">
+    <End Type="HHIModel.HomeSystem" Role="HomeSystem" Multiplicity="0..1" />
+    <End Type="HHIModel.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HomeSystem">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="SystemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

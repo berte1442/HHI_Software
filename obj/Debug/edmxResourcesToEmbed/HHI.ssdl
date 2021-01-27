@@ -18,6 +18,14 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+  </EntityType>
   <EntityType Name="CheckItem">
     <Key>
       <PropertyRef Name="ID" />
@@ -26,6 +34,16 @@
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="SystemID" Type="int" Nullable="false" />
     <Property Name="AreaID" Type="int" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="SystemID" Type="int" />
   </EntityType>
   <EntityType Name="Company">
     <Key>
@@ -136,6 +154,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Comment__Categor__10216507">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__SystemI__11158940">
+    <End Role="HomeSystem" Type="Self.HomeSystem" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HomeSystem">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="SystemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Inspectio__Addre__3E1D39E1">
     <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
     <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
@@ -211,7 +253,9 @@
   <EntityContainer Name="HHIModelStoreContainer">
     <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CheckItem" EntityType="Self.CheckItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HomeSystem" EntityType="Self.HomeSystem" Schema="dbo" store:Type="Tables" />
@@ -228,6 +272,14 @@
     <AssociationSet Name="FK__CheckItem__Syste__17036CC0" Association="Self.FK__CheckItem__Syste__17036CC0">
       <End Role="HomeSystem" EntitySet="HomeSystem" />
       <End Role="CheckItem" EntitySet="CheckItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__Categor__10216507" Association="Self.FK__Comment__Categor__10216507">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__SystemI__11158940" Association="Self.FK__Comment__SystemI__11158940">
+      <End Role="HomeSystem" EntitySet="HomeSystem" />
+      <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
     <AssociationSet Name="FK__Inspectio__Addre__3E1D39E1" Association="Self.FK__Inspectio__Addre__3E1D39E1">
       <End Role="Address" EntitySet="Address" />

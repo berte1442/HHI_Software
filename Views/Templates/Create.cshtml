@@ -13,7 +13,10 @@
 <div class="form-horizontal">
     <h4>Template</h4>
 
-    @Html.ActionLink("Create New Area", "Create", "Areas") | @Html.ActionLink("Create New System", "Create", "HomeSystems") | @Html.ActionLink("Create New Check Item", "Create", "CheckItems")
+    @Html.ActionLink("Create New Area", "Create", "Areas") | @Html.ActionLink("Create New System", "Create", "HomeSystems") |
+    @Html.ActionLink("Create New Check Item", "Create", "CheckItems") | @Html.ActionLink("Create New Comment", "Create", "Comments") |
+    @Html.ActionLink("Create New Limitation", "Create", "Limitations")
+
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
