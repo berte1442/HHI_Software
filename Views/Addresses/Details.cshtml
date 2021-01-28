@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Address Details</h2>
+<h2>Details</h2>
 
 <div>
     <h4>Address</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayName("Address")
+            @Html.DisplayNameFor(model => model.Address1)
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayName("Square Feet")
+            @Html.DisplayNameFor(model => model.SquareFeet)
         </dt>
 
         <dd>

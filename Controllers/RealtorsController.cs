@@ -12,12 +12,12 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class RealtorsController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: Realtors
         public ActionResult Index()
         {
-            return View(db.Realtor.ToList());
+            return View(db.Realtors.ToList());
         }
 
         // GET: Realtors/Details/5
@@ -27,7 +27,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Realtor realtor = db.Realtor.Find(id);
+            Realtor realtor = db.Realtors.Find(id);
             if (realtor == null)
             {
                 return HttpNotFound();
@@ -50,9 +50,9 @@ namespace HHI_InspectionSoftware.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Realtor.Add(realtor);
+                db.Realtors.Add(realtor);
                 db.SaveChanges();
-                return RedirectToAction("Create", "Inspections");
+                return RedirectToAction("Index");
             }
 
             return View(realtor);
@@ -65,7 +65,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Realtor realtor = db.Realtor.Find(id);
+            Realtor realtor = db.Realtors.Find(id);
             if (realtor == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Realtor realtor = db.Realtor.Find(id);
+            Realtor realtor = db.Realtors.Find(id);
             if (realtor == null)
             {
                 return HttpNotFound();
@@ -109,20 +109,10 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Realtor realtor = db.Realtor.Find(id);
-            db.Realtor.Remove(realtor);
+            Realtor realtor = db.Realtors.Find(id);
+            db.Realtors.Remove(realtor);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult Skip()
-        {
-            return RedirectToAction("Create", "Inspections");
-        }
-
-        public ActionResult Back()
-        {
-            return RedirectToAction("Create", "Addresses");
         }
 
         protected override void Dispose(bool disposing)

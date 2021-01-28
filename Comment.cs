@@ -14,15 +14,21 @@ namespace HHI_InspectionSoftware
     
     public partial class Comment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Comment()
+        {
+            this.Images = new HashSet<Image>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<int> CategoryID { get; set; }
-        public Nullable<int> SystemID { get; set; }
-        public Nullable<int> ImageID { get; set; }
+        public Nullable<int> CheckItemID { get; set; }
     
         public virtual Category Category { get; set; }
-        public virtual HomeSystem HomeSystem { get; set; }
-        public virtual Images Images { get; set; }
+        public virtual CheckItem CheckItem { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

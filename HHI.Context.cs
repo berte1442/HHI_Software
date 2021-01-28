@@ -13,10 +13,10 @@ namespace HHI_InspectionSoftware
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HHIEntities4 : DbContext
+    public partial class HHIEntities5 : DbContext
     {
-        public HHIEntities4()
-            : base("name=HHIEntities4")
+        public HHIEntities5()
+            : base("name=HHIEntities5")
         {
         }
     
@@ -25,20 +25,20 @@ namespace HHI_InspectionSoftware
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Address> Address { get; set; }
-        public virtual DbSet<Area> Area { get; set; }
-        public virtual DbSet<CheckItem> CheckItem { get; set; }
-        public virtual DbSet<Company> Company { get; set; }
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<HomeSystem> HomeSystem { get; set; }
-        public virtual DbSet<Inspection> Inspection { get; set; }
-        public virtual DbSet<InspectionStatus> InspectionStatus { get; set; }
-        public virtual DbSet<Inspector> Inspector { get; set; }
-        public virtual DbSet<Limitation> Limitation { get; set; }
-        public virtual DbSet<Realtor> Realtor { get; set; }
-        public virtual DbSet<Template> Template { get; set; }
-        public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Comment> Comment { get; set; }
-        public virtual DbSet<Images> Images { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Area> Areas { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<CheckItem> CheckItems { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<HomeSystem> HomeSystems { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<Inspection> Inspections { get; set; }
+        public virtual DbSet<InspectionStatu> InspectionStatus { get; set; }
+        public virtual DbSet<Inspector> Inspectors { get; set; }
+        public virtual DbSet<Limitation> Limitations { get; set; }
+        public virtual DbSet<Realtor> Realtors { get; set; }
+        public virtual DbSet<Template> Templates { get; set; }
     }
 }

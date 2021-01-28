@@ -17,7 +17,7 @@ namespace HHI_InspectionSoftware
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.Inspection = new HashSet<Inspection>();
+            this.Inspections = new HashSet<Inspection>();
         }
     
         public int ID { get; set; }
@@ -27,6 +27,6 @@ namespace HHI_InspectionSoftware
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspection> Inspection { get; set; }
+        public virtual ICollection<Inspection> Inspections { get; set; }
     }
 }

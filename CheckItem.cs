@@ -14,6 +14,12 @@ namespace HHI_InspectionSoftware
     
     public partial class CheckItem
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CheckItem()
+        {
+            this.Comments = new HashSet<Comment>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public int SystemID { get; set; }
@@ -21,5 +27,7 @@ namespace HHI_InspectionSoftware
     
         public virtual Area Area { get; set; }
         public virtual HomeSystem HomeSystem { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

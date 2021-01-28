@@ -17,6 +17,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="TemplateID" Type="int" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -43,8 +44,7 @@
     <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="500" />
     <Property Name="CategoryID" Type="int" />
-    <Property Name="SystemID" Type="int" />
-    <Property Name="ImageID" Type="int" />
+    <Property Name="CheckItemID" Type="int" />
   </EntityType>
   <EntityType Name="Company">
     <Key>
@@ -69,14 +69,16 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TemplateID" Type="int" />
   </EntityType>
-  <EntityType Name="Images">
+  <EntityType Name="Image">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="FilePath" Type="varchar" MaxLength="500" />
+    <Property Name="CommentID" Type="int" />
   </EntityType>
   <EntityType Name="Inspection">
     <Key>
@@ -90,6 +92,7 @@
     <Property Name="InspectionDate" Type="datetime" />
     <Property Name="InspectionStatusID" Type="int" />
     <Property Name="Price" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="TemplateID" Type="int" />
   </EntityType>
   <EntityType Name="InspectionStatus">
     <Key>
@@ -119,6 +122,7 @@
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="SystemID" Type="int" />
     <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="AreaID" Type="int" />
   </EntityType>
   <EntityType Name="Realtor">
     <Key>
@@ -136,9 +140,19 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="AreaIDs" Type="varchar" MaxLength="500" />
-    <Property Name="SystemIDs" Type="varchar" MaxLength="500" />
   </EntityType>
+  <Association Name="FK__Area__TemplateID__2F9A1060">
+    <End Role="Template" Type="Self.Template" Multiplicity="0..1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Template">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="TemplateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__CheckItem__AreaI__29221CFB">
     <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
     <End Role="CheckItem" Type="Self.CheckItem" Multiplicity="*" />
@@ -175,27 +189,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Comment__ImageID__1E6F845E">
-    <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
+  <Association Name="FK__Comment__CheckIt__2DB1C7EE">
+    <End Role="CheckItem" Type="Self.CheckItem" Multiplicity="0..1" />
     <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Images">
+      <Principal Role="CheckItem">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Comment">
-        <PropertyRef Name="ImageID" />
+        <PropertyRef Name="CheckItemID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Comment__SystemI__11158940">
-    <End Role="HomeSystem" Type="Self.HomeSystem" Multiplicity="0..1" />
-    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+  <Association Name="FK__HomeSyste__Templ__308E3499">
+    <End Role="Template" Type="Self.Template" Multiplicity="0..1" />
+    <End Role="HomeSystem" Type="Self.HomeSystem" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="HomeSystem">
+      <Principal Role="Template">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Comment">
-        <PropertyRef Name="SystemID" />
+      <Dependent Role="HomeSystem">
+        <PropertyRef Name="TemplateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Image__CommentID__2EA5EC27">
+    <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="CommentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -259,6 +285,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Inspectio__Templ__318258D2">
+    <End Role="Template" Type="Self.Template" Multiplicity="0..1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Template">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="TemplateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Limitatio__AreaI__2CBDA3B5">
+    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="Limitation" Type="Self.Limitation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Limitation">
+        <PropertyRef Name="AreaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Limitatio__Syste__4F47C5E3">
     <End Role="HomeSystem" Type="Self.HomeSystem" Multiplicity="0..1" />
     <End Role="Limitation" Type="Self.Limitation" Multiplicity="*" />
@@ -280,13 +330,17 @@
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HomeSystem" EntityType="Self.HomeSystem" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Inspection" EntityType="Self.Inspection" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InspectionStatus" EntityType="Self.InspectionStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Inspector" EntityType="Self.Inspector" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Limitation" EntityType="Self.Limitation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Realtor" EntityType="Self.Realtor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Area__TemplateID__2F9A1060" Association="Self.FK__Area__TemplateID__2F9A1060">
+      <End Role="Template" EntitySet="Template" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
     <AssociationSet Name="FK__CheckItem__AreaI__29221CFB" Association="Self.FK__CheckItem__AreaI__29221CFB">
       <End Role="Area" EntitySet="Area" />
       <End Role="CheckItem" EntitySet="CheckItem" />
@@ -299,13 +353,17 @@
       <End Role="Category" EntitySet="Category" />
       <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
-    <AssociationSet Name="FK__Comment__ImageID__1E6F845E" Association="Self.FK__Comment__ImageID__1E6F845E">
-      <End Role="Images" EntitySet="Images" />
+    <AssociationSet Name="FK__Comment__CheckIt__2DB1C7EE" Association="Self.FK__Comment__CheckIt__2DB1C7EE">
+      <End Role="CheckItem" EntitySet="CheckItem" />
       <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
-    <AssociationSet Name="FK__Comment__SystemI__11158940" Association="Self.FK__Comment__SystemI__11158940">
+    <AssociationSet Name="FK__HomeSyste__Templ__308E3499" Association="Self.FK__HomeSyste__Templ__308E3499">
+      <End Role="Template" EntitySet="Template" />
       <End Role="HomeSystem" EntitySet="HomeSystem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Image__CommentID__2EA5EC27" Association="Self.FK__Image__CommentID__2EA5EC27">
       <End Role="Comment" EntitySet="Comment" />
+      <End Role="Image" EntitySet="Image" />
     </AssociationSet>
     <AssociationSet Name="FK__Inspectio__Addre__3E1D39E1" Association="Self.FK__Inspectio__Addre__3E1D39E1">
       <End Role="Address" EntitySet="Address" />
@@ -326,6 +384,14 @@
     <AssociationSet Name="FK__Inspectio__Realt__40F9A68C" Association="Self.FK__Inspectio__Realt__40F9A68C">
       <End Role="Realtor" EntitySet="Realtor" />
       <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inspectio__Templ__318258D2" Association="Self.FK__Inspectio__Templ__318258D2">
+      <End Role="Template" EntitySet="Template" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Limitatio__AreaI__2CBDA3B5" Association="Self.FK__Limitatio__AreaI__2CBDA3B5">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Limitation" EntitySet="Limitation" />
     </AssociationSet>
     <AssociationSet Name="FK__Limitatio__Syste__4F47C5E3" Association="Self.FK__Limitatio__Syste__4F47C5E3">
       <End Role="HomeSystem" EntitySet="HomeSystem" />

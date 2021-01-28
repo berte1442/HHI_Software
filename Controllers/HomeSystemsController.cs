@@ -12,12 +12,13 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class HomeSystemsController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: HomeSystems
         public ActionResult Index()
         {
-            return View(db.HomeSystem.ToList());
+            var homeSystems = db.HomeSystems.Include(h => h.Template);
+            return View(homeSystems.ToList());
         }
 
         // GET: HomeSystems/Details/5
@@ -27,7 +28,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeSystem homeSystem = db.HomeSystem.Find(id);
+            HomeSystem homeSystem = db.HomeSystems.Find(id);
             if (homeSystem == null)
             {
                 return HttpNotFound();
@@ -38,6 +39,7 @@ namespace HHI_InspectionSoftware.Controllers
         // GET: HomeSystems/Create
         public ActionResult Create()
         {
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name");
             return View();
         }
 
@@ -46,15 +48,16 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name")] HomeSystem homeSystem)
+        public ActionResult Create([Bind(Include = "ID,Name,TemplateID")] HomeSystem homeSystem)
         {
             if (ModelState.IsValid)
             {
-                db.HomeSystem.Add(homeSystem);
+                db.HomeSystems.Add(homeSystem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", homeSystem.TemplateID);
             return View(homeSystem);
         }
 
@@ -65,11 +68,12 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeSystem homeSystem = db.HomeSystem.Find(id);
+            HomeSystem homeSystem = db.HomeSystems.Find(id);
             if (homeSystem == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", homeSystem.TemplateID);
             return View(homeSystem);
         }
 
@@ -78,7 +82,7 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name")] HomeSystem homeSystem)
+        public ActionResult Edit([Bind(Include = "ID,Name,TemplateID")] HomeSystem homeSystem)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace HHI_InspectionSoftware.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", homeSystem.TemplateID);
             return View(homeSystem);
         }
 
@@ -96,7 +101,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeSystem homeSystem = db.HomeSystem.Find(id);
+            HomeSystem homeSystem = db.HomeSystems.Find(id);
             if (homeSystem == null)
             {
                 return HttpNotFound();
@@ -109,8 +114,8 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            HomeSystem homeSystem = db.HomeSystem.Find(id);
-            db.HomeSystem.Remove(homeSystem);
+            HomeSystem homeSystem = db.HomeSystems.Find(id);
+            db.HomeSystems.Remove(homeSystem);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

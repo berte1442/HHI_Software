@@ -18,7 +18,9 @@ namespace HHI_InspectionSoftware
         public string Name { get; set; }
         public Nullable<int> SystemID { get; set; }
         public string Description { get; set; }
+        public Nullable<int> AreaID { get; set; }
     
+        public virtual Area Area { get; set; }
         public virtual HomeSystem HomeSystem { get; set; }
     }
 }

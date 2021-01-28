@@ -13,21 +13,21 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class ImagesController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: Images
         public ActionResult Index()
         {
-            return View(db.Images.ToList());
+            var images = db.Images.Include(i => i.Comment);
+            return View(images.ToList());
         }
-
         [HttpGet]
         public ActionResult Add()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Add(Images imageModel)
+        public ActionResult Add(Image imageModel)
         {
             string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
             string extension = Path.GetExtension(imageModel.ImageFile.FileName);
@@ -44,20 +44,18 @@ namespace HHI_InspectionSoftware.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", "Images");
             }
-            
+
             return View();
         }
 
         [HttpGet]
         public ActionResult View(int id)
         {
-            Images imageModel = new Images();
+            Image imageModel = new Image();
             imageModel = db.Images.Where(i => i.ID == id).FirstOrDefault();
 
             return View();
         }
-
-
 
         // GET: Images/Details/5
         public ActionResult Details(int? id)
@@ -66,17 +64,18 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Images images = db.Images.Find(id);
-            if (images == null)
+            Image image = db.Images.Find(id);
+            if (image == null)
             {
                 return HttpNotFound();
             }
-            return View(images);
+            return View(image);
         }
 
         // GET: Images/Create
         public ActionResult Create()
         {
+            ViewBag.CommentID = new SelectList(db.Comments, "ID", "Name");
             return View();
         }
 
@@ -85,16 +84,17 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,FilePath")] Images images)
+        public ActionResult Create([Bind(Include = "ID,Name,FilePath,CommentID")] Image image)
         {
             if (ModelState.IsValid)
             {
-                db.Images.Add(images);
+                db.Images.Add(image);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(images);
+            ViewBag.CommentID = new SelectList(db.Comments, "ID", "Name", image.CommentID);
+            return View(image);
         }
 
         // GET: Images/Edit/5
@@ -104,12 +104,13 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Images images = db.Images.Find(id);
-            if (images == null)
+            Image image = db.Images.Find(id);
+            if (image == null)
             {
                 return HttpNotFound();
             }
-            return View(images);
+            ViewBag.CommentID = new SelectList(db.Comments, "ID", "Name", image.CommentID);
+            return View(image);
         }
 
         // POST: Images/Edit/5
@@ -117,15 +118,16 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,FilePath")] Images images)
+        public ActionResult Edit([Bind(Include = "ID,Name,FilePath,CommentID")] Image image)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(images).State = EntityState.Modified;
+                db.Entry(image).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(images);
+            ViewBag.CommentID = new SelectList(db.Comments, "ID", "Name", image.CommentID);
+            return View(image);
         }
 
         // GET: Images/Delete/5
@@ -135,12 +137,12 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Images images = db.Images.Find(id);
-            if (images == null)
+            Image image = db.Images.Find(id);
+            if (image == null)
             {
                 return HttpNotFound();
             }
-            return View(images);
+            return View(image);
         }
 
         // POST: Images/Delete/5
@@ -148,8 +150,8 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Images images = db.Images.Find(id);
-            db.Images.Remove(images);
+            Image image = db.Images.Find(id);
+            db.Images.Remove(image);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

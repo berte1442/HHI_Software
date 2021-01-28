@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Check Item Index</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayName("Area")
+            @Html.DisplayNameFor(model => model.Area.Name)
         </th>
         <th>
-            @Html.DisplayName("System")
+            @Html.DisplayNameFor(model => model.HomeSystem.Name)
         </th>
         <th></th>
     </tr>

@@ -148,16 +148,13 @@
     </Compile>
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AreasController.cs" />
-    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckItemsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
-    <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeSystemsController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\InspectionsController.cs" />
-    <Compile Include="Controllers\InspectionStatusController.cs" />
     <Compile Include="Controllers\InspectorsController.cs" />
     <Compile Include="Controllers\LimitationsController.cs" />
     <Compile Include="Controllers\RealtorsController.cs" />
@@ -186,13 +183,13 @@
     <Compile Include="HomeSystem.cs">
       <DependentUpon>HHI.tt</DependentUpon>
     </Compile>
-    <Compile Include="Images.cs">
+    <Compile Include="Image.cs">
       <DependentUpon>HHI.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspection.cs">
       <DependentUpon>HHI.tt</DependentUpon>
     </Compile>
-    <Compile Include="InspectionStatus.cs">
+    <Compile Include="InspectionStatu.cs">
       <DependentUpon>HHI.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspector.cs">
@@ -201,7 +198,6 @@
     <Compile Include="Limitation.cs">
       <DependentUpon>HHI.tt</DependentUpon>
     </Compile>
-    <Compile Include="TemplateViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Realtor.cs">
       <DependentUpon>HHI.tt</DependentUpon>
@@ -273,36 +269,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\CheckItems\Create.cshtml" />
-    <Content Include="Views\CheckItems\Delete.cshtml" />
-    <Content Include="Views\CheckItems\Details.cshtml" />
-    <Content Include="Views\CheckItems\Edit.cshtml" />
-    <Content Include="Views\CheckItems\Index.cshtml" />
-    <Content Include="Views\Companies\Create.cshtml" />
-    <Content Include="Views\Companies\Delete.cshtml" />
-    <Content Include="Views\Companies\Details.cshtml" />
-    <Content Include="Views\Companies\Edit.cshtml" />
-    <Content Include="Views\Companies\Index.cshtml" />
-    <Content Include="Views\HomeSystems\Create.cshtml" />
-    <Content Include="Views\HomeSystems\Delete.cshtml" />
-    <Content Include="Views\HomeSystems\Details.cshtml" />
-    <Content Include="Views\HomeSystems\Edit.cshtml" />
-    <Content Include="Views\HomeSystems\Index.cshtml" />
-    <Content Include="Views\InspectionStatus\Create.cshtml" />
-    <Content Include="Views\InspectionStatus\Delete.cshtml" />
-    <Content Include="Views\InspectionStatus\Details.cshtml" />
-    <Content Include="Views\InspectionStatus\Edit.cshtml" />
-    <Content Include="Views\InspectionStatus\Index.cshtml" />
-    <Content Include="Views\Inspectors\Create.cshtml" />
-    <Content Include="Views\Inspectors\Delete.cshtml" />
-    <Content Include="Views\Inspectors\Details.cshtml" />
-    <Content Include="Views\Inspectors\Edit.cshtml" />
-    <Content Include="Views\Inspectors\Index.cshtml" />
-    <Content Include="Views\Realtors\Create.cshtml" />
-    <Content Include="Views\Realtors\Delete.cshtml" />
-    <Content Include="Views\Realtors\Details.cshtml" />
-    <Content Include="Views\Realtors\Edit.cshtml" />
-    <Content Include="Views\Realtors\Index.cshtml" />
     <Content Include="Views\Templates\Create.cshtml" />
     <Content Include="Views\Templates\Delete.cshtml" />
     <Content Include="Views\Templates\Details.cshtml" />
@@ -311,46 +277,61 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Customers\Create.cshtml" />
-    <Content Include="Views\Customers\Delete.cshtml" />
-    <Content Include="Views\Customers\Details.cshtml" />
-    <Content Include="Views\Customers\Edit.cshtml" />
-    <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Addresses\Create.cshtml" />
     <Content Include="Views\Addresses\Delete.cshtml" />
     <Content Include="Views\Addresses\Details.cshtml" />
     <Content Include="Views\Addresses\Edit.cshtml" />
     <Content Include="Views\Addresses\Index.cshtml" />
-    <Content Include="Views\Inspections\Create.cshtml" />
-    <Content Include="Views\Inspections\Delete.cshtml" />
-    <Content Include="Views\Inspections\Details.cshtml" />
-    <Content Include="Views\Inspections\Edit.cshtml" />
-    <Content Include="Views\Inspections\Index.cshtml" />
-    <Content Include="Views\Limitations\Create.cshtml" />
-    <Content Include="Views\Limitations\Delete.cshtml" />
-    <Content Include="Views\Limitations\Details.cshtml" />
-    <Content Include="Views\Limitations\Edit.cshtml" />
-    <Content Include="Views\Limitations\Index.cshtml" />
     <Content Include="Views\Areas\Create.cshtml" />
     <Content Include="Views\Areas\Delete.cshtml" />
     <Content Include="Views\Areas\Details.cshtml" />
     <Content Include="Views\Areas\Edit.cshtml" />
     <Content Include="Views\Areas\Index.cshtml" />
-    <Content Include="Views\Categories\Create.cshtml" />
-    <Content Include="Views\Categories\Delete.cshtml" />
-    <Content Include="Views\Categories\Details.cshtml" />
-    <Content Include="Views\Categories\Edit.cshtml" />
-    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\CheckItems\Create.cshtml" />
+    <Content Include="Views\CheckItems\Delete.cshtml" />
+    <Content Include="Views\CheckItems\Details.cshtml" />
+    <Content Include="Views\CheckItems\Edit.cshtml" />
+    <Content Include="Views\CheckItems\Index.cshtml" />
     <Content Include="Views\Comments\Create.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Comments\Details.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\HomeSystems\Create.cshtml" />
+    <Content Include="Views\HomeSystems\Delete.cshtml" />
+    <Content Include="Views\HomeSystems\Details.cshtml" />
+    <Content Include="Views\HomeSystems\Edit.cshtml" />
+    <Content Include="Views\HomeSystems\Index.cshtml" />
     <Content Include="Views\Images\Create.cshtml" />
     <Content Include="Views\Images\Delete.cshtml" />
     <Content Include="Views\Images\Details.cshtml" />
     <Content Include="Views\Images\Edit.cshtml" />
     <Content Include="Views\Images\Index.cshtml" />
+    <Content Include="Views\Inspections\Create.cshtml" />
+    <Content Include="Views\Inspections\Delete.cshtml" />
+    <Content Include="Views\Inspections\Details.cshtml" />
+    <Content Include="Views\Inspections\Edit.cshtml" />
+    <Content Include="Views\Inspections\Index.cshtml" />
+    <Content Include="Views\Inspectors\Create.cshtml" />
+    <Content Include="Views\Inspectors\Delete.cshtml" />
+    <Content Include="Views\Inspectors\Details.cshtml" />
+    <Content Include="Views\Inspectors\Edit.cshtml" />
+    <Content Include="Views\Inspectors\Index.cshtml" />
+    <Content Include="Views\Limitations\Create.cshtml" />
+    <Content Include="Views\Limitations\Delete.cshtml" />
+    <Content Include="Views\Limitations\Details.cshtml" />
+    <Content Include="Views\Limitations\Edit.cshtml" />
+    <Content Include="Views\Limitations\Index.cshtml" />
+    <Content Include="Views\Realtors\Create.cshtml" />
+    <Content Include="Views\Realtors\Delete.cshtml" />
+    <Content Include="Views\Realtors\Details.cshtml" />
+    <Content Include="Views\Realtors\Edit.cshtml" />
+    <Content Include="Views\Realtors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

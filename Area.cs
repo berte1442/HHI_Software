@@ -17,13 +17,18 @@ namespace HHI_InspectionSoftware
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Area()
         {
-            this.CheckItem = new HashSet<CheckItem>();
+            this.CheckItems = new HashSet<CheckItem>();
+            this.Limitations = new HashSet<Limitation>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
+        public Nullable<int> TemplateID { get; set; }
     
+        public virtual Template Template { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CheckItem> CheckItem { get; set; }
+        public virtual ICollection<CheckItem> CheckItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Limitation> Limitations { get; set; }
     }
 }

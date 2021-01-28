@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Inspection Details</h2>
+<h2>Details</h2>
 
 <div>
     <h4>Inspection</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayName("Inspection Date")
+            @Html.DisplayNameFor(model => model.InspectionDate)
         </dt>
 
         <dd>
@@ -27,49 +27,51 @@
         </dd>
 
         <dt>
-            @Html.DisplayName("Address")
+            @Html.DisplayNameFor(model => model.Address.Address1)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Address.Address1)
-            @Html.DisplayFor(model => model.Address.City)
-            @Html.DisplayFor(model => model.Address.State)
-            @Html.DisplayFor(model => model.Address.Zip)
         </dd>
 
         <dt>
-            @Html.DisplayName("Customer")
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Customer.FirstName)
-            @Html.DisplayFor(model => model.Customer.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayName("Inspector")
+            @Html.DisplayNameFor(model => model.Inspector.FirstName)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Inspector.FirstName)
-            @Html.DisplayFor(model => model.Inspector.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayName("Inspection Status")
+            @Html.DisplayNameFor(model => model.InspectionStatu.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.InspectionStatus.Name)
+            @Html.DisplayFor(model => model.InspectionStatu.Name)
         </dd>
 
         <dt>
-            @Html.DisplayName("Realtor")
+            @Html.DisplayNameFor(model => model.Realtor.FirstName)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Realtor.FirstName)
-            @Html.DisplayFor(model => model.Realtor.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Template.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Template.Name)
         </dd>
 
     </dl>

@@ -14,9 +14,22 @@ namespace HHI_InspectionSoftware
     
     public partial class Template
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Template()
+        {
+            this.Areas = new HashSet<Area>();
+            this.HomeSystems = new HashSet<HomeSystem>();
+            this.Inspections = new HashSet<Inspection>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
-        public string AreaIDs { get; set; }
-        public string SystemIDs { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Area> Areas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HomeSystem> HomeSystems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inspection> Inspections { get; set; }
     }
 }

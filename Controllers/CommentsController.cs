@@ -12,13 +12,13 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class CommentsController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: Comments
         public ActionResult Index()
         {
-            var comment = db.Comment.Include(c => c.Category).Include(c => c.HomeSystem);
-            return View(comment.ToList());
+            var comments = db.Comments.Include(c => c.Category).Include(c => c.CheckItem);
+            return View(comments.ToList());
         }
 
         // GET: Comments/Details/5
@@ -28,7 +28,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comment.Find(id);
+            Comment comment = db.Comments.Find(id);
             if (comment == null)
             {
                 return HttpNotFound();
@@ -39,9 +39,8 @@ namespace HHI_InspectionSoftware.Controllers
         // GET: Comments/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Category, "ID", "Name");
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name");
-            ViewBag.ImageID = new SelectList(db.Images, "ID", "Name");
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
+            ViewBag.CheckItemID = new SelectList(db.CheckItems, "ID", "Name");
             return View();
         }
 
@@ -50,18 +49,17 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Description,CategoryID,SystemID,ImageID")] Comment comment)
+        public ActionResult Create([Bind(Include = "ID,Name,Description,CategoryID,CheckItemID")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.Comment.Add(comment);
+                db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Category, "ID", "Name", comment.CategoryID);
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", comment.SystemID);
-            ViewBag.ImageID = new SelectList(db.Images, "ID", "Name", comment.ImageID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", comment.CategoryID);
+            ViewBag.CheckItemID = new SelectList(db.CheckItems, "ID", "Name", comment.CheckItemID);
             return View(comment);
         }
 
@@ -72,14 +70,13 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comment.Find(id);
+            Comment comment = db.Comments.Find(id);
             if (comment == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Category, "ID", "Name", comment.CategoryID);
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", comment.SystemID);
-            ViewBag.ImageID = new SelectList(db.Images, "ID", "Name", comment.ImageID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", comment.CategoryID);
+            ViewBag.CheckItemID = new SelectList(db.CheckItems, "ID", "Name", comment.CheckItemID);
             return View(comment);
         }
 
@@ -88,7 +85,7 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Description,CategoryID,SystemID,ImageID")] Comment comment)
+        public ActionResult Edit([Bind(Include = "ID,Name,Description,CategoryID,CheckItemID")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -96,9 +93,8 @@ namespace HHI_InspectionSoftware.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Category, "ID", "Name", comment.CategoryID);
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", comment.SystemID);
-            ViewBag.ImageID = new SelectList(db.Images, "ID", "Name", comment.ImageID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", comment.CategoryID);
+            ViewBag.CheckItemID = new SelectList(db.CheckItems, "ID", "Name", comment.CheckItemID);
             return View(comment);
         }
 
@@ -109,7 +105,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comment.Find(id);
+            Comment comment = db.Comments.Find(id);
             if (comment == null)
             {
                 return HttpNotFound();
@@ -122,8 +118,8 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comment comment = db.Comment.Find(id);
-            db.Comment.Remove(comment);
+            Comment comment = db.Comments.Find(id);
+            db.Comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

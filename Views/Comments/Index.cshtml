@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Comment Index</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,13 +18,10 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayName("Category")
+            @Html.DisplayNameFor(model => model.Category.Name)
         </th>
         <th>
-            @Html.DisplayName("System")
-        </th>
-        <th>
-            @Html.DisplayName("Image")
+            @Html.DisplayNameFor(model => model.CheckItem.Name)
         </th>
         <th></th>
     </tr>
@@ -41,12 +38,7 @@
             @Html.DisplayFor(modelItem => item.Category.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.HomeSystem.Name)
-        </td>
-        <td>
-           @* @Html.DisplayFor(modelItem => item.Images.Name)*@
-            <img src="@Url.Content(item.Images.FilePath)" width="75" height="75" alt=@item.Images.FilePath />
-
+            @Html.DisplayFor(modelItem => item.CheckItem.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

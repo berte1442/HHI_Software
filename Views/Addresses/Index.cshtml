@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Address Index</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("Street Address")
+            @Html.DisplayNameFor(model => model.Address1)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.City)
@@ -24,7 +24,7 @@
             @Html.DisplayNameFor(model => model.Zip)
         </th>
         <th>
-            @Html.DisplayName("Square Feet")
+            @Html.DisplayNameFor(model => model.SquareFeet)
         </th>
         <th></th>
     </tr>

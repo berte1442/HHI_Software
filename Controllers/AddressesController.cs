@@ -12,12 +12,12 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class AddressesController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: Addresses
         public ActionResult Index()
         {
-            return View(db.Address.ToList());
+            return View(db.Addresses.ToList());
         }
 
         // GET: Addresses/Details/5
@@ -27,7 +27,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Address address = db.Address.Find(id);
+            Address address = db.Addresses.Find(id);
             if (address == null)
             {
                 return HttpNotFound();
@@ -50,9 +50,9 @@ namespace HHI_InspectionSoftware.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Address.Add(address);
+                db.Addresses.Add(address);
                 db.SaveChanges();
-                return RedirectToAction("Create", "Realtors");
+                return RedirectToAction("Index");
             }
 
             return View(address);
@@ -65,7 +65,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Address address = db.Address.Find(id);
+            Address address = db.Addresses.Find(id);
             if (address == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Address address = db.Address.Find(id);
+            Address address = db.Addresses.Find(id);
             if (address == null)
             {
                 return HttpNotFound();
@@ -109,20 +109,10 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Address address = db.Address.Find(id);
-            db.Address.Remove(address);
+            Address address = db.Addresses.Find(id);
+            db.Addresses.Remove(address);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult Skip()
-        {
-            return RedirectToAction("Create", "Realtors");
-        }
-
-        public ActionResult Back()
-        {
-            return RedirectToAction("Create", "Customers");
         }
 
         protected override void Dispose(bool disposing)

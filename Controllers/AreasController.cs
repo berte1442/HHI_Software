@@ -12,12 +12,13 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class AreasController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: Areas
         public ActionResult Index()
         {
-            return View(db.Area.ToList());
+            var areas = db.Areas.Include(a => a.Template);
+            return View(areas.ToList());
         }
 
         // GET: Areas/Details/5
@@ -27,7 +28,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Area area = db.Area.Find(id);
+            Area area = db.Areas.Find(id);
             if (area == null)
             {
                 return HttpNotFound();
@@ -38,6 +39,7 @@ namespace HHI_InspectionSoftware.Controllers
         // GET: Areas/Create
         public ActionResult Create()
         {
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name");
             return View();
         }
 
@@ -46,15 +48,16 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name")] Area area)
+        public ActionResult Create([Bind(Include = "ID,Name,TemplateID")] Area area)
         {
             if (ModelState.IsValid)
             {
-                db.Area.Add(area);
+                db.Areas.Add(area);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", area.TemplateID);
             return View(area);
         }
 
@@ -65,11 +68,12 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Area area = db.Area.Find(id);
+            Area area = db.Areas.Find(id);
             if (area == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", area.TemplateID);
             return View(area);
         }
 
@@ -78,7 +82,7 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name")] Area area)
+        public ActionResult Edit([Bind(Include = "ID,Name,TemplateID")] Area area)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace HHI_InspectionSoftware.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", area.TemplateID);
             return View(area);
         }
 
@@ -96,7 +101,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Area area = db.Area.Find(id);
+            Area area = db.Areas.Find(id);
             if (area == null)
             {
                 return HttpNotFound();
@@ -109,8 +114,8 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Area area = db.Area.Find(id);
-            db.Area.Remove(area);
+            Area area = db.Areas.Find(id);
+            db.Areas.Remove(area);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

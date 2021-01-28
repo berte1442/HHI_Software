@@ -12,13 +12,13 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class InspectionsController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: Inspections
         public ActionResult Index()
         {
-            var inspection = db.Inspection.Include(i => i.Address).Include(i => i.Customer).Include(i => i.Inspector).Include(i => i.InspectionStatus).Include(i => i.Realtor);
-            return View(inspection.ToList());
+            var inspections = db.Inspections.Include(i => i.Address).Include(i => i.Customer).Include(i => i.Inspector).Include(i => i.InspectionStatu).Include(i => i.Realtor).Include(i => i.Template);
+            return View(inspections.ToList());
         }
 
         // GET: Inspections/Details/5
@@ -28,7 +28,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inspection inspection = db.Inspection.Find(id);
+            Inspection inspection = db.Inspections.Find(id);
             if (inspection == null)
             {
                 return HttpNotFound();
@@ -36,17 +36,15 @@ namespace HHI_InspectionSoftware.Controllers
             return View(inspection);
         }
 
+        // GET: Inspections/Create
         public ActionResult Create()
         {
-            List<Address> addresses = db.Address.ToList();
-            List<Customer> customers = db.Customer.ToList();
-            List<Realtor> realtors = db.Realtor.ToList();
-
-            ViewBag.AddressID = new SelectList(db.Address, "ID", "Address1", addresses.Last().ID);
-            ViewBag.CustomerID = new SelectList(db.Customer, "ID", "FirstName", customers.Last().ID);
-            ViewBag.InspectorID = new SelectList(db.Inspector, "ID", "FirstName");
+            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "Address1");
+            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName");
+            ViewBag.InspectorID = new SelectList(db.Inspectors, "ID", "FirstName");
             ViewBag.InspectionStatusID = new SelectList(db.InspectionStatus, "ID", "Name");
-            ViewBag.RealtorID = new SelectList(db.Realtor, "ID", "FirstName", realtors.Last().ID);
+            ViewBag.RealtorID = new SelectList(db.Realtors, "ID", "FirstName");
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name");
             return View();
         }
 
@@ -55,20 +53,21 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,AddressID,CustomerID,InspectorID,RealtorID,InspectionDate,InspectionStatusID,Price")] Inspection inspection)
+        public ActionResult Create([Bind(Include = "ID,AddressID,CustomerID,InspectorID,RealtorID,InspectionDate,InspectionStatusID,Price,TemplateID")] Inspection inspection)
         {
             if (ModelState.IsValid)
             {
-                db.Inspection.Add(inspection);
+                db.Inspections.Add(inspection);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AddressID = new SelectList(db.Address, "ID", "Address1", inspection.AddressID);
-            ViewBag.CustomerID = new SelectList(db.Customer, "ID", "FirstName", inspection.CustomerID);
-            ViewBag.InspectorID = new SelectList(db.Inspector, "ID", "FirstName", inspection.InspectorID);
+            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "Address1", inspection.AddressID);
+            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName", inspection.CustomerID);
+            ViewBag.InspectorID = new SelectList(db.Inspectors, "ID", "FirstName", inspection.InspectorID);
             ViewBag.InspectionStatusID = new SelectList(db.InspectionStatus, "ID", "Name", inspection.InspectionStatusID);
-            ViewBag.RealtorID = new SelectList(db.Realtor, "ID", "FirstName", inspection.RealtorID);
+            ViewBag.RealtorID = new SelectList(db.Realtors, "ID", "FirstName", inspection.RealtorID);
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", inspection.TemplateID);
             return View(inspection);
         }
 
@@ -79,16 +78,17 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inspection inspection = db.Inspection.Find(id);
+            Inspection inspection = db.Inspections.Find(id);
             if (inspection == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AddressID = new SelectList(db.Address, "ID", "Address1", inspection.AddressID);
-            ViewBag.CustomerID = new SelectList(db.Customer, "ID", "FirstName", inspection.CustomerID);
-            ViewBag.InspectorID = new SelectList(db.Inspector, "ID", "FirstName", inspection.InspectorID);
+            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "Address1", inspection.AddressID);
+            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName", inspection.CustomerID);
+            ViewBag.InspectorID = new SelectList(db.Inspectors, "ID", "FirstName", inspection.InspectorID);
             ViewBag.InspectionStatusID = new SelectList(db.InspectionStatus, "ID", "Name", inspection.InspectionStatusID);
-            ViewBag.RealtorID = new SelectList(db.Realtor, "ID", "FirstName", inspection.RealtorID);
+            ViewBag.RealtorID = new SelectList(db.Realtors, "ID", "FirstName", inspection.RealtorID);
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", inspection.TemplateID);
             return View(inspection);
         }
 
@@ -97,7 +97,7 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,AddressID,CustomerID,InspectorID,RealtorID,InspectionDate,InspectionStatusID,Price")] Inspection inspection)
+        public ActionResult Edit([Bind(Include = "ID,AddressID,CustomerID,InspectorID,RealtorID,InspectionDate,InspectionStatusID,Price,TemplateID")] Inspection inspection)
         {
             if (ModelState.IsValid)
             {
@@ -105,11 +105,12 @@ namespace HHI_InspectionSoftware.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AddressID = new SelectList(db.Address, "ID", "Address1", inspection.AddressID);
-            ViewBag.CustomerID = new SelectList(db.Customer, "ID", "FirstName", inspection.CustomerID);
-            ViewBag.InspectorID = new SelectList(db.Inspector, "ID", "FirstName", inspection.InspectorID);
+            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "Address1", inspection.AddressID);
+            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName", inspection.CustomerID);
+            ViewBag.InspectorID = new SelectList(db.Inspectors, "ID", "FirstName", inspection.InspectorID);
             ViewBag.InspectionStatusID = new SelectList(db.InspectionStatus, "ID", "Name", inspection.InspectionStatusID);
-            ViewBag.RealtorID = new SelectList(db.Realtor, "ID", "FirstName", inspection.RealtorID);
+            ViewBag.RealtorID = new SelectList(db.Realtors, "ID", "FirstName", inspection.RealtorID);
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", inspection.TemplateID);
             return View(inspection);
         }
 
@@ -120,7 +121,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inspection inspection = db.Inspection.Find(id);
+            Inspection inspection = db.Inspections.Find(id);
             if (inspection == null)
             {
                 return HttpNotFound();
@@ -133,17 +134,11 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Inspection inspection = db.Inspection.Find(id);
-            db.Inspection.Remove(inspection);
+            Inspection inspection = db.Inspections.Find(id);
+            db.Inspections.Remove(inspection);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        public ActionResult Back()
-        {
-            return RedirectToAction("Create", "Realtors");
-        }
-
 
         protected override void Dispose(bool disposing)
         {

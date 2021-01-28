@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="HHIModelStoreContainer" CdmEntityContainer="HHIEntities4">
-    <EntitySetMapping Name="Address">
+  <EntityContainerMapping StorageEntityContainer="HHIModelStoreContainer" CdmEntityContainer="HHIEntities5">
+    <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="HHIModel.Address">
         <MappingFragment StoreEntitySet="Address">
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -13,15 +13,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Area">
+    <EntitySetMapping Name="Areas">
       <EntityTypeMapping TypeName="HHIModel.Area">
         <MappingFragment StoreEntitySet="Area">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CheckItem">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="HHIModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CheckItems">
       <EntityTypeMapping TypeName="HHIModel.CheckItem">
         <MappingFragment StoreEntitySet="CheckItem">
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -31,7 +41,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Company">
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="HHIModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="CheckItemID" ColumnName="CheckItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
       <EntityTypeMapping TypeName="HHIModel.Company">
         <MappingFragment StoreEntitySet="Company">
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -39,7 +60,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Customer">
+    <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="HHIModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -50,18 +71,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="HomeSystem">
+    <EntitySetMapping Name="HomeSystems">
       <EntityTypeMapping TypeName="HHIModel.HomeSystem">
         <MappingFragment StoreEntitySet="HomeSystem">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Inspection">
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="HHIModel.Image">
+        <MappingFragment StoreEntitySet="Image">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inspections">
       <EntityTypeMapping TypeName="HHIModel.Inspection">
         <MappingFragment StoreEntitySet="Inspection">
-          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="AddressID" ColumnName="AddressID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
@@ -69,18 +100,20 @@
           <ScalarProperty Name="RealtorID" ColumnName="RealtorID" />
           <ScalarProperty Name="InspectionDate" ColumnName="InspectionDate" />
           <ScalarProperty Name="InspectionStatusID" ColumnName="InspectionStatusID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="InspectionStatus">
-      <EntityTypeMapping TypeName="HHIModel.InspectionStatus">
+      <EntityTypeMapping TypeName="HHIModel.InspectionStatu">
         <MappingFragment StoreEntitySet="InspectionStatus">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Inspector">
+    <EntitySetMapping Name="Inspectors">
       <EntityTypeMapping TypeName="HHIModel.Inspector">
         <MappingFragment StoreEntitySet="Inspector">
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -94,17 +127,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Limitation">
+    <EntitySetMapping Name="Limitations">
       <EntityTypeMapping TypeName="HHIModel.Limitation">
         <MappingFragment StoreEntitySet="Limitation">
-          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="SystemID" ColumnName="SystemID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Realtor">
+    <EntitySetMapping Name="Realtors">
       <EntityTypeMapping TypeName="HHIModel.Realtor">
         <MappingFragment StoreEntitySet="Realtor">
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -115,43 +149,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Template">
+    <EntitySetMapping Name="Templates">
       <EntityTypeMapping TypeName="HHIModel.Template">
         <MappingFragment StoreEntitySet="Template">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="AreaIDs" ColumnName="AreaIDs" />
-          <ScalarProperty Name="SystemIDs" ColumnName="SystemIDs" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Category">
-      <EntityTypeMapping TypeName="HHIModel.Category">
-        <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Comment">
-      <EntityTypeMapping TypeName="HHIModel.Comment">
-        <MappingFragment StoreEntitySet="Comment">
-          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
-          <ScalarProperty Name="SystemID" ColumnName="SystemID" />
-          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Images">
-      <EntityTypeMapping TypeName="HHIModel.Images">
-        <MappingFragment StoreEntitySet="Images">
-          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

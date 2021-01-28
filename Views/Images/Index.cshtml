@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HHI_InspectionSoftware.Images>
+﻿@model IEnumerable<HHI_InspectionSoftware.Image>
 
 @{
     ViewBag.Title = "Index";
@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.FilePath)
         </th>
         <th>
-            <p>Image</p>
+            @Html.DisplayNameFor(model => model.Comment.Name)
         </th>
         <th></th>
     </tr>
@@ -29,10 +29,10 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FilePath)
+            <img src="@Url.Content(item.FilePath)" width="75" height="75" alt=@item.FilePath />
         </td>
         <td>
-            <img src="@Url.Content(item.FilePath)" width="75" height="75" alt=@item.FilePath/>
+            @Html.DisplayFor(modelItem => item.Comment.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

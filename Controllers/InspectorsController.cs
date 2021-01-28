@@ -12,12 +12,12 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class InspectorsController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: Inspectors
         public ActionResult Index()
         {
-            return View(db.Inspector.ToList());
+            return View(db.Inspectors.ToList());
         }
 
         // GET: Inspectors/Details/5
@@ -27,7 +27,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inspector inspector = db.Inspector.Find(id);
+            Inspector inspector = db.Inspectors.Find(id);
             if (inspector == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace HHI_InspectionSoftware.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Inspector.Add(inspector);
+                db.Inspectors.Add(inspector);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inspector inspector = db.Inspector.Find(id);
+            Inspector inspector = db.Inspectors.Find(id);
             if (inspector == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inspector inspector = db.Inspector.Find(id);
+            Inspector inspector = db.Inspectors.Find(id);
             if (inspector == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Inspector inspector = db.Inspector.Find(id);
-            db.Inspector.Remove(inspector);
+            Inspector inspector = db.Inspectors.Find(id);
+            db.Inspectors.Remove(inspector);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

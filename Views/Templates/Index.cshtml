@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Template Index</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -14,12 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
-            @Html.DisplayName("Area IDs")
-        </th>
-        <th>
-            @Html.DisplayName("System IDs")
-        </th>
         <th></th>
     </tr>
 
@@ -27,12 +21,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AreaIDs)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SystemIDs)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

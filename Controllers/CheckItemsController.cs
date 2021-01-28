@@ -12,13 +12,13 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class CheckItemsController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: CheckItems
         public ActionResult Index()
         {
-            var checkItem = db.CheckItem.Include(c => c.Area).Include(c => c.HomeSystem);
-            return View(checkItem.ToList());
+            var checkItems = db.CheckItems.Include(c => c.Area).Include(c => c.HomeSystem);
+            return View(checkItems.ToList());
         }
 
         // GET: CheckItems/Details/5
@@ -28,7 +28,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CheckItem checkItem = db.CheckItem.Find(id);
+            CheckItem checkItem = db.CheckItems.Find(id);
             if (checkItem == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,8 @@ namespace HHI_InspectionSoftware.Controllers
         // GET: CheckItems/Create
         public ActionResult Create()
         {
-            ViewBag.AreaID = new SelectList(db.Area, "ID", "Name");
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name");
+            ViewBag.AreaID = new SelectList(db.Areas, "ID", "Name");
+            ViewBag.SystemID = new SelectList(db.HomeSystems, "ID", "Name");
             return View();
         }
 
@@ -53,13 +53,13 @@ namespace HHI_InspectionSoftware.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CheckItem.Add(checkItem);
+                db.CheckItems.Add(checkItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AreaID = new SelectList(db.Area, "ID", "Name", checkItem.AreaID);
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", checkItem.SystemID);
+            ViewBag.AreaID = new SelectList(db.Areas, "ID", "Name", checkItem.AreaID);
+            ViewBag.SystemID = new SelectList(db.HomeSystems, "ID", "Name", checkItem.SystemID);
             return View(checkItem);
         }
 
@@ -70,13 +70,13 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CheckItem checkItem = db.CheckItem.Find(id);
+            CheckItem checkItem = db.CheckItems.Find(id);
             if (checkItem == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AreaID = new SelectList(db.Area, "ID", "Name", checkItem.AreaID);
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", checkItem.SystemID);
+            ViewBag.AreaID = new SelectList(db.Areas, "ID", "Name", checkItem.AreaID);
+            ViewBag.SystemID = new SelectList(db.HomeSystems, "ID", "Name", checkItem.SystemID);
             return View(checkItem);
         }
 
@@ -93,8 +93,8 @@ namespace HHI_InspectionSoftware.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AreaID = new SelectList(db.Area, "ID", "Name", checkItem.AreaID);
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", checkItem.SystemID);
+            ViewBag.AreaID = new SelectList(db.Areas, "ID", "Name", checkItem.AreaID);
+            ViewBag.SystemID = new SelectList(db.HomeSystems, "ID", "Name", checkItem.SystemID);
             return View(checkItem);
         }
 
@@ -105,7 +105,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CheckItem checkItem = db.CheckItem.Find(id);
+            CheckItem checkItem = db.CheckItems.Find(id);
             if (checkItem == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CheckItem checkItem = db.CheckItem.Find(id);
-            db.CheckItem.Remove(checkItem);
+            CheckItem checkItem = db.CheckItems.Find(id);
+            db.CheckItems.Remove(checkItem);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -11,19 +11,19 @@ namespace HHI_InspectionSoftware
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class InspectionStatus
+    using System.ComponentModel;
+    using System.Web;
+
+    public partial class Image
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InspectionStatus()
-        {
-            this.Inspection = new HashSet<Inspection>();
-        }
-    
         public int ID { get; set; }
         public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspection> Inspection { get; set; }
+        [DisplayName("Upload File")]
+
+        public string FilePath { get; set; }
+        public Nullable<int> CommentID { get; set; }
+        public HttpPostedFileBase ImageFile { get; set; }
+
+        public virtual Comment Comment { get; set; }
     }
 }

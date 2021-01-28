@@ -12,12 +12,12 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class CustomersController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: Customers
         public ActionResult Index()
         {
-            return View(db.Customer.ToList());
+            return View(db.Customers.ToList());
         }
 
         // GET: Customers/Details/5
@@ -27,7 +27,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -50,9 +50,9 @@ namespace HHI_InspectionSoftware.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Customer.Add(customer);
+                db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Create", "Addresses");
+                return RedirectToAction("Index");
             }
 
             return View(customer);
@@ -65,7 +65,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -109,15 +109,10 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customer.Find(id);
-            db.Customer.Remove(customer);
+            Customer customer = db.Customers.Find(id);
+            db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-            public ActionResult Skip()
-        {
-            return RedirectToAction("Create", "Addresses");
         }
 
         protected override void Dispose(bool disposing)

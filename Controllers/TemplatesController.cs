@@ -12,12 +12,12 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class TemplatesController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: Templates
         public ActionResult Index()
         {
-            return View(db.Template.ToList());
+            return View(db.Templates.ToList());
         }
 
         // GET: Templates/Details/5
@@ -27,7 +27,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Template template = db.Template.Find(id);
+            Template template = db.Templates.Find(id);
             if (template == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,AreaIDs,SystemIDs")] Template template)
+        public ActionResult Create([Bind(Include = "ID,Name")] Template template)
         {
             if (ModelState.IsValid)
             {
-                db.Template.Add(template);
+                db.Templates.Add(template);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Template template = db.Template.Find(id);
+            Template template = db.Templates.Find(id);
             if (template == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,AreaIDs,SystemIDs")] Template template)
+        public ActionResult Edit([Bind(Include = "ID,Name")] Template template)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Template template = db.Template.Find(id);
+            Template template = db.Templates.Find(id);
             if (template == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Template template = db.Template.Find(id);
-            db.Template.Remove(template);
+            Template template = db.Templates.Find(id);
+            db.Templates.Remove(template);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Limitation Index</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,7 +18,10 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayName("System")
+            @Html.DisplayNameFor(model => model.Area.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeSystem.Name)
         </th>
         <th></th>
     </tr>
@@ -30,6 +33,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Area.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.HomeSystem.Name)

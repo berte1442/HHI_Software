@@ -4,33 +4,36 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Inspection Index</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "Customers")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("Inspection Date")
-        </th>
-        <th>
-            @Html.DisplayName("Address")
-        </th>
-        <th>
-            @Html.DisplayName("Customer")
-        </th>
-        <th>
-            @Html.DisplayName("Inspector")
-        </th>
-        <th>
-            @Html.DisplayName("Inspection Status")
-        </th>
-        <th>
-            @Html.DisplayName("Realtor")
+            @Html.DisplayNameFor(model => model.InspectionDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address.Address1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inspector.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InspectionStatu.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Realtor.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Template.Name)
         </th>
         <th></th>
     </tr>
@@ -41,25 +44,25 @@
             @Html.DisplayFor(modelItem => item.InspectionDate)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Address.Address1)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Customer.FirstName)
-            @Html.DisplayFor(modelItem => item.Customer.LastName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Inspector.FirstName)
-            @Html.DisplayFor(modelItem => item.Inspector.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.InspectionStatus.Name)
+            @Html.DisplayFor(modelItem => item.InspectionStatu.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Realtor.FirstName)
-            @Html.DisplayFor(modelItem => item.Realtor.LastName)
         </td>
         <td>
-            $ @Html.DisplayFor(modelItem => item.Price)
+            @Html.DisplayFor(modelItem => item.Template.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

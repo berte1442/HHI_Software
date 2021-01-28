@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Limitation Details</h2>
+<h2>Details</h2>
 
 <div>
     <h4>Limitation</h4>
@@ -27,7 +27,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayName("System")
+            @Html.DisplayNameFor(model => model.Area.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeSystem.Name)
         </dt>
 
         <dd>

@@ -17,7 +17,7 @@ namespace HHI_InspectionSoftware
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Comment = new HashSet<Comment>();
+            this.Comments = new HashSet<Comment>();
         }
     
         public int ID { get; set; }
@@ -25,6 +25,6 @@ namespace HHI_InspectionSoftware
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comment { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

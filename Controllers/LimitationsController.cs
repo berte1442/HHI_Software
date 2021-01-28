@@ -12,13 +12,13 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class LimitationsController : Controller
     {
-        private HHIEntities4 db = new HHIEntities4();
+        private HHIEntities5 db = new HHIEntities5();
 
         // GET: Limitations
         public ActionResult Index()
         {
-            var limitation = db.Limitation.Include(l => l.HomeSystem);
-            return View(limitation.ToList());
+            var limitations = db.Limitations.Include(l => l.Area).Include(l => l.HomeSystem);
+            return View(limitations.ToList());
         }
 
         // GET: Limitations/Details/5
@@ -28,7 +28,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Limitation limitation = db.Limitation.Find(id);
+            Limitation limitation = db.Limitations.Find(id);
             if (limitation == null)
             {
                 return HttpNotFound();
@@ -39,7 +39,8 @@ namespace HHI_InspectionSoftware.Controllers
         // GET: Limitations/Create
         public ActionResult Create()
         {
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name");
+            ViewBag.AreaID = new SelectList(db.Areas, "ID", "Name");
+            ViewBag.SystemID = new SelectList(db.HomeSystems, "ID", "Name");
             return View();
         }
 
@@ -48,16 +49,17 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,SystemID,Description")] Limitation limitation)
+        public ActionResult Create([Bind(Include = "ID,Name,SystemID,Description,AreaID")] Limitation limitation)
         {
             if (ModelState.IsValid)
             {
-                db.Limitation.Add(limitation);
+                db.Limitations.Add(limitation);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", limitation.SystemID);
+            ViewBag.AreaID = new SelectList(db.Areas, "ID", "Name", limitation.AreaID);
+            ViewBag.SystemID = new SelectList(db.HomeSystems, "ID", "Name", limitation.SystemID);
             return View(limitation);
         }
 
@@ -68,12 +70,13 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Limitation limitation = db.Limitation.Find(id);
+            Limitation limitation = db.Limitations.Find(id);
             if (limitation == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", limitation.SystemID);
+            ViewBag.AreaID = new SelectList(db.Areas, "ID", "Name", limitation.AreaID);
+            ViewBag.SystemID = new SelectList(db.HomeSystems, "ID", "Name", limitation.SystemID);
             return View(limitation);
         }
 
@@ -82,7 +85,7 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,SystemID,Description")] Limitation limitation)
+        public ActionResult Edit([Bind(Include = "ID,Name,SystemID,Description,AreaID")] Limitation limitation)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +93,8 @@ namespace HHI_InspectionSoftware.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.SystemID = new SelectList(db.HomeSystem, "ID", "Name", limitation.SystemID);
+            ViewBag.AreaID = new SelectList(db.Areas, "ID", "Name", limitation.AreaID);
+            ViewBag.SystemID = new SelectList(db.HomeSystems, "ID", "Name", limitation.SystemID);
             return View(limitation);
         }
 
@@ -101,7 +105,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Limitation limitation = db.Limitation.Find(id);
+            Limitation limitation = db.Limitations.Find(id);
             if (limitation == null)
             {
                 return HttpNotFound();
@@ -114,8 +118,8 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Limitation limitation = db.Limitation.Find(id);
-            db.Limitation.Remove(limitation);
+            Limitation limitation = db.Limitations.Find(id);
+            db.Limitations.Remove(limitation);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
