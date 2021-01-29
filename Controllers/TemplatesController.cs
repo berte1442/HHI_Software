@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HHI_InspectionSoftware;
+using HHI_InspectionSoftware.Models;
 
 namespace HHI_InspectionSoftware.Controllers
 {
@@ -113,6 +114,20 @@ namespace HHI_InspectionSoftware.Controllers
             db.Templates.Remove(template);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult CreateNewTemplate()
+        {
+            TemplateModel templateModel = new TemplateModel();
+            templateModel.Areas = db.Areas.ToList();
+            templateModel.Categories = db.Categories.ToList();
+            templateModel.CheckItems = db.CheckItems.ToList();
+            templateModel.Comments = db.Comments.ToList();
+            templateModel.HomeSystems = db.HomeSystems.ToList();
+            templateModel.Images = db.Images.ToList();
+            templateModel.Limitations = db.Limitations.ToList();
+            templateModel.Templates = db.Templates.ToList();
+            return View(templateModel);
         }
 
         protected override void Dispose(bool disposing)
