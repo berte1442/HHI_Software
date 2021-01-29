@@ -52,7 +52,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Addresses");
             }
 
             return View(customer);

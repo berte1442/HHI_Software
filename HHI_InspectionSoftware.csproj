@@ -157,6 +157,7 @@
     <Compile Include="Controllers\InspectionsController.cs" />
     <Compile Include="Controllers\InspectorsController.cs" />
     <Compile Include="Controllers\LimitationsController.cs" />
+    <Compile Include="Controllers\MetricsController.cs" />
     <Compile Include="Controllers\RealtorsController.cs" />
     <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Customer.cs">
@@ -198,6 +199,7 @@
     <Compile Include="Limitation.cs">
       <DependentUpon>HHI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MetricsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Realtor.cs">
       <DependentUpon>HHI.tt</DependentUpon>
@@ -225,6 +227,7 @@
       <DependentUpon>HHI.edmx</DependentUpon>
       <LastGenOutput>HHI.cs</LastGenOutput>
     </Content>
+    <Content Include="Photos\EFTPS.png" />
     <Content Include="Photos\Linkedin.png" />
     <Content Include="Photos\AirthingsLogo.jpg" />
     <Content Include="Photos\facebookLogo.png" />
@@ -332,10 +335,11 @@
     <Content Include="Views\Realtors\Details.cshtml" />
     <Content Include="Views\Realtors\Edit.cshtml" />
     <Content Include="Views\Realtors\Index.cshtml" />
+    <Content Include="Views\Metrics\Metrics.cshtml" />
+    <Content Include="Views\Metrics\RealtorMetrics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

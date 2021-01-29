@@ -1,0 +1,45 @@
+﻿@model HHI_InspectionSoftware.Realtor
+
+@{
+    ViewBag.Title = "Realtor Metrics";
+}
+
+<h2>Realtor Metrics</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Realtor Name")
+        </th>
+        <th>
+            @Html.DisplayName("Total Inspections")
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @ViewBag.rName1
+        </td>
+        <td>
+            @ViewBag.rCount1
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @ViewBag.rName2
+        </td>
+        <td>
+            @ViewBag.rCount2
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @ViewBag.rName3
+        </td>
+        <td>
+            @ViewBag.rCount3
+        </td>
+    </tr>
+
+</table>
