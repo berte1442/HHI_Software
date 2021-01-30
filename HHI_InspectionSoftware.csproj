@@ -150,6 +150,7 @@
     <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\CheckItemsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\CreateTemplatesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeSystemsController.cs" />
@@ -227,6 +228,7 @@
       <DependentUpon>HHI.edmx</DependentUpon>
       <LastGenOutput>HHI.cs</LastGenOutput>
     </Content>
+    <Content Include="Photos\GoogleAds.png" />
     <Content Include="Photos\EFTPS.png" />
     <Content Include="Photos\Linkedin.png" />
     <Content Include="Photos\AirthingsLogo.jpg" />
@@ -343,6 +345,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CreateTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

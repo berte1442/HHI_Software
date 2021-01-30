@@ -59,6 +59,7 @@ namespace HHI_InspectionSoftware.Controllers
             return View(template);
         }
 
+
         // GET: Templates/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -127,6 +128,9 @@ namespace HHI_InspectionSoftware.Controllers
             templateModel.Images = db.Images.ToList();
             templateModel.Limitations = db.Limitations.ToList();
             templateModel.Templates = db.Templates.ToList();
+
+            ViewBag.AreasID = new SelectList(db.Areas, "ID", "Name");
+
             return View(templateModel);
         }
 
