@@ -18,6 +18,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="TemplateID" Type="int" />
+    <Property Name="IsSelected" Type="bit" />
   </EntityType>
   <EntityType Name="Category">
     <Key>

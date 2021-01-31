@@ -37,9 +37,10 @@ namespace HHI_InspectionSoftware.Controllers
         }
 
         // GET: Areas/Create
-        public ActionResult Create()
+        public ActionResult Create(int templateID)
         {
-            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name");
+            ViewBag.TemplateID = templateID;    
+            //ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name");
             return View();
         }
 
@@ -54,11 +55,18 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 db.Areas.Add(area);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ModelState.Clear();
+                area.Name = "";
+                return View(area);
             }
 
-            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", area.TemplateID);
+            //ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", area.TemplateID);
             return View(area);
+        }
+
+        public ActionResult Next(int templateID)
+        {
+            return RedirectToAction("Create", "HomeSystems", new { templateID });
         }
 
         // GET: Areas/Edit/5

@@ -16,6 +16,7 @@
     <EntitySetMapping Name="Areas">
       <EntityTypeMapping TypeName="HHIModel.Area">
         <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />

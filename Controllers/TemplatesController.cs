@@ -53,7 +53,7 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 db.Templates.Add(template);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Areas", new { template.ID });
             }
 
             return View(template);
@@ -117,22 +117,43 @@ namespace HHI_InspectionSoftware.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult CreateNewTemplate()
-        {
-            TemplateModel templateModel = new TemplateModel();
-            templateModel.Areas = db.Areas.ToList();
-            templateModel.Categories = db.Categories.ToList();
-            templateModel.CheckItems = db.CheckItems.ToList();
-            templateModel.Comments = db.Comments.ToList();
-            templateModel.HomeSystems = db.HomeSystems.ToList();
-            templateModel.Images = db.Images.ToList();
-            templateModel.Limitations = db.Limitations.ToList();
-            templateModel.Templates = db.Templates.ToList();
+        //public ActionResult CreateNewTemplate()
+        //{
+        //    TemplateModel templateModel = new TemplateModel();
+        //    templateModel.Areas = db.Areas.ToList();
+        //    templateModel.Categories = db.Categories.ToList();
+        //    templateModel.CheckItems = db.CheckItems.ToList();
+        //    templateModel.Comments = db.Comments.ToList();
+        //    templateModel.HomeSystems = db.HomeSystems.ToList();
+        //    templateModel.Images = db.Images.ToList();
+        //    templateModel.Limitations = db.Limitations.ToList();
+        //    templateModel.Templates = db.Templates.ToList();
 
-            ViewBag.AreasID = new SelectList(db.Areas, "ID", "Name");
+        //    //ViewBag.AreasID = new SelectList(db.Areas, "ID", "Name", "IsSelected");
 
-            return View(templateModel);
-        }
+        //    return View(templateModel);
+        //}
+
+        ////[HttpPost]
+        ////[ValidateAntiForgeryToken]
+        //public ActionResult CreateTemplate([Bind(Include = "ID,Name")] Template template, List<Area> areas)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Templates.Add(template);
+        //        db.SaveChanges();
+        //        int templateID = db.Templates.Max(item => item.ID);
+
+        //        foreach(var a in areas)
+        //        {
+        //            a.TemplateID = templateID;
+        //            db.Areas.Add(a);
+        //            db.SaveChanges();
+        //        }
+        //    }
+
+        //    return View();
+        //}
 
         protected override void Dispose(bool disposing)
         {

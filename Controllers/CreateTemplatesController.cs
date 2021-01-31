@@ -33,5 +33,24 @@ namespace HHI_InspectionSoftware.Controllers
             
             return View();
         }
+
+        public ActionResult CreateTemplate([Bind(Include = "ID,Name")] Template template, List<Area> areas)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Templates.Add(template);
+                db.SaveChanges();
+                int templateID = db.Templates.Max(item => item.ID);
+
+                foreach (var a in areas)
+                {
+                    a.TemplateID = templateID;
+                    db.Areas.Add(a);
+                    db.SaveChanges();
+                }
+            }
+
+            return View();
+        }
     }
 }

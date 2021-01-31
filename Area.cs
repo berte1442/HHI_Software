@@ -24,6 +24,7 @@ namespace HHI_InspectionSoftware
         public int ID { get; set; }
         public string Name { get; set; }
         public Nullable<int> TemplateID { get; set; }
+        public bool IsSelected { get; set; }
     
         public virtual Template Template { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -14,6 +14,24 @@ namespace HHI_InspectionSoftware
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "Templates",
+                "Areas/Create/{templateID}",
+            new { controller = "Areas", action = "Create" }
+            );
+
+            routes.MapRoute(
+                 "Areas",
+                 "HomeSystems/Create/{templateID}",
+             new { controller = "HomeSystems", action = "Create" }
+             );
+
+            routes.MapRoute(
+                 "HomeSystems",
+                 "CheckItems/Create/{templateID}",
+             new { controller = "CheckItems", action = "Create" }
+             );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

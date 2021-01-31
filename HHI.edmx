@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HHIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HHIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="ID" />
@@ -23,6 +23,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="TemplateID" Type="int" />
+          <Property Name="IsSelected" Type="bit" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -403,8 +404,7 @@
             <End Role="Limitation" EntitySet="Limitation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HHIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -430,6 +430,7 @@
           <NavigationProperty Name="Template" Relationship="Self.FK__Area__TemplateID__2F9A1060" FromRole="Area" ToRole="Template" />
           <NavigationProperty Name="CheckItems" Relationship="Self.FK__CheckItem__AreaI__29221CFB" FromRole="Area" ToRole="CheckItem" />
           <NavigationProperty Name="Limitations" Relationship="Self.FK__Limitatio__AreaI__2CBDA3B5" FromRole="Area" ToRole="Limitation" />
+          <Property Name="IsSelected" Type="Boolean" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -857,6 +858,7 @@
           <EntitySetMapping Name="Areas">
             <EntityTypeMapping TypeName="HHIModel.Area">
               <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />

@@ -37,9 +37,9 @@ namespace HHI_InspectionSoftware.Controllers
         }
 
         // GET: CheckItems/Create
-        public ActionResult Create()
+        public ActionResult Create(int templateID)
         {
-            ViewBag.AreaID = new SelectList(db.Areas, "ID", "Name");
+            ViewBag.AreaID = new SelectList(db.Areas.Where(x => x.TemplateID == templateID), "ID", "Name");
             ViewBag.SystemID = new SelectList(db.HomeSystems, "ID", "Name");
             return View();
         }
