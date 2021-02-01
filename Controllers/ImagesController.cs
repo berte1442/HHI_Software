@@ -13,7 +13,7 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class ImagesController : Controller
     {
-        private HHIEntities5 db = new HHIEntities5();
+        private HHIEntities6 db = new HHIEntities6();
 
         // GET: Images
         public ActionResult Index()

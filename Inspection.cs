@@ -22,12 +22,14 @@ namespace HHI_InspectionSoftware
         public Nullable<System.DateTime> InspectionDate { get; set; }
         public Nullable<int> InspectionStatusID { get; set; }
         public Nullable<decimal> Price { get; set; }
+        public Nullable<int> InspectionReportID { get; set; }
         public Nullable<int> TemplateID { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual InspectionReport InspectionReport { get; set; }
         public virtual Inspector Inspector { get; set; }
-        public virtual InspectionStatu InspectionStatu { get; set; }
+        public virtual InspectionStatus InspectionStatus { get; set; }
         public virtual Realtor Realtor { get; set; }
         public virtual Template Template { get; set; }
     }

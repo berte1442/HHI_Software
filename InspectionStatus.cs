@@ -12,24 +12,18 @@ namespace HHI_InspectionSoftware
     using System;
     using System.Collections.Generic;
     
-    public partial class Area
+    public partial class InspectionStatus
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Area()
+        public InspectionStatus()
         {
-            this.CheckItems = new HashSet<CheckItem>();
-            this.Limitations = new HashSet<Limitation>();
+            this.Inspections = new HashSet<Inspection>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public Nullable<int> TemplateID { get; set; }
-        public Nullable<bool> IsSelected { get; set; }
     
-        public virtual Template Template { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CheckItem> CheckItems { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Limitation> Limitations { get; set; }
+        public virtual ICollection<Inspection> Inspections { get; set; }
     }
 }

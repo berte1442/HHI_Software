@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using HHI_InspectionSoftware;
 using HHI_InspectionSoftware.Models;
@@ -13,7 +14,7 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class TemplatesController : Controller
     {
-        private HHIEntities5 db = new HHIEntities5();
+        private HHIEntities6 db = new HHIEntities6();
 
         // GET: Templates
         public ActionResult Index()
@@ -111,9 +112,42 @@ namespace HHI_InspectionSoftware.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            // add confirmation message before delete
+
             Template template = db.Templates.Find(id);
+            IEnumerable<Area> areas = db.Areas.Where(x => x.TemplateID == id);
+            IEnumerable<HomeSystem> systems = db.HomeSystems.Where(x => x.TemplateID == id);
+            foreach(var a in areas)
+            {
+                IEnumerable<CheckItem> checkItems = db.CheckItems.Where(x => x.AreaID == a.ID);
+                foreach(var c in checkItems)
+                {
+                    IEnumerable<Comment> comments = db.Comments.Where(x => x.CheckItemID == c.ID);
+                    foreach(var co in comments)
+                    {
+                        db.Comments.Remove(co);
+                    }
+                    db.CheckItems.Remove(c);
+                }
+                db.Areas.Remove(a);
+            }
+            foreach(var s in systems)
+            {
+                IEnumerable<CheckItem> checkItems = db.CheckItems.Where(x => x.SystemID == s.ID);
+                foreach (var c in checkItems)
+                {
+                    IEnumerable<Comment> comments = db.Comments.Where(x => x.CheckItemID == c.ID);
+                    foreach(var co in comments)
+                    {
+                        db.Comments.Remove(co);
+                    }
+                    db.CheckItems.Remove(c);
+                }
+                db.HomeSystems.Remove(s);
+            }
             db.Templates.Remove(template);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

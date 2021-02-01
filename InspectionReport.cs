@@ -12,18 +12,26 @@ namespace HHI_InspectionSoftware
     using System;
     using System.Collections.Generic;
     
-    public partial class InspectionStatu
+    public partial class InspectionReport
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InspectionStatu()
+        public InspectionReport()
         {
+            this.Comments = new HashSet<Comment>();
+            this.Images = new HashSet<Image>();
             this.Inspections = new HashSet<Inspection>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
+        public int TemplateID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspection> Inspections { get; set; }
+        public virtual Template Template { get; set; }
     }
 }

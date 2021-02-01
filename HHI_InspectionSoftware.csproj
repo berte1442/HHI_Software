@@ -126,25 +126,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Area.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="CheckItem.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Comment.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Company.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AreasController.cs" />
@@ -162,7 +162,7 @@
     <Compile Include="Controllers\RealtorsController.cs" />
     <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Customer.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -182,31 +182,49 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HHI.edmx</DependentUpon>
     </Compile>
+    <Compile Include="HHI_2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HHI_2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HHI_2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HHI_2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HHI_2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HHI_2.edmx</DependentUpon>
+    </Compile>
     <Compile Include="HomeSystem.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Image.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspection.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
-    <Compile Include="InspectionStatu.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+    <Compile Include="InspectionReport.cs">
+      <DependentUpon>HHI_2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InspectionStatus.cs">
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspector.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Limitation.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TemplateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Realtor.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Template.cs">
-      <DependentUpon>HHI.tt</DependentUpon>
+      <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +245,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>HHI.edmx</DependentUpon>
       <LastGenOutput>HHI.cs</LastGenOutput>
+    </Content>
+    <Content Include="HHI_2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HHI_2.edmx</DependentUpon>
+      <LastGenOutput>HHI_2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="HHI_2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HHI_2.edmx</DependentUpon>
+      <LastGenOutput>HHI_2.cs</LastGenOutput>
     </Content>
     <Content Include="Photos\GoogleAds.png" />
     <Content Include="Photos\EFTPS.png" />
@@ -251,6 +279,13 @@
     </EntityDeploy>
     <Content Include="HHI.edmx.diagram">
       <DependentUpon>HHI.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="HHI_2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HHI_2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="HHI_2.edmx.diagram">
+      <DependentUpon>HHI_2.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

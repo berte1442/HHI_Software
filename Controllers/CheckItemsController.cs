@@ -12,7 +12,7 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class CheckItemsController : Controller
     {
-        private HHIEntities5 db = new HHIEntities5();
+        private HHIEntities6 db = new HHIEntities6();
 
         // GET: CheckItems
         public ActionResult Index()
@@ -40,7 +40,7 @@ namespace HHI_InspectionSoftware.Controllers
         public ActionResult Create(int templateID)
         {
             ViewBag.AreaID = new SelectList(db.Areas.Where(x => x.TemplateID == templateID), "ID", "Name");
-            ViewBag.SystemID = new SelectList(db.HomeSystems, "ID", "Name");
+            ViewBag.SystemID = new SelectList(db.HomeSystems.Where(x => x.TemplateID == templateID), "ID", "Name");
             return View();
         }
 

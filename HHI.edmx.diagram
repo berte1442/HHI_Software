@@ -14,12 +14,14 @@
         <EntityTypeShape EntityType="HHIModel.Customer" Width="1.5" PointX="3.75" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HHIModel.HomeSystem" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HHIModel.Image" Width="1.5" PointX="12.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HHIModel.Inspection" Width="1.5" PointX="6" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HHIModel.InspectionStatu" Width="1.5" PointX="3.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.Inspection" Width="1.875" PointX="6" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.InspectionStatus" Width="1.5" PointX="3.75" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HHIModel.Inspector" Width="1.5" PointX="3.75" PointY="17.625" IsExpanded="true" />
         <EntityTypeShape EntityType="HHIModel.Limitation" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HHIModel.Realtor" Width="1.5" PointX="3.75" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HHIModel.Template" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HHIModel.InspectionReport" Width="1.5" PointX="9" PointY="0.625" IsExpanded="true"/>
+
         <AssociationConnector Association="HHIModel.FK__Inspectio__Addre__3E1D39E1" ManuallyRouted="false" />
         <AssociationConnector Association="HHIModel.FK__Area__TemplateID__2F9A1060" ManuallyRouted="false" />
         <AssociationConnector Association="HHIModel.FK__CheckItem__AreaI__29221CFB" ManuallyRouted="false" />
@@ -35,6 +37,11 @@
         <AssociationConnector Association="HHIModel.FK__Inspectio__Inspe__793DFFAF" ManuallyRouted="false" />
         <AssociationConnector Association="HHIModel.FK__Inspectio__Realt__40F9A68C" ManuallyRouted="false" />
         <AssociationConnector Association="HHIModel.FK__Inspectio__Templ__318258D2" ManuallyRouted="false" />
+        <AssociationConnector Association="HHIModel.FK__Comment__Inspect__373B3228" ManuallyRouted="false"/>
+        <AssociationConnector Association="HHIModel.FK__Image__Inspectio__382F5661" ManuallyRouted="false"/>
+        <AssociationConnector Association="HHIModel.FK__Inspectio__Inspe__36470DEF" ManuallyRouted="false"/>
+        <AssociationConnector Association="HHIModel.FK__Inspectio__Templ__3552E9B6" ManuallyRouted="false"/>
+        <AssociationConnector Association="HHIModel.FK__Inspectio__Templ__39237A9A" ManuallyRouted="false"/>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

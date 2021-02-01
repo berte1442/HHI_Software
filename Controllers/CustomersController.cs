@@ -12,7 +12,7 @@ namespace HHI_InspectionSoftware.Controllers
 {
     public class CustomersController : Controller
     {
-        private HHIEntities5 db = new HHIEntities5();
+        private HHIEntities6 db = new HHIEntities6();
 
         // GET: Customers
         public ActionResult Index()

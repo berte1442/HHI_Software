@@ -22,8 +22,11 @@ namespace HHI_InspectionSoftware
 
         public string FilePath { get; set; }
         public Nullable<int> CommentID { get; set; }
+        public Nullable<int> InspectionReportID { get; set; }
+
         public HttpPostedFileBase ImageFile { get; set; }
 
         public virtual Comment Comment { get; set; }
+        public virtual InspectionReport InspectionReport { get; set; }
     }
 }

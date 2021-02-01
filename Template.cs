@@ -19,6 +19,7 @@ namespace HHI_InspectionSoftware
         {
             this.Areas = new HashSet<Area>();
             this.HomeSystems = new HashSet<HomeSystem>();
+            this.InspectionReports = new HashSet<InspectionReport>();
             this.Inspections = new HashSet<Inspection>();
         }
     
@@ -29,6 +30,8 @@ namespace HHI_InspectionSoftware
         public virtual ICollection<Area> Areas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HomeSystem> HomeSystems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InspectionReport> InspectionReports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspection> Inspections { get; set; }
     }

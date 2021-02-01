@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="HHIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="HHIModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Address">
     <Key>
       <PropertyRef Name="ID" />
@@ -19,10 +19,10 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="TemplateID" Type="Int32" />
+    <Property Name="IsSelected" Type="Boolean" />
     <NavigationProperty Name="Template" Relationship="Self.FK__Area__TemplateID__2F9A1060" FromRole="Area" ToRole="Template" />
     <NavigationProperty Name="CheckItems" Relationship="Self.FK__CheckItem__AreaI__29221CFB" FromRole="Area" ToRole="CheckItem" />
     <NavigationProperty Name="Limitations" Relationship="Self.FK__Limitatio__AreaI__2CBDA3B5" FromRole="Area" ToRole="Limitation" />
-    <Property Name="IsSelected" Type="Boolean" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -54,11 +54,11 @@
     <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="CategoryID" Type="Int32" />
     <Property Name="CheckItemID" Type="Int32" />
+    <Property Name="InspectionReportID" Type="Int32" />
     <NavigationProperty Name="Category" Relationship="Self.FK__Comment__Categor__10216507" FromRole="Comment" ToRole="Category" />
     <NavigationProperty Name="CheckItem" Relationship="Self.FK__Comment__CheckIt__2DB1C7EE" FromRole="Comment" ToRole="CheckItem" />
+    <NavigationProperty Name="InspectionReport" Relationship="Self.FK__Comment__Inspect__373B3228" FromRole="Comment" ToRole="InspectionReport" />
     <NavigationProperty Name="Images" Relationship="Self.FK__Image__CommentID__2EA5EC27" FromRole="Comment" ToRole="Image" />
-    <Property Name="InspectionReportID" Type="Int32" />
-    <NavigationProperty Name="InspectionReport" Relationship="HHIModel.FK__Comment__Inspect__373B3228" FromRole="Comment" ToRole="InspectionReport" />
   </EntityType>
   <EntityType Name="Company">
     <Key>
@@ -97,9 +97,9 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FilePath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="CommentID" Type="Int32" />
-    <NavigationProperty Name="Comment" Relationship="Self.FK__Image__CommentID__2EA5EC27" FromRole="Image" ToRole="Comment" />
     <Property Name="InspectionReportID" Type="Int32" />
-    <NavigationProperty Name="InspectionReport" Relationship="HHIModel.FK__Image__Inspectio__382F5661" FromRole="Image" ToRole="InspectionReport" />
+    <NavigationProperty Name="Comment" Relationship="Self.FK__Image__CommentID__2EA5EC27" FromRole="Image" ToRole="Comment" />
+    <NavigationProperty Name="InspectionReport" Relationship="Self.FK__Image__Inspectio__382F5661" FromRole="Image" ToRole="InspectionReport" />
   </EntityType>
   <EntityType Name="Inspection">
     <Key>
@@ -113,17 +113,29 @@
     <Property Name="InspectionDate" Type="DateTime" Precision="3" />
     <Property Name="InspectionStatusID" Type="Int32" />
     <Property Name="Price" Type="Decimal" Precision="6" Scale="2" />
-    <Property Name="TemplateID" Type="Int32" />
+    <Property Name="InspectionReportID" Type="Int32" />
     <NavigationProperty Name="Address" Relationship="Self.FK__Inspectio__Addre__3E1D39E1" FromRole="Inspection" ToRole="Address" />
     <NavigationProperty Name="Customer" Relationship="Self.FK__Inspectio__Custo__3F115E1A" FromRole="Inspection" ToRole="Customer" />
+    <NavigationProperty Name="InspectionReport" Relationship="Self.FK__Inspectio__Inspe__36470DEF" FromRole="Inspection" ToRole="InspectionReport" />
     <NavigationProperty Name="Inspector" Relationship="Self.FK__Inspectio__Inspe__40058253" FromRole="Inspection" ToRole="Inspector" />
     <NavigationProperty Name="InspectionStatus" Relationship="Self.FK__Inspectio__Inspe__793DFFAF" FromRole="Inspection" ToRole="InspectionStatus" />
     <NavigationProperty Name="Realtor" Relationship="Self.FK__Inspectio__Realt__40F9A68C" FromRole="Inspection" ToRole="Realtor" />
-    <NavigationProperty Name="Template" Relationship="Self.FK__Inspectio__Templ__318258D2" FromRole="Inspection" ToRole="Template" />
-    <Property Name="InspectionReportID" Type="Int32" />
-    <NavigationProperty Name="InspectionReport" Relationship="HHIModel.FK__Inspectio__Inspe__36470DEF" FromRole="Inspection" ToRole="InspectionReport" />
+    <Property Name="TemplateID" Type="Int32" />
+    <NavigationProperty Name="Template" Relationship="HHIModel1.FK__Inspectio__Templ__39237A9A" FromRole="Inspection" ToRole="Template" />
   </EntityType>
-  <EntityType Name="InspectionStatu">
+  <EntityType Name="InspectionReport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TemplateID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__Inspect__373B3228" FromRole="InspectionReport" ToRole="Comment" />
+    <NavigationProperty Name="Images" Relationship="Self.FK__Image__Inspectio__382F5661" FromRole="InspectionReport" ToRole="Image" />
+    <NavigationProperty Name="Inspections" Relationship="Self.FK__Inspectio__Inspe__36470DEF" FromRole="InspectionReport" ToRole="Inspection" />
+    <NavigationProperty Name="Template" Relationship="Self.FK__Inspectio__Templ__3552E9B6" FromRole="InspectionReport" ToRole="Template" />
+  </EntityType>
+  <EntityType Name="InspectionStatus">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -176,8 +188,8 @@
     <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Areas" Relationship="Self.FK__Area__TemplateID__2F9A1060" FromRole="Template" ToRole="Area" />
     <NavigationProperty Name="HomeSystems" Relationship="Self.FK__HomeSyste__Templ__308E3499" FromRole="Template" ToRole="HomeSystem" />
-    <NavigationProperty Name="Inspections" Relationship="Self.FK__Inspectio__Templ__318258D2" FromRole="Template" ToRole="Inspection" />
-    <NavigationProperty Name="InspectionReports" Relationship="HHIModel.FK__Inspectio__Templ__3552E9B6" FromRole="Template" ToRole="InspectionReport" />
+    <NavigationProperty Name="InspectionReports" Relationship="Self.FK__Inspectio__Templ__3552E9B6" FromRole="Template" ToRole="InspectionReport" />
+    <NavigationProperty Name="Inspections" Relationship="HHIModel1.FK__Inspectio__Templ__39237A9A" FromRole="Template" ToRole="Inspection" />
   </EntityType>
   <Association Name="FK__Inspectio__Addre__3E1D39E1">
     <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
@@ -263,6 +275,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Comment__Inspect__373B3228">
+    <End Role="InspectionReport" Type="Self.InspectionReport" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InspectionReport">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="InspectionReportID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Image__CommentID__2EA5EC27">
     <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
     <End Role="Image" Type="Self.Image" Multiplicity="*" />
@@ -311,6 +335,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Image__Inspectio__382F5661">
+    <End Role="InspectionReport" Type="Self.InspectionReport" Multiplicity="0..1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InspectionReport">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="InspectionReportID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inspectio__Inspe__36470DEF">
+    <End Role="InspectionReport" Type="Self.InspectionReport" Multiplicity="0..1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InspectionReport">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="InspectionReportID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Inspectio__Inspe__40058253">
     <End Role="Inspector" Type="Self.Inspector" Multiplicity="0..1" />
     <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
@@ -324,7 +372,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Inspectio__Inspe__793DFFAF">
-    <End Role="InspectionStatus" Type="Self.InspectionStatu" Multiplicity="0..1" />
+    <End Role="InspectionStatus" Type="HHIModel1.InspectionStatus" Multiplicity="0..1" />
     <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="InspectionStatus">
@@ -347,19 +395,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Inspectio__Templ__318258D2">
-    <End Role="Template" Type="Self.Template" Multiplicity="0..1" />
-    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+  <Association Name="FK__Inspectio__Templ__3552E9B6">
+    <End Role="Template" Type="Self.Template" Multiplicity="1" />
+    <End Role="InspectionReport" Type="Self.InspectionReport" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Template">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Inspection">
+      <Dependent Role="InspectionReport">
         <PropertyRef Name="TemplateID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="HHIEntities5" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="HHIEntities6" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Addresses" EntityType="Self.Address" />
     <EntitySet Name="Areas" EntityType="Self.Area" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -370,7 +418,8 @@
     <EntitySet Name="HomeSystems" EntityType="Self.HomeSystem" />
     <EntitySet Name="Images" EntityType="Self.Image" />
     <EntitySet Name="Inspections" EntityType="Self.Inspection" />
-    <EntitySet Name="InspectionStatus" EntityType="Self.InspectionStatu" />
+    <EntitySet Name="InspectionReports" EntityType="Self.InspectionReport" />
+    <EntitySet Name="InspectionStatus1" EntityType="HHIModel1.InspectionStatus" />
     <EntitySet Name="Inspectors" EntityType="Self.Inspector" />
     <EntitySet Name="Limitations" EntityType="Self.Limitation" />
     <EntitySet Name="Realtors" EntityType="Self.Realtor" />
@@ -403,6 +452,10 @@
       <End Role="CheckItem" EntitySet="CheckItems" />
       <End Role="Comment" EntitySet="Comments" />
     </AssociationSet>
+    <AssociationSet Name="FK__Comment__Inspect__373B3228" Association="Self.FK__Comment__Inspect__373B3228">
+      <End Role="InspectionReport" EntitySet="InspectionReports" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
     <AssociationSet Name="FK__Image__CommentID__2EA5EC27" Association="Self.FK__Image__CommentID__2EA5EC27">
       <End Role="Comment" EntitySet="Comments" />
       <End Role="Image" EntitySet="Images" />
@@ -419,113 +472,44 @@
       <End Role="HomeSystem" EntitySet="HomeSystems" />
       <End Role="Limitation" EntitySet="Limitations" />
     </AssociationSet>
+    <AssociationSet Name="FK__Image__Inspectio__382F5661" Association="Self.FK__Image__Inspectio__382F5661">
+      <End Role="InspectionReport" EntitySet="InspectionReports" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inspectio__Inspe__36470DEF" Association="Self.FK__Inspectio__Inspe__36470DEF">
+      <End Role="InspectionReport" EntitySet="InspectionReports" />
+      <End Role="Inspection" EntitySet="Inspections" />
+    </AssociationSet>
     <AssociationSet Name="FK__Inspectio__Inspe__40058253" Association="Self.FK__Inspectio__Inspe__40058253">
       <End Role="Inspector" EntitySet="Inspectors" />
       <End Role="Inspection" EntitySet="Inspections" />
     </AssociationSet>
     <AssociationSet Name="FK__Inspectio__Inspe__793DFFAF" Association="Self.FK__Inspectio__Inspe__793DFFAF">
-      <End Role="InspectionStatus" EntitySet="InspectionStatus" />
+      <End Role="InspectionStatus" EntitySet="InspectionStatus1" />
       <End Role="Inspection" EntitySet="Inspections" />
     </AssociationSet>
     <AssociationSet Name="FK__Inspectio__Realt__40F9A68C" Association="Self.FK__Inspectio__Realt__40F9A68C">
       <End Role="Realtor" EntitySet="Realtors" />
       <End Role="Inspection" EntitySet="Inspections" />
     </AssociationSet>
-    <AssociationSet Name="FK__Inspectio__Templ__318258D2" Association="Self.FK__Inspectio__Templ__318258D2">
-      <End Role="Template" EntitySet="Templates" />
-      <End Role="Inspection" EntitySet="Inspections" />
-    </AssociationSet>
-    <EntitySet Name="InspectionReports" EntityType="HHIModel.InspectionReport" />
-    <AssociationSet Name="FK__Comment__Inspect__373B3228" Association="HHIModel.FK__Comment__Inspect__373B3228">
-      <End Role="InspectionReport" EntitySet="InspectionReports" />
-      <End Role="Comment" EntitySet="Comments" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Image__Inspectio__382F5661" Association="HHIModel.FK__Image__Inspectio__382F5661">
-      <End Role="InspectionReport" EntitySet="InspectionReports" />
-      <End Role="Image" EntitySet="Images" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Inspectio__Inspe__36470DEF" Association="HHIModel.FK__Inspectio__Inspe__36470DEF">
-      <End Role="InspectionReport" EntitySet="InspectionReports" />
-      <End Role="Inspection" EntitySet="Inspections" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Inspectio__Templ__3552E9B6" Association="HHIModel.FK__Inspectio__Templ__3552E9B6">
+    <AssociationSet Name="FK__Inspectio__Templ__3552E9B6" Association="Self.FK__Inspectio__Templ__3552E9B6">
       <End Role="Template" EntitySet="Templates" />
       <End Role="InspectionReport" EntitySet="InspectionReports" />
     </AssociationSet>
-    <AssociationSet Name="FK__Inspectio__Templ__39237A9A" Association="HHIModel.FK__Inspectio__Templ__39237A9A">
+    <AssociationSet Name="FK__Inspectio__Templ__39237A9A" Association="HHIModel1.FK__Inspectio__Templ__39237A9A">
       <End Role="Template" EntitySet="Templates" />
       <End Role="Inspection" EntitySet="Inspections" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="InspectionReport">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="TemplateID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Comments" Relationship="HHIModel.FK__Comment__Inspect__373B3228" FromRole="InspectionReport" ToRole="Comment" />
-    <NavigationProperty Name="Images" Relationship="HHIModel.FK__Image__Inspectio__382F5661" FromRole="InspectionReport" ToRole="Image" />
-    <NavigationProperty Name="Inspections" Relationship="HHIModel.FK__Inspectio__Inspe__36470DEF" FromRole="InspectionReport" ToRole="Inspection" />
-    <NavigationProperty Name="Template" Relationship="HHIModel.FK__Inspectio__Templ__3552E9B6" FromRole="InspectionReport" ToRole="Template" />
-  </EntityType>
-  <Association Name="FK__Comment__Inspect__373B3228">
-    <End Type="HHIModel.InspectionReport" Role="InspectionReport" Multiplicity="0..1" />
-    <End Type="HHIModel.Comment" Role="Comment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="InspectionReport">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Comment">
-        <PropertyRef Name="InspectionReportID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Image__Inspectio__382F5661">
-    <End Type="HHIModel.InspectionReport" Role="InspectionReport" Multiplicity="0..1" />
-    <End Type="HHIModel.Image" Role="Image" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="InspectionReport">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Image">
-        <PropertyRef Name="InspectionReportID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Inspectio__Inspe__36470DEF">
-    <End Type="HHIModel.InspectionReport" Role="InspectionReport" Multiplicity="0..1" />
-    <End Type="HHIModel.Inspection" Role="Inspection" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="InspectionReport">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Inspection">
-        <PropertyRef Name="InspectionReportID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Inspectio__Templ__3552E9B6">
-    <End Type="HHIModel.Template" Role="Template" Multiplicity="1" />
-    <End Type="HHIModel.InspectionReport" Role="InspectionReport" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Template">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="InspectionReport">
-        <PropertyRef Name="TemplateID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Inspectio__Templ__39237A9A">
-    <End Type="HHIModel.Template" Role="Template" Multiplicity="0..1" />
-    <End Type="HHIModel.Inspection" Role="Inspection" Multiplicity="*" />
+    <End Type="HHIModel1.Template" Role="Template" Multiplicity="0..1" />
+    <End Type="HHIModel1.Inspection" Role="Inspection" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Template">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Inspection">
-        <PropertyRef Name="TemplateID1" />
+        <PropertyRef Name="TemplateID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

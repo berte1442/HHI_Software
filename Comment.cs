@@ -25,9 +25,11 @@ namespace HHI_InspectionSoftware
         public string Description { get; set; }
         public Nullable<int> CategoryID { get; set; }
         public Nullable<int> CheckItemID { get; set; }
+        public Nullable<int> InspectionReportID { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual CheckItem CheckItem { get; set; }
+        public virtual InspectionReport InspectionReport { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }
     }
