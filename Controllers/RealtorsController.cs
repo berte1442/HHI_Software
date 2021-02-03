@@ -38,6 +38,7 @@ namespace HHI_InspectionSoftware.Controllers
         // GET: Realtors/Create
         public ActionResult Create()
         {
+            ViewBag.RealtorsID = new SelectList(db.Realtors, "ID", "FirstName");
             return View();
         }
 

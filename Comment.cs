@@ -11,7 +11,8 @@ namespace HHI_InspectionSoftware
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Comment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +22,14 @@ namespace HHI_InspectionSoftware
         }
     
         public int ID { get; set; }
+        [DisplayName("Comment Name")]
         public string Name { get; set; }
         public string Description { get; set; }
+        [DisplayName("Category")]
         public Nullable<int> CategoryID { get; set; }
+        [DisplayName("Check Item")]
         public Nullable<int> CheckItemID { get; set; }
+        [DisplayName("Inspection Report")]
         public Nullable<int> InspectionReportID { get; set; }
     
         public virtual Category Category { get; set; }

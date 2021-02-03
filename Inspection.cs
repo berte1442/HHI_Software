@@ -11,18 +11,27 @@ namespace HHI_InspectionSoftware
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Inspection
     {
         public int ID { get; set; }
+        [DisplayName("Address")]
         public Nullable<int> AddressID { get; set; }
+        [DisplayName("Customer")]
         public Nullable<int> CustomerID { get; set; }
+        [DisplayName("Inspector")]
         public Nullable<int> InspectorID { get; set; }
+        [DisplayName("Realtor")]
         public Nullable<int> RealtorID { get; set; }
+        [DisplayName("Inspection Date / Time")]
         public Nullable<System.DateTime> InspectionDate { get; set; }
+        [DisplayName("Inspection Status")]
         public Nullable<int> InspectionStatusID { get; set; }
         public Nullable<decimal> Price { get; set; }
+        [DisplayName("Inspection Report")]
         public Nullable<int> InspectionReportID { get; set; }
+        [DisplayName("Template")]
         public Nullable<int> TemplateID { get; set; }
     
         public virtual Address Address { get; set; }

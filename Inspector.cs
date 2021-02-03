@@ -11,7 +11,8 @@ namespace HHI_InspectionSoftware
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Inspector
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,12 +22,17 @@ namespace HHI_InspectionSoftware
         }
     
         public int ID { get; set; }
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        [DisplayName("License Number")]
         public string LicenseNum { get; set; }
+        [DisplayName("License Expiration Date")]
         public System.DateTime LicenseExp { get; set; }
+        [DisplayName("Start Date")]
         public System.DateTime StartDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

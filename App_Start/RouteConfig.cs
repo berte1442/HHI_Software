@@ -16,7 +16,7 @@ namespace HHI_InspectionSoftware
             routes.MapRoute(
                 "Templates",
                 "Areas/Create/{templateID}",
-            new { controller = "Areas", action = "Create" }
+            new { controller = "Areas", action = "Create"}
             );
 
             routes.MapRoute(
@@ -24,7 +24,7 @@ namespace HHI_InspectionSoftware
                  "HomeSystems/Create/{templateID}",
              new { controller = "HomeSystems", action = "Create" }
              );
-
+                
             routes.MapRoute(
                  "HomeSystems",
                  "CheckItems/Create/{templateID}",

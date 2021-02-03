@@ -37,8 +37,12 @@ namespace HHI_InspectionSoftware.Controllers
         }
 
         // GET: Inspections/Create
-        public ActionResult Create()
+        public ActionResult Create(int? realtorID)
         {
+            if (realtorID != null)
+            {
+                ViewBag.SetRealtorID = realtorID;
+            }
             ViewBag.AddressID = new SelectList(db.Addresses, "ID", "Address1");
             ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName");
             ViewBag.InspectorID = new SelectList(db.Inspectors, "ID", "FirstName");

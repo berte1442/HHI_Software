@@ -73,6 +73,11 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 return HttpNotFound();
             }
+            var areas = db.Areas.Where(x => x.TemplateID == id);
+            var systems = db.Areas.Where(x => x.TemplateID == id);
+            ViewBag.AreasID = new SelectList(areas, "ID", "Name");
+            ViewBag.SystemsID = new SelectList(systems, "ID", "Name");
+            ViewBag.TemplateID = id;
             return View(template);
         }
 

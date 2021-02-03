@@ -11,7 +11,8 @@ namespace HHI_InspectionSoftware
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Address
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +22,12 @@ namespace HHI_InspectionSoftware
         }
     
         public int ID { get; set; }
+        [DisplayName("Street Address")]
         public string Address1 { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
+        [DisplayName("Square Feet")]
         public Nullable<int> SquareFeet { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

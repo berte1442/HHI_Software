@@ -17,11 +17,13 @@ namespace HHI_InspectionSoftware
     public partial class Image
     {
         public int ID { get; set; }
+        [DisplayName("Photo Caption")]
         public string Name { get; set; }
         [DisplayName("Upload File")]
-
         public string FilePath { get; set; }
+        [DisplayName("Comment")]
         public Nullable<int> CommentID { get; set; }
+        [DisplayName("Inspection Report")]
         public Nullable<int> InspectionReportID { get; set; }
 
         public HttpPostedFileBase ImageFile { get; set; }

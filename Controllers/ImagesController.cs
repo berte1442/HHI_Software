@@ -76,6 +76,7 @@ namespace HHI_InspectionSoftware.Controllers
         public ActionResult Create()
         {
             ViewBag.CommentID = new SelectList(db.Comments, "ID", "Name");
+            ViewBag.InspectionReportID = new SelectList(db.InspectionReports, "ID", "Name");
             return View();
         }
 
@@ -84,7 +85,7 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,FilePath,CommentID")] Image image)
+        public ActionResult Create([Bind(Include = "ID,Name,FilePath,CommentID,InspectionReportID")] Image image)
         {
             if (ModelState.IsValid)
             {
