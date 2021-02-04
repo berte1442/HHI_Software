@@ -124,9 +124,11 @@ namespace HHI_InspectionSoftware.Controllers
 
             foreach (var i in db.Inspections)
             {
-                if (db.Inspectors.Find(i.InspectorID).FirstName + " " + db.Inspectors.Find(i.InspectorID).LastName != iName1 &&
-                    db.Inspectors.Find(i.InspectorID).FirstName + " " + db.Inspectors.Find(i.InspectorID).LastName != iName2 &&
-                    db.Inspectors.Find(i.InspectorID).FirstName + " " + db.Inspectors.Find(i.InspectorID).LastName != iName3)
+                var insp = db.Inspectors.Find(i.InspectorID);
+                if (insp != null &&
+                    insp.FirstName + " " + insp.LastName != iName1 &&
+                    insp.FirstName + " " + insp.LastName != iName2 &&
+                    insp.FirstName + " " + insp.LastName != iName3)
                 { 
                     foreach (var n in db.Inspections)
                     {

@@ -23,56 +23,71 @@ namespace HHI_InspectionSoftware.Controllers
             ViewBag.InspectorID = new SelectList(db.Inspectors, "ID", "FirstName");
             ViewBag.InspectionStatusID = new SelectList(db.InspectionStatus, "ID", "Name");
             ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name");
-            ViewBag.InspectionStatusID = new SelectList(db.InspectionStatus, "ID", "Name");
 
-            var realtors = db.Realtors;
-
-            BookInspectionModel viewModel = new BookInspectionModel
-            {
-                Realtors = realtors.ToList()
-            };
+            BookInspectionModel viewModel = new BookInspectionModel();
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Address1,City,State,Zip,SquareFeet")] Address address,
-            [Bind(Include = "ID,FirstName,LastName,Phone,Email")] Customer customer,
-            [Bind(Include = "ID,FirstName,LastName,Phone,Email")] Realtor realtor,
-            [Bind(Include = "ID,AddressID,CustomerID,InspectorID,RealtorID,InspectionDate,InspectionStatusID,Price,InspectionReportID")] Inspection inspection
-            )
+        public ActionResult Create(BookInspectionModel viewModel)
+            //[Bind(Include = "ID,AddressID,CustomerID,InspectorID,RealtorID,InspectionDate,InspectionStatusID,Price,InspectionReportID")] Inspection inspection)
         {
             if (ModelState.IsValid)
             {
-                if (realtor.FirstName != null)
+                if (viewModel.Realtor.FirstName != null)
                 {
-                    db.Realtors.Add(realtor);
-                    db.Addresses.Add(address);
-                    db.Customers.Add(customer);
+                    db.Realtors.Add(viewModel.Realtor);
                     db.SaveChanges();
-
-                    inspection.AddressID = address.ID;
-                    inspection.CustomerID = customer.ID;
-                    inspection.RealtorID = realtor.ID;
-                    db.Inspections.Add(inspection);
-
-                    db.SaveChanges();
+                    viewModel.Inspection.RealtorID = viewModel.Realtor.ID;
                 }
-                else
-                {
-                    db.Addresses.Add(address);
-                    db.Customers.Add(customer);
-                    db.SaveChangesAsync();
+                db.Addresses.Add(viewModel.Address);
+                db.Customers.Add(viewModel.Customer);
+                db.SaveChanges();
 
-                    inspection.AddressID = address.ID;
-                    inspection.CustomerID = customer.ID;
-                    db.Inspections.Add(inspection);
+                viewModel.Inspection.AddressID = viewModel.Address.ID;
+                viewModel.Inspection.CustomerID = viewModel.Customer.ID;
+                viewModel.Inspection.InspectionStatusID = viewModel.InspectionStatusID;
+                viewModel.Inspection.TemplateID = viewModel.TemplateID;
+                viewModel.Inspection.InspectorID = viewModel.InspectorID;
 
-                    db.SaveChangesAsync();
-                }
+                db.Inspections.Add(viewModel.Inspection);
+
+                db.SaveChanges();
             }
 
             return RedirectToAction("Index", "Inspections");
+            
         }
-    }
-}
+
+            //    [HttpPost]
+            //    [ValidateAntiForgeryToken]
+            //    public ActionResult Create([Bind(Include = "ID,Address1,City,State,Zip,SquareFeet")] Address address,
+            //        [Bind(Include = "ID,FirstName,LastName,Phone,Email")] Customer customer,
+            //        [Bind(Include = "ID,FirstName,LastName,Phone,Email")] Realtor realtor,
+            //        [Bind(Include = "ID,AddressID,CustomerID,InspectorID,RealtorID,InspectionDate,InspectionStatusID,Price,InspectionReportID")] Inspection inspection
+            //        )
+            //    {
+            //        if (ModelState.IsValid)
+            //        {
+            //            if (realtor.FirstName != null)
+            //            {
+            //                db.Realtors.Add(realtor);
+            //                db.SaveChanges();
+            //                inspection.RealtorID = realtor.ID;
+            //            }
+            //                db.Addresses.Add(address);
+            //                db.Customers.Add(customer);
+            //                db.SaveChangesAsync();
+
+            //                inspection.AddressID = address.ID;
+            //                inspection.CustomerID = customer.ID;
+            //                db.Inspections.Add(inspection);
+
+            //                db.SaveChangesAsync();                
+            //        }
+
+            //        return RedirectToAction("Index", "Inspections");
+            //    }
+            }
+        }
