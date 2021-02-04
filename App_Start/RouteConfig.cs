@@ -13,6 +13,9 @@ namespace HHI_InspectionSoftware
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes();
+
+
             routes.MapRoute(
                 "Templates",
                 "Areas/Create/{templateID}",

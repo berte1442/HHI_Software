@@ -5,7 +5,7 @@ using System.Web;
 using HHI_InspectionSoftware;
 
 
-namespace HHI_InspectionSoftware.Models
+namespace HHI_InspectionSoftware.ViewModels
 {
     public class TemplateModel
     {

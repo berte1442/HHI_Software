@@ -22,14 +22,15 @@
             @Html.DropDownList("RealtorsID", null, htmlAttributes: new { @class = "form-control", id = "realtorDDList" })
             @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
         </div>
-
-        @*@{var selectedRealtor = (string)@<script> document.getElementById("realtorDDList").innerText;</script>;
-        HHIEntities6 db = new HHIEntities6();
-        List<Realtor> realtors = db.Realtors.Where(x => x.FirstName == selectedRealtor).ToList(); }
-
         <div>
-            @Html.ActionLink("Add Existing Realtor", "Create", "Inspections", new { realtors[0].ID }, new { @class = "btn btn-default" })
-        </div>*@
+            @*@{var selectedRealtor = (string)@<script>function SelectRealtor() {
+                    document.getElementById("realtorDDList").value;</script>; } }*@
+
+            @*<div class="col-md-4">
+               @Html.ActionLink("Select", "Select", "Realtors", new { selectedRealtor }, new { @class = "btn btn-default", onclick = "SelectRealtor()" })
+            </div>*@
+        </div>
+
     </div>
     <h4>Add New Realtor</h4>
     <div class="form-group">
@@ -67,6 +68,9 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+        <div class="col-md-4">
+            @Html.ActionLink("Skip", "Create", "Inspections", null, new { @class = "btn btn-default" })
         </div>
     </div>
 </div>

@@ -148,6 +148,7 @@
     </Compile>
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AreasController.cs" />
+    <Compile Include="Controllers\BookInspectionsController.cs" />
     <Compile Include="Controllers\CheckItemsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\CreateTemplatesController.cs" />
@@ -218,7 +219,8 @@
     <Compile Include="Limitation.cs">
       <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TemplateModel.cs" />
+    <Compile Include="ViewModels\BookInspectionModel.cs" />
+    <Compile Include="ViewModels\TemplateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Realtor.cs">
       <DependentUpon>HHI_2.tt</DependentUpon>
@@ -377,6 +379,7 @@
     <Content Include="Views\Metrics\InspectorMetrics.cshtml" />
     <Content Include="Views\Metrics\Index.cshtml" />
     <Content Include="Views\Templates\CreateNewTemplate.cshtml" />
+    <Content Include="Views\BookInspections\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

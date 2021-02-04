@@ -8,7 +8,7 @@ using System.Web;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using HHI_InspectionSoftware;
-using HHI_InspectionSoftware.Models;
+using HHI_InspectionSoftware.ViewModels;
 
 namespace HHI_InspectionSoftware.Controllers
 {

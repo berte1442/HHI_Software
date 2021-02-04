@@ -59,6 +59,12 @@ namespace HHI_InspectionSoftware.Controllers
             return View(realtor);
         }
 
+        [Route("inspections/create/{realtorID}")]
+        public ActionResult Select(int realtorID)
+        {
+            return RedirectToAction("Create", "Inspections", new { realtorID });
+        }
+
         // GET: Realtors/Edit/5
         public ActionResult Edit(int? id)
         {
