@@ -93,6 +93,7 @@ namespace HHI_InspectionSoftware.Controllers
             ViewBag.InspectionStatusID = new SelectList(db.InspectionStatus, "ID", "Name", inspection.InspectionStatusID);
             ViewBag.RealtorID = new SelectList(db.Realtors, "ID", "FirstName", inspection.RealtorID);
             ViewBag.InspectionReportID = new SelectList(db.InspectionReports, "ID", "Name", inspection.InspectionReportID);
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", inspection.TemplateID);
             return View(inspection);
         }
 
@@ -101,7 +102,7 @@ namespace HHI_InspectionSoftware.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,AddressID,CustomerID,InspectorID,RealtorID,InspectionDate,InspectionStatusID,Price,InspectionReportID")] Inspection inspection)
+        public ActionResult Edit([Bind(Include = "ID,AddressID,CustomerID,InspectorID,RealtorID,InspectionDate,InspectionStatusID,Price,InspectionReportID,TemplateID")] Inspection inspection)
         {
             if (ModelState.IsValid)
             {
@@ -115,6 +116,7 @@ namespace HHI_InspectionSoftware.Controllers
             ViewBag.InspectionStatusID = new SelectList(db.InspectionStatus, "ID", "Name", inspection.InspectionStatusID);
             ViewBag.RealtorID = new SelectList(db.Realtors, "ID", "FirstName", inspection.RealtorID);
             ViewBag.InspectionReportID = new SelectList(db.InspectionReports, "ID", "Name", inspection.InspectionReportID);
+            ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name", inspection.TemplateID);
             return View(inspection);
         }
 

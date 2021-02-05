@@ -23,6 +23,7 @@ namespace HHI_InspectionSoftware.ViewModels
         public int TemplateID { get; set; }
         public int InspectionStatusID { get; set; }
         public int InspectorID { get; set; }
+        public int RealtorID { get; set; }
 
         public IEnumerable<Realtor> Realtors { get; set; }
         public IEnumerable<Template> Templates { get; set; }

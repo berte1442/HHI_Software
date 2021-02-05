@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            $@Html.DisplayFor(model => model.Price)
         </dd>
 
         <dt>
@@ -35,19 +35,21 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Customer.FirstName)
+            @Html.DisplayName("Customer")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Customer.FirstName)
+            @Html.DisplayFor(model => model.Customer.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Inspector.FirstName)
+            @Html.DisplayName("Inspector")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Inspector.FirstName)
+            @Html.DisplayFor(model => model.Inspector.LastName)
         </dd>
 
         <dt>
@@ -59,15 +61,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Realtor.FirstName)
+            @Html.DisplayName("Realtor")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Realtor.FirstName)
+            @Html.DisplayFor(model => model.Realtor.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Template.Name)
+            @Html.DisplayName("Template")
         </dt>
 
         <dd>

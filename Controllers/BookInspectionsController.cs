@@ -23,6 +23,7 @@ namespace HHI_InspectionSoftware.Controllers
             ViewBag.InspectorID = new SelectList(db.Inspectors, "ID", "FirstName");
             ViewBag.InspectionStatusID = new SelectList(db.InspectionStatus, "ID", "Name");
             ViewBag.TemplateID = new SelectList(db.Templates, "ID", "Name");
+            ViewBag.RealtorID = new SelectList(db.Realtors, "ID", "FullName");
 
             BookInspectionModel viewModel = new BookInspectionModel();
             return View(viewModel);
@@ -35,12 +36,20 @@ namespace HHI_InspectionSoftware.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (viewModel.Realtor.FirstName != null)
+                if(viewModel.RealtorID == null)
                 {
-                    db.Realtors.Add(viewModel.Realtor);
-                    db.SaveChanges();
-                    viewModel.Inspection.RealtorID = viewModel.Realtor.ID;
+                    if (viewModel.Realtor.FirstName != null)
+                    {
+                        db.Realtors.Add(viewModel.Realtor);
+                        db.SaveChanges();
+                        viewModel.Inspection.RealtorID = viewModel.Realtor.ID;
+                    }
                 }
+                else
+                {
+                    viewModel.Inspection.RealtorID = viewModel.RealtorID;
+                }
+
                 db.Addresses.Add(viewModel.Address);
                 db.Customers.Add(viewModel.Customer);
                 db.SaveChanges();

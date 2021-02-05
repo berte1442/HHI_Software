@@ -34,7 +34,16 @@ namespace HHI_InspectionSoftware
         public System.DateTime LicenseExp { get; set; }
         [DisplayName("Start Date")]
         public System.DateTime StartDate { get; set; }
-    
+
+        [DisplayName("Inspector")]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspection> Inspections { get; set; }
     }

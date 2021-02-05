@@ -28,7 +28,16 @@ namespace HHI_InspectionSoftware
         public string LastName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-    
+
+        [DisplayName("Customer")]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspection> Inspections { get; set; }
     }

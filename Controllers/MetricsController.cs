@@ -19,7 +19,6 @@ namespace HHI_InspectionSoftware.Controllers
         // returns top 3 realtors
         public ActionResult RealtorMetrics()
         {
-            Realtor realtor;
             string rName1 = null;
             string rName2 = null;
             string rName3 = null;
@@ -36,59 +35,63 @@ namespace HHI_InspectionSoftware.Controllers
             decimal revTotal = 0;
             foreach (var i in db.Inspections)
             {
-                if (db.Realtors.Find(i.RealtorID).FirstName + " " + db.Realtors.Find(i.RealtorID).LastName != rName1 &&
-                    db.Realtors.Find(i.RealtorID).FirstName + " " + db.Realtors.Find(i.RealtorID).LastName != rName2 &&
-                    db.Realtors.Find(i.RealtorID).FirstName + " " + db.Realtors.Find(i.RealtorID).LastName != rName3)
+                if(i.RealtorID != null)
                 {
-                    foreach (var n in db.Inspections)
+                    var real = db.Realtors.Find(i.RealtorID);
+                    if (real.FullName != rName1 &&
+                        real.FullName != rName2 &&
+                        real.FullName != rName3)
                     {
-                        if (i.RealtorID == n.RealtorID)
+                        foreach (var n in db.Inspections)
                         {
-                            counter++;
-                            revTotal += n.Price??0;
+                            if (i.RealtorID == n.RealtorID)
+                            {
+                                counter++;
+                                revTotal += n.Price ?? 0;
+                            }
                         }
+
+                        string name = real.FullName;
+
+                        if (counter > rCount1)
+                        {
+                            rCount3 = rCount2;
+                            rCount2 = rCount1;
+                            rCount1 = counter;
+
+                            rName3 = rName2;
+                            rName2 = rName1;
+                            rName1 = name;
+
+                            rRev3 = rRev2;
+                            rRev2 = rRev1;
+                            rRev1 = revTotal;
+
+                        }
+                        else if (counter > rCount2)
+                        {
+                            rCount3 = rCount2;
+                            rCount2 = counter;
+
+                            rName3 = rName2;
+                            rName2 = name;
+
+                            rRev3 = rRev2;
+                            rRev2 = revTotal;
+                        }
+                        else if (counter > rCount3)
+                        {
+                            rCount3 = counter;
+
+                            rName3 = name;
+
+                            rRev3 = revTotal;
+                        }
+
+                        counter = 0;
+                        revTotal = 0;
                     }
-
-                    realtor = db.Realtors.Find(i.RealtorID);
-                    string name = realtor.FirstName + " " + realtor.LastName;
-
-                    if (counter > rCount1)
-                    {
-                        rCount3 = rCount2;
-                        rCount2 = rCount1;
-                        rCount1 = counter;
-
-                        rName3 = rName2;
-                        rName2 = rName1;
-
-                        rName1 = name;
-
-                        rRev1 = revTotal;
-
-                    }
-                    else if (counter > rCount2)
-                    {
-                        rCount3 = rCount2;
-                        rCount2 = counter;
-
-                        rName3 = rName2;
-
-                        rName2 = name;
-
-                        rRev2 = revTotal;
-                    }
-                    else if (counter > rCount3)
-                    {
-                        rCount3 = counter;
-
-                        rName3 = name;
-
-                        rRev3 = revTotal;
-                    }
-
-                    counter = 0;
-                    revTotal = 0;
-                }
+                }      
             }
 
             ViewBag.rName1 = rName1;
@@ -106,7 +109,6 @@ namespace HHI_InspectionSoftware.Controllers
 
         public ActionResult InspectorMetrics()
         {
-            Inspector inspector;
             string iName1 = null;
             string iName2 = null;
             string iName3 = null;
@@ -126,9 +128,9 @@ namespace HHI_InspectionSoftware.Controllers
             {
                 var insp = db.Inspectors.Find(i.InspectorID);
                 if (insp != null &&
-                    insp.FirstName + " " + insp.LastName != iName1 &&
-                    insp.FirstName + " " + insp.LastName != iName2 &&
-                    insp.FirstName + " " + insp.LastName != iName3)
+                    insp.FullName != iName1 &&
+                    insp.FullName != iName2 &&
+                    insp.FullName != iName3)
                 { 
                     foreach (var n in db.Inspections)
                     {
@@ -139,8 +141,7 @@ namespace HHI_InspectionSoftware.Controllers
                         }
                     }
 
-                    inspector = db.Inspectors.Find(i.InspectorID);
-                    string name = inspector.FirstName + " " + inspector.LastName;
+                    string name = insp.FullName;
 
                     if (counter > iCount1)
                     {
@@ -150,9 +151,10 @@ namespace HHI_InspectionSoftware.Controllers
 
                         iName3 = iName2;
                         iName2 = iName1;
-
                         iName1 = name;
 
+                        iRev3 = iRev2;
+                        iRev2 = iRev1;
                         iRev1 = revTotal;
 
                     }
@@ -162,9 +164,9 @@ namespace HHI_InspectionSoftware.Controllers
                         iCount2 = counter;
 
                         iName3 = iName2;
-
                         iName2 = name;
 
+                        iRev3 = iRev2;
                         iRev2 = revTotal;
 
                     }
