@@ -10,6 +10,7 @@
     <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Zip" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="SquareFeet" Type="int" />
+    <Property Name="YearBuilt" Type="int" />
   </EntityType>
   <EntityType Name="Area">
     <Key>

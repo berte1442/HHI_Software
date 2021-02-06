@@ -15,6 +15,7 @@
           <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Zip" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="SquareFeet" Type="int" />
+          <Property Name="YearBuilt" Type="int" />
         </EntityType>
         <EntityType Name="Area">
           <Key>
@@ -495,6 +496,7 @@
           <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SquareFeet" Type="Int32" />
           <NavigationProperty Name="Inspections" Relationship="Self.FK__Inspectio__Addre__3E1D39E1" FromRole="Address" ToRole="Inspection" />
+          <Property Name="YearBuilt" Type="Int32" />
         </EntityType>
         <EntityType Name="Area">
           <Key>
@@ -1006,6 +1008,7 @@
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="HHIModel1.Address">
               <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="YearBuilt" ColumnName="YearBuilt" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Address1" ColumnName="Address" />
                 <ScalarProperty Name="City" ColumnName="City" />

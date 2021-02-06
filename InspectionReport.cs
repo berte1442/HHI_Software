@@ -11,8 +11,7 @@ namespace HHI_InspectionSoftware
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class InspectionReport
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,9 +23,7 @@ namespace HHI_InspectionSoftware
         }
     
         public int ID { get; set; }
-        [DisplayName("Inspection Report")]
         public string Name { get; set; }
-        [DisplayName("Template")]
         public int TemplateID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

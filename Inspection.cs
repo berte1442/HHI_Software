@@ -24,12 +24,12 @@ namespace HHI_InspectionSoftware
         public Nullable<int> InspectorID { get; set; }
         [DisplayName("Realtor")]
         public Nullable<int> RealtorID { get; set; }
-        [DisplayName("Inspection Date / Time")]
+        [DisplayName("Inspection Date")]
         public Nullable<System.DateTime> InspectionDate { get; set; }
-        [DisplayName("Inspection Status")]
+        [DisplayName("Status")]
         public Nullable<int> InspectionStatusID { get; set; }
         public Nullable<decimal> Price { get; set; }
-        [DisplayName("Inspection Report")]
+        [DisplayName("Report Number")]
         public Nullable<int> InspectionReportID { get; set; }
         [DisplayName("Template")]
         public Nullable<int> TemplateID { get; set; }

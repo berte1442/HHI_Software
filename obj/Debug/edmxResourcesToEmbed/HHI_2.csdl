@@ -11,6 +11,7 @@
     <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="SquareFeet" Type="Int32" />
     <NavigationProperty Name="Inspections" Relationship="Self.FK__Inspectio__Addre__3E1D39E1" FromRole="Address" ToRole="Inspection" />
+    <Property Name="YearBuilt" Type="Int32" />
   </EntityType>
   <EntityType Name="Area">
     <Key>

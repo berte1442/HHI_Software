@@ -26,6 +26,9 @@
         <th>
             @Html.DisplayName("Square Feet")
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearBuilt)
+        </th>
         <th></th>
     </tr>
 
@@ -45,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SquareFeet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearBuilt)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

@@ -11,17 +11,13 @@ namespace HHI_InspectionSoftware
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class Limitation
     {
         public int ID { get; set; }
-        [DisplayName("Limitation")]
         public string Name { get; set; }
-        [DisplayName("System")]
         public Nullable<int> SystemID { get; set; }
         public string Description { get; set; }
-        [DisplayName("Area")]
         public Nullable<int> AreaID { get; set; }
     
         public virtual Area Area { get; set; }

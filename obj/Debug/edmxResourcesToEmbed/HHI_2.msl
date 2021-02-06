@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="HHIModel1.Address">
         <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="YearBuilt" ColumnName="YearBuilt" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Address1" ColumnName="Address" />
           <ScalarProperty Name="City" ColumnName="City" />

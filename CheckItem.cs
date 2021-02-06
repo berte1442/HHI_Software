@@ -11,8 +11,7 @@ namespace HHI_InspectionSoftware
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class CheckItem
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +21,8 @@ namespace HHI_InspectionSoftware
         }
     
         public int ID { get; set; }
-        [DisplayName("Check Item")]
         public string Name { get; set; }
-        [DisplayName("System")]
         public int SystemID { get; set; }
-        [DisplayName("Area")]
         public Nullable<int> AreaID { get; set; }
     
         public virtual Area Area { get; set; }
