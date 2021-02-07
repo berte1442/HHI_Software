@@ -20,7 +20,7 @@ namespace HHI_InspectionSoftware
         {
             this.Inspections = new HashSet<Inspection>();
         }
-
+    
         public int ID { get; set; }
         [DisplayName("Address")]
         public string Address1 { get; set; }
@@ -31,7 +31,7 @@ namespace HHI_InspectionSoftware
         public Nullable<int> SquareFeet { get; set; }
         [DisplayName("Year Built")]
         public Nullable<int> YearBuilt { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspection> Inspections { get; set; }
     }
