@@ -219,6 +219,7 @@
     <Compile Include="Limitation.cs">
       <DependentUpon>HHI_2.tt</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\BookInspectionModel.cs" />
     <Compile Include="ViewModels\TemplateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -380,10 +381,11 @@
     <Content Include="Views\Metrics\Index.cshtml" />
     <Content Include="Views\Templates\CreateNewTemplate.cshtml" />
     <Content Include="Views\BookInspections\Create.cshtml" />
+    <Content Include="Views\CreateTemplates\Create.cshtml" />
+    <Content Include="Views\CreateTemplates\_AddAreas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CreateTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

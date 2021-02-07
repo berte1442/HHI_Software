@@ -16,22 +16,38 @@ namespace HHI_InspectionSoftware.Controllers
             return View();
         }
 
+        // GET: CreateTemplates/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name")] Template template,
-            [Bind(Include = "ID,Name,TemplateID")] Area area)
+        public ActionResult Create([Bind(Include = "ID,Name")] Template template)
         {
             if (ModelState.IsValid)
             {
                 db.Templates.Add(template);
                 db.SaveChanges();
-                int templateID = db.Templates.Max(item => item.ID);
-                area.TemplateID = templateID;
-                db.Areas.Add(area);
-                db.SaveChanges();
+
+                foreach(var a in areas)
+                {
+                    a.TemplateID = template.ID;
+                    db.Areas.Add(a);
+                    db.SaveChanges();
+                }
             }
             
             return View();
+        }
+
+        List<Area> areas = new List<Area>();
+        public void AddArea(string areaName)
+        {
+            Area area = new Area();
+            area.Name = areaName;
+            areas.Add(area);
         }
 
         public ActionResult CreateTemplate([Bind(Include = "ID,Name")] Template template, List<Area> areas)
