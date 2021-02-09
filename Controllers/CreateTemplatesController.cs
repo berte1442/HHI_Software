@@ -62,23 +62,29 @@ namespace HHI_InspectionSoftware.Controllers
                     templateModel.Area.TemplateID = templateID;
                     db.Areas.Add(templateModel.Area);
                     db.SaveChanges();
-                    foreach(var a in db.Areas)
+
+                }
+                foreach (var a in db.Areas)
+                {
+                    if (a.TemplateID == templateID)
                     {
-                        if(a.TemplateID == templateID)
-                        {
-                            templateModel.Template.Areas.Add(a);
-                        }
+                        templateModel.Template.Areas.Add(a);
                     }
                 }
-
-                if(templateModel.HomeSystem.Name != null)
+                if (templateModel.HomeSystem.Name != null)
                 {
                     templateModel.HomeSystem.TemplateID = templateID;
                     db.HomeSystems.Add(templateModel.HomeSystem);
                     db.SaveChanges();
-                    //templateModel.HomeSystems.ToList().Add(templateModel.HomeSystem);
-                }
 
+                }
+                foreach (var s in db.HomeSystems)
+                {
+                    if (s.TemplateID == templateID)
+                    {
+                        templateModel.Template.HomeSystems.Add(s);
+                    }
+                }
                 return View(templateModel);
                
             }
@@ -105,7 +111,26 @@ namespace HHI_InspectionSoftware.Controllers
             templateModel.Areas = areas;
             return View("Save", templateModel);
         }
-    
+
+        public ActionResult DeleteSystem(int? id, int? templateID)
+        {
+            //int templateID = templateModel.Template.ID;
+            HomeSystem system = db.HomeSystems.Find(id);
+            db.HomeSystems.Remove(system);
+            db.SaveChanges();
+            TemplateModel templateModel = new TemplateModel();
+            templateModel.Template = db.Templates.Find(templateID);
+            List<HomeSystem> systems = new List<HomeSystem>();
+            foreach (var s in db.HomeSystems)
+            {
+                if (s.TemplateID == templateID)
+                {
+                    systems.Add(s);
+                }
+            }
+            templateModel.HomeSystems = systems;
+            return View("Save", templateModel);
+        }
 
         public ActionResult CreateTemplate([Bind(Include = "ID,Name")] Template template, List<Area> areas)
         {
