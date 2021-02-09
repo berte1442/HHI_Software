@@ -381,7 +381,7 @@
     <Content Include="Views\Metrics\Index.cshtml" />
     <Content Include="Views\Templates\CreateNewTemplate.cshtml" />
     <Content Include="Views\BookInspections\Create.cshtml" />
-    <Content Include="Views\CreateTemplates\Create.cshtml" />
+    <Content Include="Views\CreateTemplates\Save.cshtml" />
     <Content Include="Views\CreateTemplates\_AddAreas.cshtml" />
   </ItemGroup>
   <ItemGroup>

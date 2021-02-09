@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HHI_InspectionSoftware.ViewModels;
 
 namespace HHI_InspectionSoftware.Controllers
 {
@@ -19,36 +21,91 @@ namespace HHI_InspectionSoftware.Controllers
         // GET: CreateTemplates/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Save");
+        }
+
+        public ActionResult SaveGet(int? templateID, TemplateModel templateModel)
+        {
+            //TemplateModel templateModel = new TemplateModel();
+            //templateModel.Template = db.Templates.Find(templateID);
+            //templateModel.Areas = areas;
+
+            return View("Save", templateModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name")] Template template)
+        public ActionResult Save(TemplateModel templateModel)
         {
             if (ModelState.IsValid)
             {
-                db.Templates.Add(template);
-                db.SaveChanges();
-
-                foreach(var a in areas)
+                var name = templateModel.Template.Name;
+                bool doesExist = false;
+                int templateID = 0;
+                foreach(var t in db.Templates)
                 {
-                    a.TemplateID = template.ID;
-                    db.Areas.Add(a);
-                    db.SaveChanges();
+                    if(t.Name == name)
+                    {
+                        doesExist = true;
+                        templateID = t.ID;
+                    }
                 }
+                if (!doesExist)
+                {
+                    db.Templates.Add(templateModel.Template);
+                    db.SaveChanges();
+                    templateID = templateModel.Template.ID;
+                }
+                    
+                if (templateModel.Area.Name != null)
+                {
+                    templateModel.Area.TemplateID = templateID;
+                    db.Areas.Add(templateModel.Area);
+                    db.SaveChanges();
+                    foreach(var a in db.Areas)
+                    {
+                        if(a.TemplateID == templateID)
+                        {
+                            templateModel.Template.Areas.Add(a);
+                        }
+                    }
+                }
+
+                if(templateModel.HomeSystem.Name != null)
+                {
+                    templateModel.HomeSystem.TemplateID = templateID;
+                    db.HomeSystems.Add(templateModel.HomeSystem);
+                    db.SaveChanges();
+                    //templateModel.HomeSystems.ToList().Add(templateModel.HomeSystem);
+                }
+
+                return View(templateModel);
+               
             }
             
             return View();
         }
 
-        List<Area> areas = new List<Area>();
-        public void AddArea(string areaName)
+        public ActionResult DeleteArea(int? id, int? templateID)
         {
-            Area area = new Area();
-            area.Name = areaName;
-            areas.Add(area);
+            //int templateID = templateModel.Template.ID;
+            Area area = db.Areas.Find(id);
+            db.Areas.Remove(area);
+            db.SaveChanges();
+            TemplateModel templateModel = new TemplateModel();
+            templateModel.Template = db.Templates.Find(templateID);
+            List<Area> areas = new List<Area>();
+            foreach (var a in db.Areas)
+            {
+                if (a.TemplateID == templateID)
+                {
+                    areas.Add(a);
+                }
+            }
+            templateModel.Areas = areas;
+            return View("Save", templateModel);
         }
+    
 
         public ActionResult CreateTemplate([Bind(Include = "ID,Name")] Template template, List<Area> areas)
         {
