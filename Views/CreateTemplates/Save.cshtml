@@ -25,102 +25,13 @@
 
         <hr />
 
-        <h4>Add Areas</h4>
+        @{TemplateModel templateModel = Model;
+        }
+            @Html.Partial("_AddAreas", templateModel)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Area.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Area.Name, new { htmlAttributes = new { @class = "form-control", Value = "" } })
-                @Html.ValidationMessageFor(model => model.Area.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add" class="btn btn-default" />
-            </div>
-        </div>
-
-        <div id="areaTable">
-            @{ if (Model != null)
-
-                {
-
-                    <table class="table">
-                        <tr>
-                            <th>
-                                @Html.DisplayName("Areas")
-                            </th>
-                            <th></th>
-                        </tr>
-
-                        @foreach (var item in Model.Template.Areas)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Delete", "DeleteArea", new { item.ID, item.TemplateID })
-                                </td>
-                            </tr>
-                        }
-
-                    </table>
-                }
-            }
-        </div>
         <hr />
 
-        <h4>Add Systems</h4>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HomeSystem.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HomeSystem.Name, new { htmlAttributes = new { @class = "form-control", Value = "" } })
-                @Html.ValidationMessageFor(model => model.HomeSystem.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add" class="btn btn-default" />
-            </div>
-        </div>
-
-        <div id="areaTable">
-            @{ if (Model != null)
-
-                {
-
-                    <table class="table">
-                        <tr>
-                            <th>
-                                @Html.DisplayName("Systems")
-                            </th>
-                            <th></th>
-                        </tr>
-
-                        @foreach (var item in Model.Template.HomeSystems)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Delete", "DeleteSystem", new { item.ID, item.TemplateID })
-                                </td>
-                            </tr>
-                        }
-
-                    </table>
-                }
-            }
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add" class="btn btn-default" />
-            </div>
-        </div>
+        @Html.Partial("_AddSystems", templateModel)
     </div>
 }
 
