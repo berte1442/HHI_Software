@@ -24,7 +24,7 @@ namespace HHI_InspectionSoftware.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveArea(TemplateModel templateModel)
+        public ActionResult Update(TemplateModel templateModel)
        {
             //if (ModelState.IsValid)
             //{
@@ -53,6 +53,14 @@ namespace HHI_InspectionSoftware.Controllers
                     db.SaveChanges();
                     ViewBag.AreaID = templateModel.Area.ID;
                 }
+
+            if (templateModel.HomeSystem.Name != null)
+            {
+                templateModel.HomeSystem.TemplateID = templateID;
+                db.HomeSystems.Add(templateModel.HomeSystem);
+                db.SaveChanges();
+                ViewBag.SystemID = templateModel.HomeSystem.ID;
+            }
 
             //}
             foreach (var a in db.Areas)
@@ -94,80 +102,80 @@ namespace HHI_InspectionSoftware.Controllers
             return View("Save", templateModel);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SaveSystem(TemplateModel templateModel)
-        {
-            //if (ModelState.IsValid)
-            //{
-                var name = templateModel.Template.Name;
-                bool doesExist = false;
-                int templateID = 0;
-                foreach (var t in db.Templates)
-                {
-                    if (t.Name == name)
-                    {
-                        doesExist = true;
-                        templateID = t.ID;
-                    }
-                }
-                if (!doesExist)
-                {
-                    db.Templates.Add(templateModel.Template);
-                    db.SaveChanges();
-                    templateID = templateModel.Template.ID;
-                }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult SaveSystem(TemplateModel templateModel)
+        //{
+        //    //if (ModelState.IsValid)
+        //    //{
+        //        var name = templateModel.Template.Name;
+        //        bool doesExist = false;
+        //        int templateID = 0;
+        //        foreach (var t in db.Templates)
+        //        {
+        //            if (t.Name == name)
+        //            {
+        //                doesExist = true;
+        //                templateID = t.ID;
+        //            }
+        //        }
+        //        if (!doesExist)
+        //        {
+        //            db.Templates.Add(templateModel.Template);
+        //            db.SaveChanges();
+        //            templateID = templateModel.Template.ID;
+        //        }
 
-                if (templateModel.HomeSystem.Name != null)
-                {
-                    templateModel.HomeSystem.TemplateID = templateID;
-                    db.HomeSystems.Add(templateModel.HomeSystem);
-                    db.SaveChanges();
-                    ViewBag.SystemID = templateModel.HomeSystem.ID;
-                }
+        //        if (templateModel.HomeSystem.Name != null)
+        //        {
+        //            templateModel.HomeSystem.TemplateID = templateID;
+        //            db.HomeSystems.Add(templateModel.HomeSystem);
+        //            db.SaveChanges();
+        //            ViewBag.SystemID = templateModel.HomeSystem.ID;
+        //        }
 
-                foreach (var a in db.Areas)
-                {
-                    if (a.TemplateID == templateID)
-                    {
-                        templateModel.Template.Areas.Add(a);
-                    }
-                }
+        //        foreach (var a in db.Areas)
+        //        {
+        //            if (a.TemplateID == templateID)
+        //            {
+        //                templateModel.Template.Areas.Add(a);
+        //            }
+        //        }
 
-                foreach (var s in db.HomeSystems)
-                {
-                    if (s.TemplateID == templateID)
-                    {
-                        templateModel.Template.HomeSystems.Add(s);
-                    }
-                }
-                templateModel.Template.ID = templateID;
+        //        foreach (var s in db.HomeSystems)
+        //        {
+        //            if (s.TemplateID == templateID)
+        //            {
+        //                templateModel.Template.HomeSystems.Add(s);
+        //            }
+        //        }
+        //        templateModel.Template.ID = templateID;
 
-                //ViewBag.Areas = new SelectList(templateModel.Template.Areas, "ID", "Name");
-                //ViewBag.Systems = new SelectList(templateModel.Template.HomeSystems, "ID", "Name");
+        //        //ViewBag.Areas = new SelectList(templateModel.Template.Areas, "ID", "Name");
+        //        //ViewBag.Systems = new SelectList(templateModel.Template.HomeSystems, "ID", "Name");
 
-                //return View("Save", templateModel);
-            //}
+        //        //return View("Save", templateModel);
+        //    //}
 
-            if (templateModel.Template.Areas != null)
-            {
-                ViewBag.Areas = new SelectList(templateModel.Template.Areas, "ID", "Name");
-            }
-            else
-            {
-                ViewBag.Areas = new SelectList("");
-            }
-            if (templateModel.Template.HomeSystems != null)
-            {
-                ViewBag.Systems = new SelectList(templateModel.Template.HomeSystems, "ID", "Name");
-            }
-            else
-            {
-                ViewBag.Systems = new SelectList("");
-            }
+        //    if (templateModel.Template.Areas != null)
+        //    {
+        //        ViewBag.Areas = new SelectList(templateModel.Template.Areas, "ID", "Name");
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Areas = new SelectList("");
+        //    }
+        //    if (templateModel.Template.HomeSystems != null)
+        //    {
+        //        ViewBag.Systems = new SelectList(templateModel.Template.HomeSystems, "ID", "Name");
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Systems = new SelectList("");
+        //    }
 
-            return View("Save", templateModel);
-        }
+        //    return View("Save", templateModel);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -222,12 +230,15 @@ namespace HHI_InspectionSoftware.Controllers
 
         public ActionResult SaveLimitation(TemplateModel templateModel)
         {
-            //if (ModelState.IsValid)
-            //{
+            var lName = db.Limitations.FirstOrDefault(x => x.Name == templateModel.Limitation.Name &&
+                                                 x.AreaID == templateModel.Limitation.AreaID &&
+                                                 x.SystemID == templateModel.Limitation.SystemID);
+            if (lName == null)
+            {
                 Limitation limitation = templateModel.Limitation;
                 db.Limitations.Add(limitation);
                 db.SaveChanges();
-            //}
+            }
             List<Limitation> limitations = new List<Limitation>();
             foreach(var l in db.Limitations)
             {
@@ -238,6 +249,15 @@ namespace HHI_InspectionSoftware.Controllers
             }
             templateModel.Limitations = limitations;
 
+            List<CheckItem> checkItems = new List<CheckItem>();
+            foreach (var c in db.CheckItems)
+            {
+                if (c.AreaID == templateModel.CheckItem.AreaID)
+                {
+                    checkItems.Add(c);
+                }
+            }
+            templateModel.CheckItems = checkItems;
             templateModel.Template = db.Templates.Find(templateModel.Template.ID);
 
             List<Area> areas = new List<Area>();
@@ -281,13 +301,68 @@ namespace HHI_InspectionSoftware.Controllers
             return View("Save", templateModel);
         }
 
-        public void SaveCheckItem(CheckItem checkItem)
+        public ActionResult SaveCheckItem(TemplateModel templateModel)
         {
-            if (ModelState.IsValid)
+            var ciName = db.CheckItems.FirstOrDefault(x => x.Name == templateModel.CheckItem.Name && 
+                                                        x.AreaID == templateModel.CheckItem.AreaID &&
+                                                        x.SystemID == templateModel.CheckItem.SystemID);
+            if (ciName == null)
             {
+                CheckItem checkItem = templateModel.CheckItem;
                 db.CheckItems.Add(checkItem);
                 db.SaveChanges();
             }
+            List<CheckItem> checkItems = new List<CheckItem>();
+            foreach (var c in db.CheckItems)
+            {
+                if (c.AreaID == templateModel.CheckItem.AreaID)
+                {
+                    checkItems.Add(c);
+                }
+            }
+            templateModel.CheckItems = checkItems;
+
+            templateModel.Template = db.Templates.Find(templateModel.Template.ID);
+
+            List<Area> areas = new List<Area>();
+            foreach (var a in db.Areas)
+            {
+                if (a.TemplateID == templateModel.Template.ID)
+                {
+                    areas.Add(a);
+                }
+            }
+            templateModel.Template.Areas = areas;
+
+            List<HomeSystem> systems = new List<HomeSystem>();
+            foreach (var s in db.HomeSystems)
+            {
+                if (s.TemplateID == templateModel.Template.ID)
+                {
+                    systems.Add(s);
+                }
+            }
+            templateModel.Template.HomeSystems = systems;
+
+
+            if (templateModel.Template.Areas != null)
+            {
+                ViewBag.Areas = new SelectList(templateModel.Template.Areas, "ID", "Name");
+            }
+            else
+            {
+                ViewBag.Areas = new SelectList("");
+            }
+            if (templateModel.Template.HomeSystems != null)
+            {
+                ViewBag.Systems = new SelectList(templateModel.Template.HomeSystems, "ID", "Name");
+            }
+            else
+            {
+                ViewBag.Systems = new SelectList("");
+            }
+            //templateModel.Limitation = null;
+            return View("Save", templateModel);
         }
     }
 }

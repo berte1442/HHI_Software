@@ -15,7 +15,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Add Area" class="btn btn-success" formaction="SaveArea" asp-controller="CreateTemplates" />
+            <input type="submit" value="Add Area" class="btn btn-success" formaction="Update" asp-controller="CreateTemplates" />
         </div>
     </div>
 </div>
@@ -149,22 +149,28 @@
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.CheckItem.SystemID, "System", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.DropDownList("Systems", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.DropDownListFor(model => model.CheckItem.SystemID, ViewBag.Systems as SelectList, "Select System..", new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.CheckItem.SystemID, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.CheckItem.AreaID, "Area", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.DropDownList("Areas", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.HiddenFor(model => model.CheckItem.AreaID, new { @Value = item.ID })
                                             @Html.ValidationMessageFor(model => model.CheckItem.AreaID, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
                                     <div class="form-group">
+                                        <div class="col-md-10">
+                                            @Html.HiddenFor(model => model.Template.ID, new { @Value = item.TemplateID })
+                                            @Html.ValidationMessageFor(model => model.Template.ID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
-                                            <input type="submit" value="Add Check Item" class="btn btn-default" asp-action="SaveCheckItem" asp-controller="CreateTemplates" />
+                                            <input type="submit" value="Add Check Item" class="btn btn-default" formaction="SaveCheckItem" asp-controller="CreateTemplates" />
                                         </div>
                                     </div>
                                 </form>
