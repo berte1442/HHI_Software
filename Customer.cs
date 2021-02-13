@@ -12,6 +12,7 @@ namespace HHI_InspectionSoftware
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Customer
     {
@@ -20,13 +21,15 @@ namespace HHI_InspectionSoftware
         {
             this.Inspections = new HashSet<Inspection>();
         }
-    
+
         public int ID { get; set; }
         [DisplayName("First Name")]
         public string FirstName { get; set; }
         [DisplayName("Last Name")]
         public string LastName { get; set; }
+        //[Phone]
         public string Phone { get; set; }
+       // [EmailAddress]
         public string Email { get; set; }
 
         [DisplayName("Customer")]

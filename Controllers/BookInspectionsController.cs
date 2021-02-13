@@ -48,8 +48,8 @@ namespace HHI_InspectionSoftware.Controllers
                     viewModel.Inspection.RealtorID = viewModel.RealtorID;
                 }
             }
-            else if(viewModel.RealtorID == 0 && viewModel.Realtor.FirstName == null)
-            {
+            //else if (!ModelState.IsValid || viewModel.RealtorID == 0 && viewModel.Realtor.FirstName == null)
+            //{
 
                 db.Addresses.Add(viewModel.Address);
                 db.Customers.Add(viewModel.Customer);
@@ -64,7 +64,7 @@ namespace HHI_InspectionSoftware.Controllers
                 db.Inspections.Add(viewModel.Inspection);
 
                 db.SaveChanges();
-            }
+            //}
             return RedirectToAction("Index", "Inspections");
         }
 

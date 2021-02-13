@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using HHI_InspectionSoftware.ViewModels;
 
 namespace HHI_InspectionSoftware.Controllers
@@ -12,57 +13,19 @@ namespace HHI_InspectionSoftware.Controllers
     {
         private HHIEntities6 db = new HHIEntities6();
 
-        //// GET: CreateTemplates
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        // GET: CreateTemplates/Create
+        //GET: CreateTemplates/Create
         public ActionResult Save()
         {
-            return View("Save");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Update(TemplateModel templateModel)
-        {
-            if (ModelState.IsValid)
-            {
-                // Checks to see if template name is available
-                // Aborts if not, saves if so
-                bool nameTaken = false;
-                foreach(var t in db.Templates)
-                {
-                    if(templateModel.Template.Name == t.Name)
-                    {
-                        nameTaken = true;
-                    }
-                }
-                if (nameTaken)
-                {
-                    // name taken - abort save - find out how to prompt user to change name through view 
-                    return View("Save", templateModel);
-                }
-                else
-                {
-                    db.Templates.Add(templateModel.Template);
-                    db.SaveChanges();
-                }
-            }
-            return View("Save", templateModel);
-        }
-
-        //public ActionResult SaveGet(int? templateID, TemplateModel templateModel)
-        //{
-        //    return View("Save", templateModel);
-        //}
+            //var areaIDs = db.Limitations.Include(x => x.Area).ToList();
+            //var systemIDs = db.Limitations.Include(x => x.HomeSystem).ToList();
+            return View();
+        }    
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SaveArea(TemplateModel templateModel)
-        {
+       {
             //if (ModelState.IsValid)
             //{
                 var name = templateModel.Template.Name;
@@ -228,7 +191,7 @@ namespace HHI_InspectionSoftware.Controllers
                     areas.Add(a);
                 }
             }
-            templateModel.Areas = areas;
+            templateModel.Template.Areas = areas;
             return View("Save", templateModel);
         }
 
@@ -253,28 +216,68 @@ namespace HHI_InspectionSoftware.Controllers
                     systems.Add(s);
                 }
             }
-            templateModel.HomeSystems = systems;
+            templateModel.Template.HomeSystems = systems;
             return View("Save", templateModel);
         }
 
         public ActionResult SaveLimitation(TemplateModel templateModel)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 Limitation limitation = templateModel.Limitation;
                 db.Limitations.Add(limitation);
                 db.SaveChanges();
-            }
+            //}
             List<Limitation> limitations = new List<Limitation>();
             foreach(var l in db.Limitations)
             {
-                if(l.AreaID == templateModel.Area.ID)
+                if(l.AreaID == templateModel.Limitation.AreaID)
                 {
                     limitations.Add(l);
                 }
             }
             templateModel.Limitations = limitations;
 
+            templateModel.Template = db.Templates.Find(templateModel.Template.ID);
+
+            List<Area> areas = new List<Area>();
+            foreach(var a in db.Areas)
+            {
+                if(a.TemplateID == templateModel.Template.ID)
+                {
+                    areas.Add(a);
+                }
+            }
+            templateModel.Template.Areas = areas;
+
+            List<HomeSystem> systems = new List<HomeSystem>();
+            foreach(var s in db.HomeSystems)
+            {
+                if(s.TemplateID == templateModel.Template.ID)
+                {
+                    systems.Add(s);
+                }
+            }
+            templateModel.Template.HomeSystems = systems;
+
+
+            if (templateModel.Template.Areas != null)
+            {
+                ViewBag.Areas = new SelectList(templateModel.Template.Areas, "ID", "Name");
+            }
+            else
+            {
+                ViewBag.Areas = new SelectList("");
+            }
+            if (templateModel.Template.HomeSystems != null)
+            {
+                ViewBag.Systems = new SelectList(templateModel.Template.HomeSystems, "ID", "Name");
+            }
+            else
+            {
+                ViewBag.Systems = new SelectList("");
+            }
+            //templateModel.Limitation = null;
             return View("Save", templateModel);
         }
 
@@ -286,24 +289,5 @@ namespace HHI_InspectionSoftware.Controllers
                 db.SaveChanges();
             }
         }
-
-        //public ActionResult CreateTemplate([Bind(Include = "ID,Name")] Template template, List<Area> areas)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Templates.Add(template);
-        //        db.SaveChanges();
-        //        int templateID = db.Templates.Max(item => item.ID);
-
-        //        foreach (var a in areas)
-        //        {
-        //            a.TemplateID = templateID;
-        //            db.Areas.Add(a);
-        //            db.SaveChanges();
-        //        }
-        //    }
-
-        //    return View();
-        //}
     }
 }

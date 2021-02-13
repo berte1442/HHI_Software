@@ -384,6 +384,7 @@
     <Content Include="Views\CreateTemplates\Save.cshtml" />
     <Content Include="Views\CreateTemplates\_AddAreas.cshtml" />
     <Content Include="Views\CreateTemplates\_AddSystems.cshtml" />
+    <Content Include="Views\CreateTemplates\_AddLimitations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

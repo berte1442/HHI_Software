@@ -1,0 +1,51 @@
+﻿@model HHI_InspectionSoftware.ViewModels.TemplateModel
+
+@using (Html.BeginForm("SaveLimiation", "CreateTemplates", FormMethod.Post))
+{
+
+<h4>Limitation</h4>
+<hr/>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+    @Html.LabelFor(model => model.Limitation.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Limitation.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Limitation.Name, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Limitation.SystemID, "System", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.Limitation.SystemID, ViewBag.Systems as SelectList, "Select System..", new { @class = "form-control" })
+        @*@Html.DropDownList("Systems", null, htmlAttributes: new { @class = "form-control" })*@
+        @Html.ValidationMessageFor(model => model.Limitation.SystemID, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Limitation.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Limitation.Description, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Limitation.Description, "", new { @class = "text-danger" })
+    </div>
+</div>
+@*<div class="form-group">
+    <div class="col-md-10">
+        @Html.HiddenFor(model => model.Limitation.AreaID, new { @Value = Model.Area.ID })
+        @Html.ValidationMessageFor(model => model.Limitation.AreaID, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-10">
+        @Html.HiddenFor(model => model.Template, new { @Value = Model.Template })
+        @Html.ValidationMessageFor(model => model.Template, "", new { @class = "text-danger" })
+    </div>
+</div>*@
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input id="@Model.Area.ID" type="submit" value="Add Limitation" class="btn btn-default" formaction="SaveLimitation" asp-controller="CreateTemplates" />
+    </div>
+</div>
+}

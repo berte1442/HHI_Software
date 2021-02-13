@@ -12,6 +12,7 @@ namespace HHI_InspectionSoftware
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Inspector
     {
@@ -26,7 +27,9 @@ namespace HHI_InspectionSoftware
         public string FirstName { get; set; }
         [DisplayName("Last Name")]
         public string LastName { get; set; }
+        [Phone]
         public string Phone { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
         [DisplayName("License Number")]
         public string LicenseNum { get; set; }

@@ -1,45 +1,92 @@
 ﻿@model HHI_InspectionSoftware.ViewModels.TemplateModel
 
 <h4>Add Systems</h4>
-
-<div class="form-group">
-    @Html.LabelFor(model => model.HomeSystem.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.EditorFor(model => model.HomeSystem.Name, new { htmlAttributes = new { @class = "form-control", Value = "" } })
-        @Html.ValidationMessageFor(model => model.HomeSystem.Name, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.HomeSystem.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HomeSystem.Name, new { htmlAttributes = new { @class = "form-control", Value = "" } })
+            @Html.ValidationMessageFor(model => model.HomeSystem.Name, "", new { @class = "text-danger" })
+        </div>
     </div>
-</div>
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Add System" class="btn btn-default" formaction="SaveSystem" asp-controller="CreateTemplates" />
-    </div>
-</div>
-
-<div id="areaTable">
-    @{ if (Model != null && Model.Template.HomeSystems != null)
-
+    @*@{ if (Model != null)
         {
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayName("Systems")
-                    </th>
-                    <th></th>
-                </tr>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.Template, new { @Value = Model.Template })
+                    @Html.ValidationMessageFor(model => model.Template, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }}*@
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add System" class="btn btn-default" formaction="SaveSystem" asp-controller="CreateTemplates" />
+        </div>
+    </div>
 
-                @foreach (var item in Model.Template.HomeSystems)
+    <div id="systemTable">
+        @{ if (Model != null && Model.Template != null && Model.Template.HomeSystems != null)
+            {
+                <hr />
+
+                <h2>Systems</h2>
+                <button id="systemsBtn" class="btn btn-default" type="button" data-toggle="collapse" data-target="#display2" aria-expanded="false" aria-controls="display2">
+                    Show Systems
+                </button>
+            }}
+
+        <div class="collapse" id="display2">
+            @{ if (Model != null && Model.Template != null && Model.Template.HomeSystems != null)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Delete", "DeleteSystem", new { item.ID, item.TemplateID })
-                        </td>
-                    </tr>
+                    foreach (var item in Model.Template.HomeSystems)
+                    {
+                        <div class="form-group">
+                            <div>
+                                <h3 style="color: green">"@item.Name"</h3>
+                            </div>
+                            <div>
+                                <button id="deleteBtn" class="btn btn-danger" formaction="DeleteSystem" asp-controller="CreateTemplates">
+                                    Delete System
+                                </button>
+                            </div>
+                        </div>
+                    }
                 }
+            }
+            @*@{ if (Model != null && Model.Template.HomeSystems != null)
 
-            </table>
+                    {
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayName("Systems")
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model.Template.HomeSystems)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Delete", "DeleteSystem", new { item.ID, item.TemplateID })
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    }
+                }*@
+    </div>
+    <script>
+        document.getElementById('systemsBtn').onclick = function () {
+            if (this.innerText == "Show Systems") {
+                this.innerText = "Hide Systems";
+            }
+            else {
+                this.innerText = "Show Systems";
+            }
         }
-    }
-</div>
+
+    </script>
