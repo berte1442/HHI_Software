@@ -12,7 +12,7 @@
         <h2>Template Builder</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+    <div>
         <h4>Template Name</h4>
 
         <div class="form-group">
@@ -22,7 +22,7 @@
                 @Html.ValidationMessageFor(model => model.Template.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
+    </div>
             <hr />
 
             @Html.Partial("_AddAreas")
