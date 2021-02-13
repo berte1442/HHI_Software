@@ -22,21 +22,9 @@
                 @Html.ValidationMessageFor(model => model.Template.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-        @*@{ if (Model != null)
-            {
-                <div class="form-group">
-                    <div class="col-md-10">
-                        @Html.HiddenFor(model => model.Template.ID, new { @Value = Model.Template.ID })
-                        @Html.ValidationMessageFor(model => model.Template.ID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                }
-            }*@
 
             <hr />
 
-            @*@{TemplateModel templateModel = Model;
-            }*@
             @Html.Partial("_AddAreas")
 
             <hr />
