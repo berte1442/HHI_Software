@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add System" class="btn btn-primary" formaction="Update" asp-controller="CreateTemplates" />
+                <input type="submit" value="Add System" class="btn btn-primary" formaction="Save" asp-controller="CreateTemplates" />
             </div>
         </div>
     </div>
@@ -49,32 +49,6 @@
                         }
                     }
                 }
-                @*@{ if (Model != null && Model.Template.HomeSystems != null)
-
-                    {
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    @Html.DisplayName("Systems")
-                                </th>
-                                <th></th>
-                            </tr>
-
-                            @foreach (var item in Model.Template.HomeSystems)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Name)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Delete", "DeleteSystem", new { item.ID, item.TemplateID })
-                                    </td>
-                                </tr>
-                            }
-
-                        </table>
-                    }
-                }*@
             </div>
             <script>
                 document.getElementById('systemsBtn').onclick = function () {
