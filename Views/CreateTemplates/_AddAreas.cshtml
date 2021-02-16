@@ -25,12 +25,12 @@
         {
             <hr />
             <h2 style="color: green">Areas</h2>
-            <button id="areasBtn" class="btn btn-default" type="button" data-toggle="collapse" data-target="#display" aria-expanded="false" aria-controls="display">
-                Show Areas
+            <button id="areasBtn" class="btn btn-default" type="button" data-toggle="collapse" data-target="#display" aria-expanded="true" aria-controls="display">
+                Hide Areas
             </button>
         }}
 
-    <div class="collapse" id="display">
+    <div class="collapse in" id="display">
         @{ if (Model != null && Model.Template != null && Model.Template.Areas != null)
             {
                 foreach (var item in Model.Template.Areas)
