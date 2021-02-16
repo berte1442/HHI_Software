@@ -48,9 +48,11 @@
                             }
                             @foreach (var l in item.Limitations)
                             {
-                                <a onmouseover="ShowDescription('@l.ID')" onmouseout="HideDescription('@l.ID') "href="~/Limitations/Details/@l.ID"><h4>@l.Name</h4><span id="@l.ID" hidden>@l.Description</span></a><br />
+                                var system = Model.Template.HomeSystems.First(x => x.ID == l.SystemID);
+
+                                <span title="System: @system.Name (click to edit)" ><a onmouseover="ShowDescription('@l.ID')" onmouseout="HideDescription('@l.ID') " href="~/Limitations/Edit/@l.ID"><h4>@l.Name</h4><span id="@l.ID" hidden>@l.Description</span></a></span><br />
                             }
-                        </div>
+</div>
                         <div class="col-md-2">
                             @if (item.CheckItems != null && item.Limitations.ToList().Count > 0)
                             {
@@ -58,7 +60,9 @@
                             }
                             @foreach (var c in item.CheckItems)
                             {
-                                <a href="~/CheckItems/Details/@c.ID"><h4>@c.Name</h4></a><br />
+                                var system = Model.Template.HomeSystems.First(x => x.ID == c.SystemID);
+
+                                <span title="System: @system.Name (click to edit)"><a href="~/CheckItems/Edit/@c.ID"><h4>@c.Name</h4></a><br /></span>
                             }
                         </div>
                         <div class="row">

@@ -6088,6 +6088,22 @@ button.close {
   filter: alpha(opacity=0);
   opacity: 0;
 }
+    /* Tooltip text */
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+        /* Position the tooltip text - see examples below! */
+        position: absolute;
+        z-index: 1;
+    }
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
 .tooltip.in {
   filter: alpha(opacity=90);
   opacity: 0.9;
