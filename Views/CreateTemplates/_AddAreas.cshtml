@@ -50,9 +50,9 @@
                             {
                                 var system = Model.Template.HomeSystems.First(x => x.ID == l.SystemID);
 
-                                <span title="System: @system.Name (click to edit)" ><a onmouseover="ShowDescription('@l.ID')" onmouseout="HideDescription('@l.ID') " href="~/Limitations/Edit/@l.ID"><h4>@l.Name</h4><span id="@l.ID" hidden>@l.Description</span></a></span><br />
+                                <span title="System: @system.Name (click to edit)"><a onmouseover="ShowDescription('@l.ID')" onmouseout="HideDescription('@l.ID') " href="~/Limitations/Edit/@l.ID"><h4>@l.Name</h4><span id="@l.ID" hidden>"@l.Description"</span></a></span><br />
                             }
-</div>
+                        </div>
                         <div class="col-md-2">
                             @if (item.CheckItems != null && item.Limitations.ToList().Count > 0)
                             {
@@ -77,9 +77,23 @@
                                 <button id="checkItemBtn" class="btn btn-success" type="button" data-toggle="collapse" data-target="#@id" aria-expanded="false" aria-controls="@id">
                                     Add Check Item
                                 </button>
-                                <button id="deleteBtn" class="btn btn-danger" formaction="DeleteArea" asp-controller="CreateTemplates">
-                                    Delete Area
-                                </button>
+                                @*<button id="deleteBtn" class="btn btn-danger" formaction="DeleteArea" asp-controller="CreateTemplates">
+                                        Delete Area
+                                    </button>*@
+                                @Ajax.ActionLink(
+                                    "Delete Area",
+                                    "DeleteArea",
+                                    "CreateTemplates",
+                                    new 
+                                         {
+                                        id = @item.ID,
+                                        templateID = @Model.Template.ID
+                                    },
+                                    new AjaxOptions
+                                {
+                                        HttpMethod = "POST",
+                                    }
+                                )
                             </div>
                             <div class="collapse col-md-4" id="@item.ID">
 
@@ -201,9 +215,10 @@
     function ShowDescription(id) {
         document.getElementById(id).hidden = false;
     };
-    
+
     function HideDescription(id) {
         document.getElementById(id).hidden = true;
     }
 
 </script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>

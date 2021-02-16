@@ -196,30 +196,55 @@ namespace HHI_InspectionSoftware.Controllers
             return View("Save", templateModel);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteArea(TemplateModel templateModel)
+        public ActionResult DeleteArea(int id, int templateID)
         {
             //int templateID = templateModel.Template.ID;
             //TemplateModel templateModel = new TemplateModel();
-            List<Area> areas = new List<Area>();
-            Area area = db.Areas.Find(templateModel.Area.ID);
+            Area area = db.Areas.Find(id);
             if(area != null)
             {
+                foreach(var c in db.CheckItems)
+                {
+                    if(c.AreaID == area.ID)
+                    {
+                        DeleteCheckItem(c.ID);
+                    }
+                }
+                foreach(var l in db.Limitations)
+                {
+                    if(l.AreaID == area.ID)
+                    {
+                        DeleteLimitation(l.ID);
+                    }
+                }
                 db.Areas.Remove(area);
                 db.SaveChanges();
-               // templateModel.Template = db.Templates.Find(templateID);
             }
 
-            foreach (var a in db.Areas)
+            TemplateModel templateModel = new TemplateModel();
+            templateModel.Template = db.Templates.Find(templateID);
+
+            return Save(templateID, templateModel);
+        }
+
+        public void DeleteCheckItem(int id)
+        {
+            CheckItem checkItem = db.CheckItems.Find(id);
+            if(checkItem != null)
             {
-                if (a.TemplateID == templateModel.Template.ID)
-                {
-                    areas.Add(a);
-                }
+                db.CheckItems.Remove(checkItem);
+                db.SaveChangesAsync();
             }
-            templateModel.Template.Areas = areas;
-            return View("Save", templateModel);
+        }
+        
+        public void DeleteLimitation(int id)
+        {
+            Limitation limitation = db.Limitations.Find(id);
+            if (limitation != null)
+            {
+                db.Limitations.Remove(limitation);
+                db.SaveChangesAsync();
+            }
         }
 
         public ActionResult DeleteSystem(int? id, int? templateID)
