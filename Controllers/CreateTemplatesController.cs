@@ -58,7 +58,7 @@ namespace HHI_InspectionSoftware.Controllers
                 }
             }
 
-            if (!doesExist && templateModel.Template != null)
+            if (!doesExist && templateModel.Template != null && templateModel.Template.Name != null)
             {
                 db.Templates.Add(templateModel.Template);
                 db.SaveChanges();
@@ -98,9 +98,63 @@ namespace HHI_InspectionSoftware.Controllers
                 }
             }
 
+            if (templateModel.Limitation != null && templateModel.Limitation.Name != null)
+            {
+                var lName = db.Limitations.FirstOrDefault(x => x.Name == templateModel.Limitation.Name &&
+                                         x.AreaID == templateModel.Limitation.AreaID &&
+                                         x.SystemID == templateModel.Limitation.SystemID);
+                if (lName == null)
+                {
+                    Limitation limitation = templateModel.Limitation;
+                    db.Limitations.Add(limitation);
+                    db.SaveChanges();
+                }
+                List<Limitation> limitations = new List<Limitation>();
+                foreach (var l in db.Limitations)
+                {
+                    if (l.AreaID == templateModel.Limitation.AreaID)
+                    {
+                        limitations.Add(l);
+                    }
+                }
+                templateModel.Limitations = limitations;
+            }
+
+            if (templateModel.CheckItem != null && templateModel.CheckItem.Name != null)
+            {
+                var ciName = db.CheckItems.FirstOrDefault(x => x.Name == templateModel.CheckItem.Name &&
+                                            x.AreaID == templateModel.CheckItem.AreaID &&
+                                            x.SystemID == templateModel.CheckItem.SystemID);
+                if (ciName == null)
+                {
+                    CheckItem checkItem = templateModel.CheckItem;
+                    db.CheckItems.Add(checkItem);
+                    db.SaveChanges();
+                }
+                List<CheckItem> checkItems = new List<CheckItem>();
+                foreach (var c in db.CheckItems)
+                {
+                    if (c.AreaID == templateModel.CheckItem.AreaID)
+                    {
+                        checkItems.Add(c);
+                    }
+                }
+                templateModel.CheckItems = checkItems;
+            }
+
+
+            //templateModel.Template.ID = templateID;
+
             if (templateModel.Template != null)
             {
-                templateModel.Template.ID = templateID;
+                if(templateModel.Template.ID == null)
+                {
+                    templateModel.Template.ID = templateID;
+                }
+                else
+                {
+                    templateModel.Template = db.Templates.Find(templateModel.Template.ID);
+                }
 
                 if (templateModel.Template.Areas != null)
                 {

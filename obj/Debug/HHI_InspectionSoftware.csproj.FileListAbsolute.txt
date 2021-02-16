@@ -79,3 +79,4 @@ C:\Users\rchpi\source\repos\HHI_InspectionSoftware\bin\Microsoft.CodeDom.Provide
 C:\Users\rchpi\source\repos\HHI_InspectionSoftware\obj\Debug\HHI_InspectionSoftware.csproj.CopyComplete
 C:\Users\rchpi\source\repos\HHI_InspectionSoftware\obj\Debug\HHI_InspectionSoftware.dll
 C:\Users\rchpi\source\repos\HHI_InspectionSoftware\obj\Debug\HHI_InspectionSoftware.pdb
+C:\Users\rchpi\source\repos\HHI_InspectionSoftware\obj\Debug\HHI_InspectionSoftware.csprojAssemblyReference.cache
