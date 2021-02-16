@@ -48,7 +48,7 @@
                             }
                             @foreach (var l in item.Limitations)
                             {
-                                <a href="~/Limitations/Details/@l.ID"><h4>@l.Name</h4></a><br />
+                                <a onmouseover="ShowDescription('@l.ID')" onmouseout="HideDescription('@l.ID') "href="~/Limitations/Details/@l.ID"><h4>@l.Name</h4><span id="@l.ID" hidden>@l.Description</span></a><br />
                             }
                         </div>
                         <div class="col-md-2">
@@ -192,6 +192,14 @@
         else {
             this.innerText = "Show Areas";
         }
+    };
+
+    function ShowDescription(id) {
+        document.getElementById(id).hidden = false;
+    };
+    
+    function HideDescription(id) {
+        document.getElementById(id).hidden = true;
     }
 
 </script>
