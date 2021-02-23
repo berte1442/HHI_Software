@@ -1,11 +1,7 @@
-﻿using System;
+﻿using HHI_InspectionSoftware.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Data.Entity;
-using HHI_InspectionSoftware.ViewModels;
 
 namespace HHI_InspectionSoftware.Controllers
 {
@@ -36,7 +32,7 @@ namespace HHI_InspectionSoftware.Controllers
             string name = null;
 
             /////////// uses id parameter to set templateModel.Template/////////
-            if(id != null && templateModel.Template == null)
+            if(id != null && (templateModel == null || templateModel.Template == null))
             {
                 templateModel.Template = db.Templates.Find(id);
                 templateID = (int)id;
@@ -175,7 +171,7 @@ namespace HHI_InspectionSoftware.Controllers
                 }
 
                 ////// ViewBag data created for views ////////
-                if (templateModel.Template.Areas != null)
+                if (templateModel.Template != null && templateModel.Template.Areas != null)
                 {
                     ViewBag.Areas = new SelectList(templateModel.Template.Areas, "ID", "Name");
                 }
@@ -183,7 +179,7 @@ namespace HHI_InspectionSoftware.Controllers
                 {
                     ViewBag.Areas = new SelectList("");
                 }
-                if (templateModel.Template.HomeSystems != null)
+                if (templateModel.Template != null && templateModel.Template.HomeSystems != null)
                 {
                     ViewBag.Systems = new SelectList(templateModel.Template.HomeSystems, "ID", "Name");
                 }
@@ -224,6 +220,36 @@ namespace HHI_InspectionSoftware.Controllers
             TemplateModel templateModel = new TemplateModel();
             templateModel.Template = db.Templates.Find(templateID);
 
+            return RedirectToAction("Save", "CreateTemplates", new { templateID, templateModel });
+        }
+        public ActionResult DeleteSystem(int id, int templateID)
+        {
+            //int templateID = templateModel.Template.ID;
+            //TemplateModel templateModel = new TemplateModel();
+            HomeSystem system = db.HomeSystems.Find(id);
+            if (system != null)
+            {
+                foreach (var c in db.CheckItems)
+                {
+                    if (c.SystemID == system.ID)
+                    {
+                        DeleteCheckItem(c.ID);
+                    }
+                }
+                foreach (var l in db.Limitations)
+                {
+                    if (l.SystemID == system.ID)
+                    {
+                        DeleteLimitation(l.ID);
+                    }
+                }
+                db.HomeSystems.Remove(system);
+                db.SaveChanges();
+            }
+
+            TemplateModel templateModel = new TemplateModel();
+            templateModel.Template = db.Templates.Find(templateID);
+
             return Save(templateID, templateModel);
         }
 
@@ -247,30 +273,6 @@ namespace HHI_InspectionSoftware.Controllers
             }
         }
 
-        public ActionResult DeleteSystem(int? id, int? templateID)
-        {
-            //int templateID = templateModel.Template.ID;
-            TemplateModel templateModel = new TemplateModel();
-            List<HomeSystem> systems = new List<HomeSystem>();
-            HomeSystem system = db.HomeSystems.Find(id);
-
-            if(system != null)
-            {
-                db.HomeSystems.Remove(system);
-                db.SaveChanges();
-                templateModel.Template = db.Templates.Find(templateID);
-            }
-
-            foreach (var s in db.HomeSystems)
-            {
-                if (s.TemplateID == templateID)
-                {
-                    systems.Add(s);
-                }
-            }
-            templateModel.Template.HomeSystems = systems;
-            return View("Save", templateModel);
-        }
 
         public ActionResult SaveLimitation(TemplateModel templateModel)
         {

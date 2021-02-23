@@ -273,7 +273,7 @@
     <Content Include="Photos\SpectoraLogo.png" />
     <Content Include="Photos\Website.png" />
     <Content Include="Photos\LOGO.jpg" />
-    <Content Include="Scripts\Book_ChangePage.js" />
+    <Content Include="Scripts\ElementFocus.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="HHI.edmx">

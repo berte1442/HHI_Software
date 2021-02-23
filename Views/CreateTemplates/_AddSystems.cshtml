@@ -40,11 +40,25 @@
                                         <hr />
 
                                     </div>
-                                <div>
-                                    <button id="deleteBtn" class="btn btn-danger" formaction="DeleteSystem" asp-controller="CreateTemplates">
-                                        Delete System
-                                    </button>
-                                </div>
+                                    <div>
+                                        @Ajax.ActionLink(
+                               "Delete System",
+                               "DeleteSystem",
+                               "CreateTemplates",
+                               new
+                                    {
+                                   id = @item.ID,
+                                   templateID = @Model.Template.ID
+                               },
+                               new AjaxOptions
+                           {
+                                   HttpMethod = "POST",
+                               }
+                           )
+                                        @*<button id="deleteBtn" class="btn btn-danger" formaction="DeleteSystem" asp-controller="CreateTemplates">
+            Delete System
+        </button>*@
+                                    </div>
                             </div>
                         }
                     }
