@@ -38,13 +38,18 @@
                         {
                             //var outerID = item.ID.ToString() + "outer";
                             var innerID = item.ID.ToString() + "inner";
+                            var buttonID = item.ID.ToString() + "button";
+                            var targetID = item.ID.ToString() + "target";
                             @*<div id="@outerID" ondrop="drop(event)" ondragover="allowDrop(event)">*@
                             <div id="@innerID" class="form-group" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
                                 <div>
                                     <hr />
-                                    <h3 style="color: green">"@item.Name"</h3>
+                                    
+                                        <h3 style="color: green">"@item.Name"</h3>
+                                        <button onclick="ShowAreaDetails(id)" id="@buttonID" class="btn btn-default" type="button" data-toggle="collapse" data-target="#@targetID" aria-expanded="true" aria-controls="@targetID">Show Details</button>
                                     <hr />
                                 </div>
+                                <div class="collapse" id="@targetID">
                                 <div class="col-md-2">
                                     @if (item.Limitations != null && item.Limitations.ToList().Count > 0)
                                     {
@@ -54,7 +59,7 @@
                                     {
                                         var system = Model.Template.HomeSystems.First(x => x.ID == l.SystemID);
 
-                                        <span title="System: @system.Name (click to edit)"><a onmouseover="ShowDescription('@l.ID')" onmouseout="HideDescription('@l.ID') " href="~/Limitations/Edit/@l.ID"><h4>@l.Name</h4><span id="@l.ID" hidden>"@l.Description"</span></a></span><br />
+                                        <span title="System: @system.Name (click to edit)"><a onmouseover="ShowDescription('@l.ID')" onmouseout="HideDescription('@l.ID') " href="~/Limitations/Edit/@l.ID">@l.Name<span id="@l.ID" hidden><br /><br />"@l.Description"<br /></span></a></span><br />
                                     }
                                 </div>
                                 <div class="col-md-2">
@@ -66,7 +71,59 @@
                                     {
                                         var system = Model.Template.HomeSystems.First(x => x.ID == c.SystemID);
 
-                                        <span title="System: @system.Name (click to edit)"><a href="~/CheckItems/Edit/@c.ID"><h4>@c.Name</h4></a><br /></span>
+                                        var checkItemButtonID = c.ID.ToString() + "checkItemButtonID";
+                                        var checkItemDetails = c.ID.ToString() + "checkItemDetails";
+
+                                        @*<span title="System: @system.Name (click to edit)"><a href="~/CheckItems/Edit/@c.ID">@c.Name</a><br /></span>*@
+                                        <span title="System: @system.Name (click to edit)"><button id="@checkItemButtonID" class="btn btn-default" type="button" data-toggle="collapse" data-target="#@checkItemDetails" aria-expanded="true" aria-controls="@checkItemDetails">@c.Name</button><br /></span>
+
+                                        <div class="collapse" id="@checkItemDetails">
+
+                                            @{ var commentFormID = c.ID.ToString() + "commentFormID";}
+
+                                            <form id="@commentFormID">
+                                                <div class="form-horizontal">
+                                                    <h4>Add Comment</h4>
+                                                    <hr />
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Comment.Name, "Comment Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-10">
+                                                            @Html.EditorFor(model => model.Comment.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.Comment.Name, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Comment.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-10">
+                                                            @Html.EditorFor(model => model.Comment.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.Comment.Description, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Comment.CategoryID, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-10">
+                                                            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.Comment.CategoryID, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-10">
+                                                            @Html.HiddenFor(model => model.Comment.CheckItemID, new { @Value = item.ID })
+                                                            @Html.ValidationMessageFor(model => model.Limitation.AreaID, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-md-offset-2 col-md-10">
+                                                            <input type="submit" value="Create" class="btn btn-default" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     }
                                 </div>
                                 <div class="row">
@@ -82,20 +139,8 @@
                                             Add Check Item
                                         </button>
 
-                                        @Ajax.ActionLink(
-                                            "Delete Area",
-                                            "DeleteArea",
-                                            "CreateTemplates",
-                                            new
-                                                 {
-                                                id = @item.ID,
-                                                templateID = @Model.Template.ID
-                                            },
-                                            new AjaxOptions
-                                        {
-                                                HttpMethod = "POST",
-                                            }
-                                        )
+                                        @Ajax.ActionLink("Delete Area", "DeleteArea", "CreateTemplates", new {id = @item.ID,templateID = @Model.Template.ID}, new AjaxOptions{HttpMethod = "POST"}, new { @class="btn btn-danger"})
+
                                     </div>
                                     <div class="collapse col-md-4" id="@item.ID">
 
@@ -190,12 +235,12 @@
 
                                             <div class="form-group">
                                                 <div class="col-md-offset-2 col-md-10">
-                                                    <input type="submit" value="Add Check Item" class="btn btn-default" formaction="Save" asp-controller="CreateTemplates" />
+                                                    <input onclick="LastUsed('@innerID')" type="submit" value="Add Check Item" class="btn btn-default" formaction="Save" asp-controller="CreateTemplates" />
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-
+                                </div>
                                 </div>
                             </div>
                         }
@@ -204,26 +249,18 @@
             </div>
         </div>
     </div>
+
 <script>
-    document.getElementById('areasBtn').onclick = function () {
+        document.getElementById('areasBtn').onclick = function () {
         if (this.innerText == "Show Areas") {
-            this.innerText = "Hide Areas";
-        }
+        this.innerText = "Hide Areas";
+}
         else {
-            this.innerText = "Show Areas";
-        }
-    };
-
-    function ShowDescription(id) {
-        document.getElementById(id).hidden = false;
-    };
-
-    function HideDescription(id) {
-        document.getElementById(id).hidden = true;
-    };
+        this.innerText = "Show Areas";
+}
+};
 
 </script>
-
 <script>
     function allowDrop(ev) {
         ev.preventDefault();

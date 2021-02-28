@@ -161,7 +161,7 @@ namespace HHI_InspectionSoftware.Controllers
             /////// ensures templateModel.Template.ID is set ///////
             if (templateModel.Template != null)
             {
-                if(templateModel.Template.ID == null)
+                if(templateModel.Template.ID == 0)
                 {
                     templateModel.Template.ID = templateID;
                 }
@@ -189,6 +189,8 @@ namespace HHI_InspectionSoftware.Controllers
                 }
             }
 
+            ViewBag.CategoryID = new SelectList(db.Categories.ToList(), "ID", "Name");
+            
             return View("Save", templateModel);
         }
 
