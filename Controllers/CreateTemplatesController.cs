@@ -412,5 +412,24 @@ namespace HHI_InspectionSoftware.Controllers
             //templateModel.Limitation = null;
             return View("Save", templateModel);
         }
+
+        public void NewAreaOrder(int templateID, int area1ID, int area2ID)
+        {
+            var template = db.Templates.Find(templateID);
+            var areas = template.Areas.ToList();
+            var a1 = areas.FirstOrDefault(x => x.ID == area1ID);
+            var index1 = areas.IndexOf(a1);
+            var a2 = areas.FirstOrDefault(x => x.ID == area2ID);
+            var index2 = areas.IndexOf(a2);
+
+            areas[index1] = a2;
+            areas[index2] = a1;
+
+            db.Templates.Remove(template);
+            template.Areas = areas;
+            db.Templates.Add(template);
+            db.SaveChanges();
+         
+        }
     }
 }
