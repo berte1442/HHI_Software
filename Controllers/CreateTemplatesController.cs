@@ -158,6 +158,25 @@ namespace HHI_InspectionSoftware.Controllers
                 templateModel.CheckItems = checkItems;
             }
 
+            /////// adds comments to database /////////
+            if (templateModel.Comment != null)
+            {
+                Comment comment = templateModel.Comment;
+                db.Comments.Add(comment);
+                db.SaveChanges();
+
+                if (templateModel.CheckItem == null)
+                {
+                    templateModel.CheckItem = db.CheckItems.Find(comment.CheckItemID);
+                    templateModel.HomeSystem = db.HomeSystems.Find(templateModel.CheckItem.SystemID);
+                    templateModel.Template = db.Templates.Find(templateModel.HomeSystem.TemplateID);
+                    templateModel.Limitations = db.Limitations.Where(x => x.HomeSystem == templateModel.HomeSystem);
+                    templateModel.CheckItems = db.CheckItems.Where(x => x.HomeSystem == templateModel.HomeSystem);
+                    templateModel.HomeSystems = db.HomeSystems.Where(x => x.TemplateID == templateModel.Template.ID);
+                    templateModel.Areas = db.Areas.Where(x => x.TemplateID == templateModel.Template.ID);
+                }
+
+            }
             /////// ensures templateModel.Template.ID is set ///////
             if (templateModel.Template != null)
             {
@@ -190,7 +209,7 @@ namespace HHI_InspectionSoftware.Controllers
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories.ToList(), "ID", "Name");
-            
+
             return View("Save", templateModel);
         }
 

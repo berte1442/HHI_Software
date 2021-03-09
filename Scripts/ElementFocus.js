@@ -1,5 +1,4 @@
-﻿
-function LastUsed(id) {
+﻿function LastUsed(id) {
     sessionStorage.setItem('lastUsed', id);
 }
 function SetFocus() {
@@ -7,6 +6,8 @@ function SetFocus() {
     if (lastUsed != null) {
         window.location.hash = '#' + lastUsed;
         $(window.location.hash).show();
+        var btnID = lastUsed.concat('button'); 
+        document.getElementById(btnID).click();
     }
 
 }
