@@ -1,0 +1,272 @@
+﻿@model HHI_InspectionSoftware.ViewModels.BookInspectionModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>Book Inspection</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h4>Add Customer</h4>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Customer.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Customer.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Customer.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Customer.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Customer.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Customer.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Customer.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Customer.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <h4>Add Address</h4>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address.Address1, "Street Address", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address.Address1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.Address1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address.City, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address.State, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address.State, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.State, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address.Zip, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address.Zip, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address.SquareFeet, "Square Feet", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address.SquareFeet, new { htmlAttributes = new { @class = "form-control", id = "squareFeet", onblur = "SetPrice()" } })
+                @Html.ValidationMessageFor(model => model.Address.SquareFeet, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address.YearBuilt, "Year Built", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address.YearBuilt, new { htmlAttributes = new { @class = "form-control", id = "year" } })
+                @Html.ValidationMessageFor(model => model.Address.YearBuilt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <h4>Add Realtor</h4><h6>(optional)</h6>
+        <div class="btn-group">
+            <button onclick="CloseNewRealtor()" id="existBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExisting" aria-expanded="false" aria-controls="collapseExisting">
+                Select Existing Realtor
+            </button>
+            <button onclick="CloseExistingRealtor()" id="newBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNew" aria-expanded="false" aria-controls="collapseNew">
+                Add New Realtor
+            </button>
+        </div>
+        <div class="collapse" id="collapseExisting">
+            <div class="card card-body" id="exist">
+                <h4>Select Existing Realtor</h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RealtorID, "Realtor", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("RealtorID", null, "Select a Realtor...", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RealtorID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse" id="collapseNew">
+            <div class="card card-body" id="new">
+                <h4>Add New Realtor</h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Realtor.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Realtor.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Realtor.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Realtor.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Realtor.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Realtor.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Realtor.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Realtor.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Realtor.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Realtor.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Realtor.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Realtor.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <hr />
+
+        <h4>Inspection Date</h4>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inspection.InspectionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Inspection.InspectionDate, new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form-control",
+                        id = "date",
+                        type = "datetime-local"@*onblur = "InspectionStatus()"*@ }
+                })
+                @Html.ValidationMessageFor(model => model.Inspection.InspectionDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <h4>Price</h4>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inspection.Price, "Price $", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Inspection.Price, new { htmlAttributes = new { @class = "form-control", id = "price" } })
+                @Html.ValidationMessageFor(model => model.Inspection.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <h4>Select a Template</h4>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TemplateID, "Template", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TemplateID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TemplateID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <h4>Inspection Status</h4>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InspectionStatusID, "Inspection Status", htmlAttributes: new { @class = "control-label col-md-2", id = "status" })
+            <div class="col-md-10">
+                @Html.DropDownList("InspectionStatusID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.InspectionStatusID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
+        <h4>Select Inspector</h4>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InspectorID, "Inspector", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("InspectorID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.InspectorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index", "Inspections")
+        </div>
+
+        <script>
+            function SetPrice() {
+                var min = 1500;
+                var price = 315;
+                var sqft = document.getElementById("squareFeet").value;
+
+                while (sqft > min) {
+                    price += 15;
+                    min += 500;
+                }
+
+                document.getElementById("price").value = price;
+            };
+
+            function CloseNewRealtor() {
+                var check = document.getElementById("newBtn").getAttribute("aria-expanded");
+
+                if (check == "true") {
+                    document.getElementById("newBtn").click();
+                }
+            };
+
+            function CloseExistingRealtor() {
+                var check = document.getElementById("existBtn").getAttribute("aria-expanded");
+
+                if (check == "true") {
+                    document.getElementById("existBtn").click();
+                }
+            };
+
+            //function InspectionStatus() {
+            //    var today = new Date();
+            //    var date = document.getElementById("date").value;
+            //    var check = dates.compare(today, date);             
+
+            //    if (check == 1) {
+            //        document.getElementById("status").selected = "completed";
+            //    }
+            //};
+
+
+        </script>

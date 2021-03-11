@@ -1,0 +1,73 @@
+﻿
+@using HHI_InspectionSoftware.ViewModels;
+@model TemplateModel
+@{
+    ViewBag.Title = "Template Builder";
+}
+
+<h2>Template Builder</h2>
+
+@using (Html.BeginForm("Create", "Templates", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Template</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Template Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Template.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Template.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+       @* @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+        <div class="form-group">
+            @Html.Label("Select Areas to add to template", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @{; var areas = Model.Areas.ToList();
+                    foreach (var a in areas)
+                    {
+                        <div>
+                            <input type="checkbox" id="@a.ID" value="@a.Name" class="areas" />
+                            <label for="areas">@a.Name</label>
+                        </div>
+                    }
+                    <script>
+                    /*document.getElementById('CreateTemplateBtn').onclick = */function GetAreas () {
+                        var areas = [];
+                        var count = @{; int count = Model.Areas.Count();};
+                        var i;
+                        @{; var iCounter = 0; }
+                        for (i = 0; i < count; i++) {
+                            var id = @{; int id = areas[iCounter].ID;};
+                            var isChecked = document.getElementById(id).checked;
+                                if (isChecked == true) {
+                                        areas.push(areas[iCounter].ID);
+                                        @iCounter++;
+                                    }
+                            }
+                        return areas;
+                    }
+                    </script>
+                }
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+                @*<div class="form-group">
+
+                    *<div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Create", "CreateTemplate", "CreateTemplates", new { @id = "CreateTemplateBtn", onclick = "GetAreas()" })
+            </div>*@
+                </div>
+            </div>
+    </div>
+}
+
+@*create a new controller to represent TemplateModel - add action which saves all information to the database for each table*@

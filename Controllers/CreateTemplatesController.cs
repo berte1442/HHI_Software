@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Data;
+using System.Data.Entity;
+using System.IO;
+using System.Net;
+using System.Web;
 
 namespace HHI_InspectionSoftware.Controllers
 {
@@ -159,11 +164,17 @@ namespace HHI_InspectionSoftware.Controllers
             }
 
             /////// adds comments to database /////////
-            if (templateModel.Comment != null)
+            if (templateModel.Comment != null && templateModel.Comment.Name != null)
             {
                 Comment comment = templateModel.Comment;
                 db.Comments.Add(comment);
                 db.SaveChanges();
+                
+                if(templateModel.Image != null)
+                {
+                    templateModel.Image.CommentID = comment.ID;
+                    AddImage(templateModel.Image);
+                }
 
                 if (templateModel.CheckItem == null)
                 {
@@ -220,14 +231,31 @@ namespace HHI_InspectionSoftware.Controllers
             Area area = db.Areas.Find(id);
             if(area != null)
             {
-                foreach(var c in db.CheckItems)
+                foreach (var c in db.CheckItems)
                 {
-                    if(c.AreaID == area.ID)
+                    if (c.AreaID == area.ID)
                     {
-                        DeleteCheckItem(c.ID);
+                        foreach (var co in db.Comments)
+                        {
+                            if (co.CheckItemID == c.ID)
+                            {
+                                foreach (var i in db.Images)
+                                {
+                                    if (i.CommentID == co.ID)
+                                    {
+                                        db.Images.Remove(i);
+                                        db.SaveChangesAsync();
+                                    }
+                                }
+                                db.Comments.Remove(co);
+                                db.SaveChangesAsync();
+                            }
+                        }
+                        db.CheckItems.Remove(c);
+                        db.SaveChangesAsync();
                     }
                 }
-                foreach(var l in db.Limitations)
+                foreach (var l in db.Limitations)
                 {
                     if(l.AreaID == area.ID)
                     {
@@ -254,7 +282,24 @@ namespace HHI_InspectionSoftware.Controllers
                 {
                     if (c.SystemID == system.ID)
                     {
-                        DeleteCheckItem(c.ID);
+                        foreach(var co in db.Comments)
+                        {
+                            if(co.CheckItemID == c.ID)
+                            {
+                                foreach(var i in db.Images)
+                                {
+                                    if(i.CommentID == co.ID)
+                                    {
+                                        db.Images.Remove(i);
+                                        db.SaveChangesAsync();
+                                    }
+                                }
+                                db.Comments.Remove(co);
+                                db.SaveChangesAsync();
+                            }
+                        }
+                        db.CheckItems.Remove(c);
+                        db.SaveChangesAsync();
                     }
                 }
                 foreach (var l in db.Limitations)
@@ -274,14 +319,33 @@ namespace HHI_InspectionSoftware.Controllers
             return Save(templateID, templateModel);
         }
 
-        public void DeleteCheckItem(int id)
+        public ActionResult DeleteCheckItem(int id, int templateID)
         {
             CheckItem checkItem = db.CheckItems.Find(id);
             if(checkItem != null)
             {
+                foreach(var c in db.Comments)
+                {
+                    if(c.CheckItemID == checkItem.ID)
+                    {
+                        foreach(var i in db.Images)
+                        {
+                            if(i.CommentID == c.ID)
+                            {
+                                db.Images.Remove(i);
+                                db.SaveChangesAsync();
+                            }
+                        }
+                        db.Comments.Remove(c);
+                    }
+                }
                 db.CheckItems.Remove(checkItem);
-                db.SaveChangesAsync();
+                db.SaveChanges();
             }
+            TemplateModel templateModel = new TemplateModel();
+            templateModel.Template = db.Templates.Find(templateID);
+
+            return Save(templateID, templateModel);
         }
         
         public void DeleteLimitation(int id)
@@ -294,6 +358,27 @@ namespace HHI_InspectionSoftware.Controllers
             }
         }
 
+        public ActionResult DeleteComment(int id, int templateID)
+        {            
+            Comment comment = db.Comments.Find(id);
+            if(comment != null)
+            {
+                foreach (var i in db.Images)
+                {
+                    if (i.CommentID == comment.ID)
+                    {
+                        db.Images.Remove(i);
+                        db.SaveChangesAsync();
+                    }
+                }
+                db.Comments.Remove(comment);
+                db.SaveChanges();
+            }
+            TemplateModel templateModel = new TemplateModel();
+            templateModel.Template = db.Templates.Find(templateID);
+
+            return Save(templateID, templateModel);
+        }
 
         public ActionResult SaveLimitation(TemplateModel templateModel)
         {
@@ -430,6 +515,35 @@ namespace HHI_InspectionSoftware.Controllers
             }
             //templateModel.Limitation = null;
             return View("Save", templateModel);
+        }
+
+       // [HttpPost]
+        public void AddImage(Image imageModel/*, int templateID*/)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
+            string extension = Path.GetExtension(imageModel.ImageFile.FileName);
+            fileName = fileName + extension;
+            imageModel.FilePath = "~/Photos/" + fileName;
+            // reconfigure below code to save images to newly created folder for specific inspection
+
+            fileName = Path.Combine(Server.MapPath("~/Photos/"), fileName);
+            imageModel.ImageFile.SaveAs(fileName);
+
+            if (ModelState.IsValid)
+            {
+                db.Images.Add(imageModel);
+                db.SaveChanges();
+                //return RedirectToAction("Index", "Images");
+            }
+
+            //TemplateModel templateModel = new TemplateModel();
+            //templateModel.Template = db.Templates.Find(templateID);
+            //templateModel.Areas = db.Areas.Where(x => x.TemplateID == templateID);
+            //templateModel.HomeSystems = db.HomeSystems.Where(x => x.TemplateID == templateID);
+
+
+
+            //return View("Save", templateModel);
         }
 
         public void NewAreaOrder(int templateID, int area1ID, int area2ID)

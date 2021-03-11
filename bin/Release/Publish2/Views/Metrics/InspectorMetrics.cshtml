@@ -1,0 +1,58 @@
+﻿@model HHI_InspectionSoftware.Inspector
+
+@{
+    ViewBag.Title = "Inspector Metrics";
+}
+
+<h2>Inspector Metrics</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Inspector Name")
+        </th>
+        <th>
+            @Html.DisplayName("Total Inspections")
+        </th>
+        <th>
+            @Html.DisplayName("Total Revenue")
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @ViewBag.iName1
+        </td>
+        <td>
+            @ViewBag.iCount1
+        </td>
+        <td>
+            $@ViewBag.iRev1
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @ViewBag.iName2
+        </td>
+        <td>
+            @ViewBag.iCount2
+        </td>
+        <td>
+            $@ViewBag.iRev2
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @ViewBag.iName3
+        </td>
+        <td>
+            @ViewBag.iCount3
+        </td>
+        <td>
+            $@ViewBag.iRev3
+        </td>
+    </tr>
+
+</table>
+

@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HHIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Zip" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="SquareFeet" Type="int" />
+  </EntityType>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="TemplateID" Type="int" />
+    <Property Name="IsSelected" Type="bit" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="CheckItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SystemID" Type="int" Nullable="false" />
+    <Property Name="AreaID" Type="int" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="CheckItemID" Type="int" />
+    <Property Name="InspectionReportID" Type="int" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HomeSystem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TemplateID" Type="int" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="FilePath" Type="varchar" MaxLength="500" />
+    <Property Name="CommentID" Type="int" />
+    <Property Name="InspectionReportID" Type="int" />
+  </EntityType>
+  <EntityType Name="Inspection">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressID" Type="int" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="InspectorID" Type="int" />
+    <Property Name="RealtorID" Type="int" />
+    <Property Name="InspectionDate" Type="datetime" />
+    <Property Name="InspectionStatusID" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="InspectionReportID" Type="int" />
+    <Property Name="TemplateID" Type="int" />
+  </EntityType>
+  <EntityType Name="InspectionReport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="TemplateID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InspectionStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Inspector">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LicenseNum" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LicenseExp" Type="datetime" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Limitation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SystemID" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="AreaID" Type="int" />
+  </EntityType>
+  <EntityType Name="Realtor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Template">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Area__TemplateID__2F9A1060">
+    <End Role="Template" Type="Self.Template" Multiplicity="0..1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Template">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="TemplateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CheckItem__AreaI__29221CFB">
+    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="CheckItem" Type="Self.CheckItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CheckItem">
+        <PropertyRef Name="AreaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CheckItem__Syste__17036CC0">
+    <End Role="HomeSystem" Type="Self.HomeSystem" Multiplicity="1" />
+    <End Role="CheckItem" Type="Self.CheckItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HomeSystem">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CheckItem">
+        <PropertyRef Name="SystemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__Categor__10216507">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__CheckIt__2DB1C7EE">
+    <End Role="CheckItem" Type="Self.CheckItem" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CheckItem">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="CheckItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__Inspect__373B3228">
+    <End Role="InspectionReport" Type="Self.InspectionReport" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InspectionReport">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="InspectionReportID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HomeSyste__Templ__308E3499">
+    <End Role="Template" Type="Self.Template" Multiplicity="0..1" />
+    <End Role="HomeSystem" Type="Self.HomeSystem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Template">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HomeSystem">
+        <PropertyRef Name="TemplateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Image__CommentID__2EA5EC27">
+    <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="CommentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Image__Inspectio__382F5661">
+    <End Role="InspectionReport" Type="Self.InspectionReport" Multiplicity="0..1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InspectionReport">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="InspectionReportID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inspectio__Addre__3E1D39E1">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inspectio__Custo__3F115E1A">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inspectio__Inspe__36470DEF">
+    <End Role="InspectionReport" Type="Self.InspectionReport" Multiplicity="0..1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InspectionReport">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="InspectionReportID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inspectio__Inspe__40058253">
+    <End Role="Inspector" Type="Self.Inspector" Multiplicity="0..1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inspector">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="InspectorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inspectio__Inspe__793DFFAF">
+    <End Role="InspectionStatus" Type="Self.InspectionStatus" Multiplicity="0..1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InspectionStatus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="InspectionStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inspectio__Realt__40F9A68C">
+    <End Role="Realtor" Type="Self.Realtor" Multiplicity="0..1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Realtor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="RealtorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inspectio__Templ__3552E9B6">
+    <End Role="Template" Type="Self.Template" Multiplicity="1" />
+    <End Role="InspectionReport" Type="Self.InspectionReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Template">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InspectionReport">
+        <PropertyRef Name="TemplateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inspectio__Templ__39237A9A">
+    <End Role="Template" Type="Self.Template" Multiplicity="0..1" />
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Template">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="TemplateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Limitatio__AreaI__2CBDA3B5">
+    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="Limitation" Type="Self.Limitation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Limitation">
+        <PropertyRef Name="AreaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Limitatio__Syste__4F47C5E3">
+    <End Role="HomeSystem" Type="Self.HomeSystem" Multiplicity="0..1" />
+    <End Role="Limitation" Type="Self.Limitation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HomeSystem">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Limitation">
+        <PropertyRef Name="SystemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HHIModelStoreContainer">
+    <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CheckItem" EntityType="Self.CheckItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HomeSystem" EntityType="Self.HomeSystem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inspection" EntityType="Self.Inspection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InspectionReport" EntityType="Self.InspectionReport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InspectionStatus" EntityType="Self.InspectionStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inspector" EntityType="Self.Inspector" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Limitation" EntityType="Self.Limitation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Realtor" EntityType="Self.Realtor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Area__TemplateID__2F9A1060" Association="Self.FK__Area__TemplateID__2F9A1060">
+      <End Role="Template" EntitySet="Template" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CheckItem__AreaI__29221CFB" Association="Self.FK__CheckItem__AreaI__29221CFB">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="CheckItem" EntitySet="CheckItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CheckItem__Syste__17036CC0" Association="Self.FK__CheckItem__Syste__17036CC0">
+      <End Role="HomeSystem" EntitySet="HomeSystem" />
+      <End Role="CheckItem" EntitySet="CheckItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__Categor__10216507" Association="Self.FK__Comment__Categor__10216507">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__CheckIt__2DB1C7EE" Association="Self.FK__Comment__CheckIt__2DB1C7EE">
+      <End Role="CheckItem" EntitySet="CheckItem" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__Inspect__373B3228" Association="Self.FK__Comment__Inspect__373B3228">
+      <End Role="InspectionReport" EntitySet="InspectionReport" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HomeSyste__Templ__308E3499" Association="Self.FK__HomeSyste__Templ__308E3499">
+      <End Role="Template" EntitySet="Template" />
+      <End Role="HomeSystem" EntitySet="HomeSystem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Image__CommentID__2EA5EC27" Association="Self.FK__Image__CommentID__2EA5EC27">
+      <End Role="Comment" EntitySet="Comment" />
+      <End Role="Image" EntitySet="Image" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Image__Inspectio__382F5661" Association="Self.FK__Image__Inspectio__382F5661">
+      <End Role="InspectionReport" EntitySet="InspectionReport" />
+      <End Role="Image" EntitySet="Image" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inspectio__Addre__3E1D39E1" Association="Self.FK__Inspectio__Addre__3E1D39E1">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inspectio__Custo__3F115E1A" Association="Self.FK__Inspectio__Custo__3F115E1A">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inspectio__Inspe__36470DEF" Association="Self.FK__Inspectio__Inspe__36470DEF">
+      <End Role="InspectionReport" EntitySet="InspectionReport" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inspectio__Inspe__40058253" Association="Self.FK__Inspectio__Inspe__40058253">
+      <End Role="Inspector" EntitySet="Inspector" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inspectio__Inspe__793DFFAF" Association="Self.FK__Inspectio__Inspe__793DFFAF">
+      <End Role="InspectionStatus" EntitySet="InspectionStatus" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inspectio__Realt__40F9A68C" Association="Self.FK__Inspectio__Realt__40F9A68C">
+      <End Role="Realtor" EntitySet="Realtor" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inspectio__Templ__3552E9B6" Association="Self.FK__Inspectio__Templ__3552E9B6">
+      <End Role="Template" EntitySet="Template" />
+      <End Role="InspectionReport" EntitySet="InspectionReport" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inspectio__Templ__39237A9A" Association="Self.FK__Inspectio__Templ__39237A9A">
+      <End Role="Template" EntitySet="Template" />
+      <End Role="Inspection" EntitySet="Inspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Limitatio__AreaI__2CBDA3B5" Association="Self.FK__Limitatio__AreaI__2CBDA3B5">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Limitation" EntitySet="Limitation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Limitatio__Syste__4F47C5E3" Association="Self.FK__Limitatio__Syste__4F47C5E3">
+      <End Role="HomeSystem" EntitySet="HomeSystem" />
+      <End Role="Limitation" EntitySet="Limitation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

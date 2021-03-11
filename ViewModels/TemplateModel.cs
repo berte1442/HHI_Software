@@ -13,10 +13,10 @@ namespace HHI_InspectionSoftware.ViewModels
         public Area Area { get; set; }
         public HomeSystem HomeSystem { get; set; }
         public CheckItem CheckItem { get; set; }
-        //public Image Image { get; set; }
+        public Image Image { get; set; }
         public Comment Comment { get; set; }
         public Limitation Limitation { get; set; }
-        //public Category Category { get; set; }
+        public Category Category { get; set; }
 
         //public IEnumerable<Template> Templates { get; set; }
         public IEnumerable<Area> Areas { get; set; }
@@ -25,6 +25,6 @@ namespace HHI_InspectionSoftware.ViewModels
         public IEnumerable<Image> Images { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
         public IEnumerable<Limitation> Limitations { get; set; }
-        //public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
     }
 }
