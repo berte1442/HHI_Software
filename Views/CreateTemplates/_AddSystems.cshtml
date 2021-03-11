@@ -37,34 +37,34 @@
                     {
                         foreach (var item in Model.Template.HomeSystems)
                         {
-                                <div class="form-group">
-                                    <div>
-                                        <hr />
-                                        <h3 style="color: blue">"@item.Name"</h3>
+                            <div class="form-group">
+                                <div>
+                                    <hr />
+                                    <h3 style="color: blue">"@item.Name"</h3>
 
-                                    </div>
-                                    @{ var buttonID = item.Name.ToString() + "systemBtnID";
-                                        var targetID = item.Name.ToString() + "systemTargetID";}
-                                    <button onclick="ShowAreaDetails(id)" id="@buttonID" class="btn btn-info" type="button" data-toggle="collapse" data-target="#@targetID" aria-expanded="true" aria-controls="@targetID">Show Details</button>
-                                    <div class="collapse" id="@targetID">
-                                        <hr />
-                                        <div>
-                                            @{ if (item.CheckItems.Count > 0)
-                                                {
+                                </div>
+                                @{ var buttonID = item.Name.ToString() + "systemBtnID";
+                                    var targetID = item.Name.ToString() + "systemTargetID";}
+                                <button onclick="ShowAreaDetails(id)" id="@buttonID" class="btn btn-info" type="button" data-toggle="collapse" data-target="#@targetID" aria-expanded="true" aria-controls="@targetID">Show Details</button>
+                                <div class="collapse" id="@targetID">
+                                    <hr />
+                                    <div>
+                                        @{ if (item.CheckItems.Count > 0)
+                                            {
                                                 <div class="col-md-2">
                                                     <h4 style="color: orange">Limitations:</h4>
 
                                                     @{ foreach (var l in item.Limitations)
                                                         {
                                                             var area = Model.Template.Areas.First(x => x.ID == l.AreaID);
-                                                    <div class="col-md-6">
-                                                        <p style="font-weight:bold">@area.Name:</p>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <p> @l.Name</p>
-                                                    </div>
+                                                            <div class="col-md-6">
+                                                                <p style="font-weight:bold">@area.Name:</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p> @l.Name</p>
+                                                            </div>
                                                         }
-                                                        }
+                                                    }
                                                 </div>
                                                 <div class="col-md-2">
                                                     <h4 style="color: green">Check Items:</h4>
@@ -78,20 +78,24 @@
                                                             <div class="col-md-6">
                                                                 <p>@c.Name</p>
                                                             </div>
-                                                            }
                                                         }
+                                                    }
                                                 </div>
-                                                }
                                             }
-                                        </div>
-                                        <div>
-                                            @Ajax.ActionLink("Delete System", "DeleteSystem", "CreateTemplates", new { id = @item.ID, templateID = @Model.Template.ID }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "btn btn-danger" })
-                                        </div>
+                                        }
+                                    </div>
+                                    <div>
+                                        @Ajax.ActionLink("Delete System", "DeleteSystem", "CreateTemplates", new { id = @item.ID, templateID = @Model.Template.ID }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "btn btn-danger" })
                                     </div>
                                 </div>
+                            </div>
                         }
                     }
                 }
+                <hr/>
+                <button id="systemsBtn2" class="btn btn-info" type="button" data-toggle="collapse" data-target="#display2" aria-expanded="true" aria-controls="display2">
+                    Hide Systems
+                </button>
             </div>
             <script>
                 document.getElementById('systemsBtn').onclick = function () {
@@ -101,6 +105,11 @@
                     else {
                         this.innerText = "Show Systems";
                     }
-                }
+                };
+
+                document.getElementById('systemsBtn2').onclick = function () {
+                    document.getElementById('systemsBtn').innerText = "Show Systems";
+                };
+
 
             </script>
