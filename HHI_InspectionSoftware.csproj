@@ -275,6 +275,7 @@
     <Content Include="Photos\LOGO.jpg" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\CheckItemVsLimitationForm.js" />
     <Content Include="Scripts\ElementFocus.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -5,24 +5,31 @@
 <div onload="SetFocus()">
     <div style="background-color: lightgreen">
 
-        <h4 style="color: green">Add Areas</h4>
+        <h2 style="color: green">Areas</h2>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Area.Name, htmlAttributes: new { @class = "control-label col-md-2", style = "color: green" })
+            @*@Html.LabelFor(model => model.Area.Name, htmlAttributes: new { @class = "control-label col-md-2", style = "color: green" })*@
+            @Html.Label("Create New Area", htmlAttributes: new { @class = "control-label col-md-2", style = "color: green" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Area.Name, new { htmlAttributes = new { @class = "form-control", Value = "" } })
+                @Html.EditorFor(model => model.Area.Name, new { htmlAttributes = new { @class = "form-control", Value = "", placeholder ="Area Name" } })
                 @Html.ValidationMessageFor(model => model.Area.Name, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Add Area" class="btn btn-success" formaction="Save" asp-controller="CreateTemplates" />
+                <button id="areasBtn" class="btn btn-info" type="button" data-toggle="collapse" data-target="#display" aria-expanded="true" aria-controls="display">
+                    Hide Areas
+                </button>
+            </div>
+            <div>
+
             </div>
         </div>
     </div>
 
     <div id="areaTable">
-        @{ if (Model != null && Model.Template != null && Model.Template.Areas != null)
+        @*@{ if (Model != null && Model.Template != null && Model.Template.Areas != null)
             {
                 <hr />
                 <h2 style="color: green">Areas</h2>
@@ -30,7 +37,7 @@
                     Hide Areas
                 </button>
             }
-        }
+        }*@
 
         <div class="collapse in" id="display" @*ondrop="drop(event)" ondragover="allowDrop(event)"*@>
 
@@ -50,7 +57,7 @@
                     @*<div>*@
                         <hr />
                         <h3 style="color: green">"@item.Name"</h3>
-                        <button onclick="ShowAreaDetails(id)" id="@buttonID" class="btn btn-default" type="button" data-toggle="collapse" data-target="#@targetID" aria-expanded="true" aria-controls="@targetID">Show Details</button>
+                        <button onclick="ShowAreaDetails(id)" id="@buttonID" class="btn btn-info" type="button" data-toggle="collapse" data-target="#@targetID" aria-expanded="true" aria-controls="@targetID">Show Details</button>
                         <hr />
                     @*</div>*@
                     <div class="collapse" id="@targetID">
@@ -82,13 +89,13 @@
 
                         @*<div id="@uiFormID">*@
                             <span title="System: @system.Name (click to edit)">
-                                <button id="@checkItemButtonID" class="btn btn-default" style="width: 100px; white-space: normal" type="button" data-toggle="collapse" data-target="#@checkItemDetails" aria-expanded="true" aria-controls="@checkItemDetails">@c.Name </button>
+                                <button id="@checkItemButtonID" class="btn btn-success" style="width: 100px; white-space: normal; margin-bottom: 2px" type="button" data-toggle="collapse" data-target="#@checkItemDetails" aria-expanded="true" aria-controls="@checkItemDetails">@c.Name </button>
                             </span>
                             <span title="Delete Check Item">
                                 @*@Ajax.ActionLink("\uD83D\uDDD1", "DeleteCheckItem", "CreateTemplates", new { id = @c.ID, templateID = @Model.Template.ID }, new AjaxOptions { HttpMethod = "POST" }, new { style = "color: red; align: right" })*@
                                 <button id="@deleteButtonID" type="button" onclick="DeleteCheckItem(@c.ID, @Model.Template.ID, @checkItemButtonID, @deleteButtonID)" style="color: red; background-color:white; border:none">&#128465;</button>
                             </span>
-                            <br />
+                            <br/>
                         @*</div>*@
                                 
 
@@ -101,23 +108,23 @@
                             }
                             @foreach (var co in c.Comments)
                             {
-                                <span title="@co.Description">@co.Name</span>
-                                <span title="Delete Comment">
-                                    @Ajax.ActionLink("\uD83D\uDDD1", "DeleteComment", "CreateTemplates", new { id = @co.ID, templateID = @Model.Template.ID }, new AjaxOptions { HttpMethod = "POST" }, new { style = "color: red; align: right" })
-                                </span>
-                                <br />
-
-
+                                <div style="margin-bottom: 10px">
+                                    <span title="@co.Description">@co.Name</span>
+                                    <span title="Delete Comment">
+                                        @Ajax.ActionLink("\uD83D\uDDD1", "DeleteComment", "CreateTemplates", new { id = @co.ID, templateID = @Model.Template.ID }, new AjaxOptions { HttpMethod = "POST" }, new { style = "color: red; align: right" })
+                                    </span>
+                                </div>
                             }
+                            <hr />
+
                             @{ var commentFormID = c.ID.ToString() + "commentFormID";}
 
                             <form id="@commentFormID">
                                 <div class="form-horizontal">
                                     <h4>Add Comment</h4>
-                                    <hr />
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.Comment.Name, "Comment Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.Comment.Name, "Comment Name", htmlAttributes: new { @class = "control-label" })
                                         <div class="col-md-10">
                                             @Html.EditorFor(model => model.Comment.Name, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.Comment.Name, "", new { @class = "text-danger" })
@@ -125,7 +132,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.Comment.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.Comment.Description, htmlAttributes: new { @class = "control-label" })
                                         <div class="col-md-10">
                                             @Html.TextAreaFor(model => model.Comment.Description, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.Comment.Description, "", new { @class = "text-danger" })
@@ -133,7 +140,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.LabelFor(model => model.Comment.CategoryID, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        @Html.LabelFor(model => model.Comment.CategoryID, "Category", htmlAttributes: new { @class = "control-label" })
                                         <div class="col-md-10">
                                             @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.Comment.CategoryID, "", new { @class = "text-danger" })
@@ -147,69 +154,72 @@
                                     </div>
 
                                     @*<div class="form-group">
-                                        @Html.LabelFor(model => model.Image.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            <input type="file" name="ImageFile" />
-                                        </div>
-                                    </div>
+                    @Html.LabelFor(model => model.Image.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="ImageFile" />
+                    </div>
+                </div>
 
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Image.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.EditorFor(model => model.Image.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Image.Name, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Image.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Image.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Image.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
 
                                     <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
-                                            <input onclick="LastUsed('@innerID')" type="submit" value="Add Comment" class="btn btn-default" formaction="Save" asp-controller="CreateTemplates" />
+                                            <input onclick="LastUsed('@innerID')" type="submit" value="Add Comment" class="btn btn-success" formaction="Save" asp-controller="CreateTemplates" />
                                         </div>
                                     </div>
                                 </div>
+                                <hr />
+
                             </form>
+                            <br />
 
                             @*<form>
-                                <div class="form-horizontal">
-                                    <h4>Add Image For Comment</h4>
-                                    <hr />*@
-                                    @*<div class="form-group">
-                                        @Html.LabelFor(model => model.Image.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.EditorFor(model => model.Image.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Image.Name, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
+        <div class="form-horizontal">
+            <h4>Add Image For Comment</h4>
+            <hr />*@
+                            @*<div class="form-group">
+            @Html.LabelFor(model => model.Image.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Image.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Image.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Image.FilePath, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            <input type="file" name="ImageFile" />
-                                        </div>
-                                    </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image.FilePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="ImageFile" />
+            </div>
+        </div>*@
 
-                                    @*<div class="form-group">
-                                        <div class="col-md-10">
-                                            @Html.HiddenFor(model => model.Image.CommentID)
-                                            @Html.ValidationMessageFor(model => model.Image.CommentID, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                            @*<div class="form-group">
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.Image.CommentID)
+                @Html.ValidationMessageFor(model => model.Image.CommentID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
-                                    @*<div class="form-group">
-                                        @Html.LabelFor(model => model.Image.CommentID, "CommentID", htmlAttributes: new { @class = "control-label col-md-2" })
-                                        <div class="col-md-10">
-                                            @Html.DropDownList("CommentID", null, htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Image.CommentID, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                            @*<div class="form-group">
+            @Html.LabelFor(model => model.Image.CommentID, "CommentID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CommentID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Image.CommentID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
-                                    @*<div class="form-group">
-                                        <div class="col-md-offset-2 col-md-10">
-                                            @Ajax.ActionLink("Add Photo", "AddImage", "CreateTemplates", new { imageModel = @Model.Image, templateID = @Model.Template.ID }, new AjaxOptions { HttpMethod = "POST" }, null)
-                                        </div>
-                                    </div>*@
-                                @*</div>
-                            </form>*@
+                            @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Ajax.ActionLink("Add Photo", "AddImage", "CreateTemplates", new { imageModel = @Model.Image, templateID = @Model.Template.ID }, new AjaxOptions { HttpMethod = "POST" }, null)
+            </div>
+        </div>*@
+                            @*</div>
+        </form>*@
 
                         </div>
                             }
@@ -354,37 +364,6 @@
 
 </script>
 
-<script>
-    function CheckItemVsLimitation(id) {
-
-        //console.log(id);
-        var dataTarget = document.getElementById(id).getAttribute('data-target');
-        //console.log(dataTarget);
-        var limitationBtn = dataTarget.substring(1).concat('limitationBtn');
-        var checkItemBtn = dataTarget.substring(2).concat('checkItemBtn');
-
-        if (id == limitationBtn) {
-            var checkDataBtnTarget = dataTarget.replace('#', '');
-            var checkBtnID = checkDataBtnTarget.concat('checkItemBtn');
-            //console.log(checkBtnID);
-            var expanded = document.getElementById(checkBtnID).getAttribute('aria-expanded');
-            //console.log(expanded);
-            if (expanded == 'true') {
-                document.getElementById(checkBtnID).click();
-            }            
-        }
-        else if (id == checkItemBtn) {
-            var limitDataTarget = dataTarget.replace('#0', '');
-            var limitBtnID = limitDataTarget.concat('limitationBtn');
-            //console.log(limitBtnID);
-            var expanded = document.getElementById(limitBtnID).getAttribute('aria-expanded');
-            console.log(expanded);
-            if (expanded == 'true') {
-                document.getElementById(limitBtnID).click();
-            }
-        }
-    };
-</script>
 <script>
         function allowDrop(ev) {
             ev.preventDefault();

@@ -2,11 +2,12 @@
 
     <div style="background-color: lightblue">
 
-        <h4 style="color: blue">Add Systems</h4>
+        <h2 style="color: blue">Systems</h2>
         <div class="form-group">
-            @Html.LabelFor(model => model.HomeSystem.Name, htmlAttributes: new { @class = "control-label col-md-2", style = "color: blue" })
+            @*@Html.LabelFor(model => model.HomeSystem.Name, htmlAttributes: new { @class = "control-label col-md-2", style = "color: blue" })*@
+            @Html.Label("Create New System", htmlAttributes: new { @class = "control-label col-md-2", style = "color: blue"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HomeSystem.Name, new { htmlAttributes = new { @class = "form-control", Value = "" } })
+                @Html.EditorFor(model => model.HomeSystem.Name, new { htmlAttributes = new { @class = "form-control", Value = "", placeholder = "System Name"  } })
                 @Html.ValidationMessageFor(model => model.HomeSystem.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -14,11 +15,14 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Add System" class="btn btn-primary" formaction="Save" asp-controller="CreateTemplates" />
+                <button id="systemsBtn" class="btn btn-info" type="button" data-toggle="collapse" data-target="#display2" aria-expanded="true" aria-controls="display2">
+                    Hide Systems
+                </button>
             </div>
         </div>
     </div>
         <div id="systemTable">
-            @{ if (Model != null && Model.Template != null && Model.Template.HomeSystems != null)
+            @*@{ if (Model != null && Model.Template != null && Model.Template.HomeSystems != null)
                 {
                     <hr />
 
@@ -26,7 +30,7 @@
                     <button id="systemsBtn" class="btn btn-default" type="button" data-toggle="collapse" data-target="#display2" aria-expanded="true" aria-controls="display2">
                         Hide Systems
                     </button>
-                }}
+                }}*@
 
             <div class="collapse in" id="display2">
                 @{ if (Model != null && Model.Template != null && Model.Template.HomeSystems != null)
