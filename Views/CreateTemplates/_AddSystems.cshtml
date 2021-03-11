@@ -37,17 +37,58 @@
                     {
                         foreach (var item in Model.Template.HomeSystems)
                         {
-                            <div class="form-group">
+                                <div class="form-group">
                                     <div>
                                         <hr />
                                         <h3 style="color: blue">"@item.Name"</h3>
-                                        <hr />
 
                                     </div>
-                                    <div>
-                                        @Ajax.ActionLink("Delete System", "DeleteSystem", "CreateTemplates", new {id = @item.ID, templateID = @Model.Template.ID}, new AjaxOptions {HttpMethod = "POST"}, new {@class = "btn btn-danger"})
+                                    @{ var buttonID = item.Name.ToString() + "systemBtnID";
+                                        var targetID = item.Name.ToString() + "systemTargetID";}
+                                    <button onclick="ShowAreaDetails(id)" id="@buttonID" class="btn btn-info" type="button" data-toggle="collapse" data-target="#@targetID" aria-expanded="true" aria-controls="@targetID">Show Details</button>
+                                    <div class="collapse" id="@targetID">
+                                        <hr />
+                                        <div>
+                                            @{ if (item.CheckItems.Count > 0)
+                                                {
+                                                <div class="col-md-2">
+                                                    <h4 style="color: orange">Limitations:</h4>
+
+                                                    @{ foreach (var l in item.Limitations)
+                                                        {
+                                                            var area = Model.Template.Areas.First(x => x.ID == l.AreaID);
+                                                    <div class="col-md-6">
+                                                        <p style="font-weight:bold">@area.Name:</p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p> @l.Name</p>
+                                                    </div>
+                                                        }
+                                                        }
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h4 style="color: green">Check Items:</h4>
+
+                                                    @{ foreach (var c in item.CheckItems)
+                                                        {
+                                                            var area = Model.Template.Areas.First(x => x.ID == c.AreaID);
+                                                            <div class="col-md-6">
+                                                                <p style="font-weight:bold">@area.Name:</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>@c.Name</p>
+                                                            </div>
+                                                            }
+                                                        }
+                                                </div>
+                                                }
+                                            }
+                                        </div>
+                                        <div>
+                                            @Ajax.ActionLink("Delete System", "DeleteSystem", "CreateTemplates", new { id = @item.ID, templateID = @Model.Template.ID }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "btn btn-danger" })
+                                        </div>
                                     </div>
-                            </div>
+                                </div>
                         }
                     }
                 }

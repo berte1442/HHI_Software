@@ -229,34 +229,6 @@
         </div>
 
         <script>
-            function SetPrice() {
-                var min = 1500;
-                var price = 315;
-                var sqft = document.getElementById("squareFeet").value;
-
-                while (sqft > min) {
-                    price += 15;
-                    min += 500;
-                }
-
-                document.getElementById("price").value = price;
-            };
-
-            function CloseNewRealtor() {
-                var check = document.getElementById("newBtn").getAttribute("aria-expanded");
-
-                if (check == "true") {
-                    document.getElementById("newBtn").click();
-                }
-            };
-
-            function CloseExistingRealtor() {
-                var check = document.getElementById("existBtn").getAttribute("aria-expanded");
-
-                if (check == "true") {
-                    document.getElementById("existBtn").click();
-                }
-            };
 
             //function InspectionStatus() {
             //    var today = new Date();
@@ -267,6 +239,5 @@
             //        document.getElementById("status").selected = "completed";
             //    }
             //};
-
 
         </script>

@@ -296,6 +296,8 @@
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\PriceSetter.js" />
+    <Content Include="Scripts\RealtorSelectorSwitch.js" />
     <Content Include="Scripts\ShowHTML.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
